@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="archi"
+            type="unicauca.movil.eventmpro.models.Ponente"
+            />
+
+        <variable
+            name="handler"
+            type="unicauca.movil.eventmpro.CargaDatos" />
+
+    </data>
+
+
+
+<TableLayout
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stretchColumns="*"
+    tools:context="unicauca.movil.eventmpro.CargaDatos">
+
+    <FrameLayout>
+
+        <ImageView
+            android:layout_marginTop="@dimen/small"
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/login_img"
+            android:scaleType="fitCenter"
+            android:src="@drawable/events" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/mask"
+            />
+    </FrameLayout>
+
+    <TableLayout
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+        <TableRow
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/carga_icon"
+                android:layout_height="@dimen/carga_icon"
+                android:layout_marginRight="@dimen/small"
+                app:srcCompat="@drawable/check_pro" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                >
+                <TextView
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/carga_title"
+                    android:textColor="@color/textTitle"
+                    android:layout_marginBottom="@dimen/small"
+                    />
+
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:text="Mostrar"
+                android:onClick="@{()->handler.readXmlPullParser()}"/>
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:text="Continuar"
+                android:onClick="@{()->handler.continuar()}"
+                />
+
+        </TableRow>
+
+        <TextView
+            android:id="@+id/mostrar"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textTitle"
+            android:layout_marginBottom="@dimen/small"
+            />
+
+
+    </TableLayout>
+
+
+</TableLayout>
+</layout>

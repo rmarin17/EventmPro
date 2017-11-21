@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="small">10dp</dimen>
+    <dimen name="login_img">200dp</dimen>
+    <dimen name="medium">20dp</dimen>
+    <dimen name="activity_horizontal_margin">10dp</dimen>
+    <dimen name="principal_icon">25dp</dimen>
+    <dimen name="icon_btn">40dp</dimen>
+    <dimen name="carga_icon">50dp</dimen>
+    <dimen name="template_img">140dp</dimen>
+    <dimen name="icon">25dp</dimen>
+    <dimen name="img_ponen">100dp</dimen>
+
+
+</resources>

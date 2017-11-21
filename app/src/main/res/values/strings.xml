@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">EventmPro</string>
+    <string name="principal_description">Crea y diseña tu propio evento desde la página web oficial de nuestro servicio, contando con un gran número de ajustes que le darán a tu evento maniobrabilidad tanto para asistentes como organizadores. También genera tu propia aplicación móvil exclusiva para tu evento y cárgala con tan solo un archivo que descargas en tu móvil.</string>
+    <string name="principal_objetivo">Descripción</string>
+    <string name="login_in">Cargar</string>
+    <string name="principal_cargar">Carga Tu Archivo</string>
+    <string name="btn_text_cargar">Carga Tu Archivo</string>
+    <string name="explore_folder">Ruta Actual</string>
+    <string name="action_settings">Settings</string>
+    <string name="carga_title">Archivo Seleccionado</string>
+    <string name="empy">No se encuentran datos registrados</string>
+    <string name="img_ponente">imagen del ponente</string>
+    <string name="img_tipo">Tipo</string>
+    <string name="img_empresa">Empresa</string>
+
+
+</resources>

@@ -1,0 +1,69 @@
+package unicauca.movil.eventmpro.adapters;
+
+import android.databinding.DataBindingUtil;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import unicauca.movil.eventmpro.R;
+import unicauca.movil.eventmpro.databinding.TemplatePonentesBinding;
+import unicauca.movil.eventmpro.util.L;
+
+/**
+ * Created by RicardoM on 10/11/2017.
+ */
+
+public class PonenteAdapter extends RecyclerView.Adapter<PonenteAdapter.PonenteViewHolder> {
+
+
+    public interface OnPonenteListener{
+        void onPonente(View v);
+    }
+
+    LayoutInflater inflater;
+    OnPonenteListener onPonenteListener;
+
+    public PonenteAdapter(LayoutInflater inflater, OnPonenteListener onPonenteListener) {
+        this.onPonenteListener = onPonenteListener;
+        this.inflater = inflater;
+    }
+
+    @Override
+    public PonenteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v  = inflater.inflate(R.layout.template_ponentes, parent, false);
+        PonenteViewHolder holder = new PonenteViewHolder(v);
+        return holder;
+    }
+
+    @Override
+    public void onBindViewHolder(PonenteViewHolder holder, int position) {
+        holder.binding.setPonen(L.data.get(position));
+        holder.binding.setHandler(this);
+    }
+
+    @Override
+    public int getItemCount() {
+        return L.data.size();
+    }
+
+    public void onClickPonente(View v){
+        onPonenteListener.onPonente(v);
+    }
+
+    //Retorna el tipo de view o Celda
+    /*@Override
+    public int getItemViewType(int position) { return 0;}*/
+
+    public static class PonenteViewHolder extends RecyclerView.ViewHolder{
+
+        TemplatePonentesBinding binding;
+
+        public PonenteViewHolder(View itemView) {
+            super(itemView);
+
+            binding = DataBindingUtil.bind(itemView);
+
+        }
+    }
+}
