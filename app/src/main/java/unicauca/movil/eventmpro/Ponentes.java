@@ -34,7 +34,7 @@ public class Ponentes extends AppCompatActivity implements PonenteAdapter.OnPone
 
 
         L.data = new ArrayList<>();
-        adapter = new PonenteAdapter(getLayoutInflater(), this);
+        adapter = new PonenteAdapter(getLayoutInflater(), L.data,this);
         binding.recycler.setAdapter(adapter);
         binding.recycler.setLayoutManager(new LinearLayoutManager(this));
 
@@ -61,12 +61,12 @@ public class Ponentes extends AppCompatActivity implements PonenteAdapter.OnPone
     }
 
     @Override
-    public void onPonente(View v) {
+    public void onPonente(int position) {
 
-        int pos =  binding.recycler.getChildAdapterPosition(v);
+        //int pos =  binding.recycler.getChildAdapterPosition(position);
 
         Intent intent = new Intent(this, DetailPonente.class);
-        intent.putExtra(DetailPonente.EXTRA_POS, pos);
+        intent.putExtra(DetailPonente.EXTRA_POS, position);
 
         startActivity(intent);
 

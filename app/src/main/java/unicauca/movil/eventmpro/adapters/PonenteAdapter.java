@@ -6,8 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import unicauca.movil.eventmpro.R;
 import unicauca.movil.eventmpro.databinding.TemplatePonentesBinding;
+import unicauca.movil.eventmpro.models.Ponente;
 import unicauca.movil.eventmpro.util.L;
 
 /**
@@ -18,14 +21,16 @@ public class PonenteAdapter extends RecyclerView.Adapter<PonenteAdapter.PonenteV
 
 
     public interface OnPonenteListener{
-        void onPonente(View v);
+        void onPonente(int position);
     }
 
     LayoutInflater inflater;
     OnPonenteListener onPonenteListener;
+    List<Ponente> data;
 
-    public PonenteAdapter(LayoutInflater inflater, OnPonenteListener onPonenteListener) {
+    public PonenteAdapter(LayoutInflater inflater, List<Ponente> data, OnPonenteListener onPonenteListener) {
         this.onPonenteListener = onPonenteListener;
+        this.data = data;
         this.inflater = inflater;
     }
 
@@ -38,7 +43,8 @@ public class PonenteAdapter extends RecyclerView.Adapter<PonenteAdapter.PonenteV
 
     @Override
     public void onBindViewHolder(PonenteViewHolder holder, int position) {
-        holder.binding.setPonen(L.data.get(position));
+        holder.binding.setPonen(data.get(position));
+        holder.binding.card.setTag(position);
         holder.binding.setHandler(this);
     }
 
@@ -47,8 +53,8 @@ public class PonenteAdapter extends RecyclerView.Adapter<PonenteAdapter.PonenteV
         return L.data.size();
     }
 
-    public void onClickPonente(View v){
-        onPonenteListener.onPonente(v);
+    public void onClickPonente(int position){
+        onPonenteListener.onPonente(position);
     }
 
     //Retorna el tipo de view o Celda

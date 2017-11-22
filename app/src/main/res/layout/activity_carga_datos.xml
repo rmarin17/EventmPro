@@ -88,6 +88,11 @@
                 android:text="Continuar"
                 android:onClick="@{()->handler.continuar()}"
                 />
+            <Button
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:text="Programacion"
+                android:onClick="@{()->handler.programacion()}"
+                />
 
         </TableRow>
 

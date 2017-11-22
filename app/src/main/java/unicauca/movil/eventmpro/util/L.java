@@ -2,6 +2,7 @@ package unicauca.movil.eventmpro.util;
 
 import java.util.List;
 
+import unicauca.movil.eventmpro.models.Dias;
 import unicauca.movil.eventmpro.models.Ponente;
 
 /**
@@ -11,4 +12,5 @@ import unicauca.movil.eventmpro.models.Ponente;
 public class L {
 
     public static List<Ponente> data;
+    public static List<Dias> data1;
 }
