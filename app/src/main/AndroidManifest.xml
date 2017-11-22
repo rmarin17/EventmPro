@@ -31,7 +31,8 @@
         </activity>
         <activity android:name=".CargaDatos" />
         <activity android:name=".Ponentes" />
-        <activity android:name=".DetailPonente"></activity>
+        <activity android:name=".DetailPonente" />
+        <activity android:name=".Programacion"></activity>
     </application>
 
 </manifest>
