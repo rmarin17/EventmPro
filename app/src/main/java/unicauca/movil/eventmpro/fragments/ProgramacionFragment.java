@@ -38,28 +38,23 @@ import unicauca.movil.eventmpro.util.L;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProgramacionFragment extends Fragment implements HttpAsyncTask.OnResponseReceived, ProgramacionAdapter.OnProgramacionListener {
+public class ProgramacionFragment extends Fragment implements ProgramacionAdapter.OnProgramacionListener{//, HttpAsyncTask.OnResponseReceived {
 
     private static final String EXTRA_DAY = "day";
-    private static final String EXTRA_COMMAND = "commnad";
-
-    String comando;
+    //private static final String EXTRA_COMMAND = "commnad";
+    //String comando;
     int dia;
-
     ProgramacionAdapter adapter;
-
     DiasDao dao;
-
     Gson gson;
-
     FragmentProgramacionBinding binding;
 
 
-    public static ProgramacionFragment newInstance(int day, String commnad) {
+    public static ProgramacionFragment newInstance(int day){//, String commnad) {
         ProgramacionFragment fragment = new ProgramacionFragment();
         Bundle args = new Bundle();
         args.putInt(EXTRA_DAY, day);
-        args.putString(EXTRA_COMMAND, commnad);
+        //args.putString(EXTRA_COMMAND, commnad);
 
         fragment.setArguments(args);
         return fragment;
@@ -69,16 +64,13 @@ public class ProgramacionFragment extends Fragment implements HttpAsyncTask.OnRe
         // Required empty public constructor
     }
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
             Bundle args = getArguments();
             dia = args.getInt(EXTRA_DAY);
-            comando = args.getString(EXTRA_COMMAND);
-
+           // comando = args.getString(EXTRA_COMMAND);
 
     }
 
@@ -87,9 +79,7 @@ public class ProgramacionFragment extends Fragment implements HttpAsyncTask.OnRe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_programacion, container, false);
-
 
 
         L.data1 = new ArrayList<>();
@@ -110,7 +100,14 @@ public class ProgramacionFragment extends Fragment implements HttpAsyncTask.OnRe
 
     public void loadData() {
 
-        if (!verificaConexion(getContext())) {
+        List<Dias> list = dao.getAllByDay(dia);
+
+        for (Dias d : list){
+            L.data1.add(d);
+        }
+        adapter.notifyDataSetChanged();
+        //region Cargar datos on internet
+        /*if (!verificaConexion(getContext())) {
             Toast.makeText(getContext(),
                     "Por favor conectate a internet para obtener la programacion mas reciente.", Toast.LENGTH_SHORT)
                     .show();
@@ -533,10 +530,12 @@ public class ProgramacionFragment extends Fragment implements HttpAsyncTask.OnRe
         {
             HttpAsyncTask task = new HttpAsyncTask(this);
             task.execute(comando);
-        }
+        }*/
+        //endregion
 
     }
-
+    //region htttp que ya no sirve
+/*
     @Override
     public void onResponse(boolean success, String json) {
 
@@ -567,11 +566,12 @@ public class ProgramacionFragment extends Fragment implements HttpAsyncTask.OnRe
             }
         }
         return bConectado;
-    }
-
+    }*/
+    //endregion
 
     @Override
     public void onProgramacionClick(int position) {
 
     }
+
 }

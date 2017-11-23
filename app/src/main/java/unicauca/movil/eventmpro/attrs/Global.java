@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import com.squareup.picasso.Picasso;
 
 /**
- * Created by Dario Chamorro on 29/11/2016.
+ * Created by Ricardo Marin on 29/11/2016.
  */
 
 public class Global {
