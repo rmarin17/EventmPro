@@ -57,7 +57,7 @@
                 android:layout_width="@dimen/carga_icon"
                 android:layout_height="@dimen/carga_icon"
                 android:layout_marginRight="@dimen/small"
-                app:srcCompat="@drawable/check_pro" />
+                app:srcCompat="@drawable/ic_check" />
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="0dp"
@@ -92,6 +92,12 @@
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:text="Programacion"
                 android:onClick="@{()->handler.programacion()}"
+                />
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:text="Notificaciones"
+                android:onClick="@{()->handler.noti()}"
                 />
 
         </TableRow>

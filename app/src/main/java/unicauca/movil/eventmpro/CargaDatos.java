@@ -448,6 +448,13 @@ public class CargaDatos extends AppCompatActivity {
 
     }
 
+    public void noti(){
+
+        Intent intent = new Intent(CargaDatos.this, Notification.class);
+        startActivity(intent);
+
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode,

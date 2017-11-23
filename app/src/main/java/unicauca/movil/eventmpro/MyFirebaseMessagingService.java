@@ -10,6 +10,8 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.util.Calendar;
+
 import unicauca.movil.eventmpro.db.NotificationDao;
 import unicauca.movil.eventmpro.models.Mensaje;
 
@@ -28,7 +30,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
 
-        dao = new NotificationDao(this);
+
 
 
         Log.d(TAG, "From: " + remoteMessage.getFrom());
@@ -42,10 +44,26 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
             men = remoteMessage.getNotification().getBody();
-            sendNotification(men);
+
+
+            Calendar calendario = Calendar.getInstance();
+            int hora, min,dia,mes,ano;
+            String fecha_sistema,hora_sistema;
+
+            dia = calendario.get(Calendar.DAY_OF_MONTH);
+            mes = calendario.get(Calendar.MONTH)+1;
+            ano = calendario.get(Calendar.YEAR);
+            hora = calendario.get(Calendar.HOUR_OF_DAY);
+            min = calendario.get(Calendar.MINUTE);
+            fecha_sistema = dia+"/"+mes+"/"+ano;
+            hora_sistema = ""+hora+":"+min+"";
+            dao = new NotificationDao(this);
             Mensaje m = new Mensaje();
             m.setMensaje(men);
+            m.setFecha(fecha_sistema);
+            m.setHora(hora_sistema);
             dao.insert(m);
+            sendNotification(men);
         }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
@@ -54,13 +72,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private void sendNotification(String body) {
 
-        Intent notifyIntent = new Intent(this, Notification.class);
+        Intent notifyIntent = new Intent(this, unicauca.movil.eventmpro.Notification.class);
         notifyIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivities(this, 0,
                 new Intent[]{notifyIntent}, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = new Notification.Builder(this)
-                //.setSmallIcon(R.drawable.ic_alert)
-                .setContentTitle("Tet 2016")
+                .setSmallIcon(R.drawable.ic_notification)
+                .setContentTitle("EventmPro")
                 .setContentText(body)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)

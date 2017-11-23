@@ -18,6 +18,8 @@ public class NotificationDao {
 
     static final String TABLE = "notification";
     static final String C_MESSAGE = "mensaje";
+    static final String C_DATE = "fecha";
+    static final String C_TIME = "hora";
 
     SQLiteDatabase db;
 
@@ -29,6 +31,8 @@ public class NotificationDao {
     public void insert (Mensaje mensaje){
         ContentValues cV = new ContentValues();
         cV.put(C_MESSAGE, mensaje.getMensaje());
+        cV.put(C_DATE, mensaje.getFecha());
+        cV.put(C_TIME, mensaje.getHora());
         long id = db.insert(TABLE,null,cV);
         mensaje.setId(id);
 
@@ -38,6 +42,8 @@ public class NotificationDao {
 
         ContentValues cV = new ContentValues();
         cV.put(C_MESSAGE, mensaje.getMensaje());
+        cV.put(C_DATE, mensaje.getFecha());
+        cV.put(C_TIME, mensaje.getHora());
         long id = db.update(TABLE,cV,"_id = ?",new String[]{mensaje.getId()+" "});
     }
 
@@ -66,6 +72,8 @@ public class NotificationDao {
             mensaje = new Mensaje();
             mensaje.setId(c.getLong(0));
             mensaje.setMensaje(c.getString(1));
+            mensaje.setFecha(c.getString(2));
+            mensaje.setHora(c.getString(3));
 
         }
         return mensaje;

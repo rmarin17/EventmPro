@@ -50,7 +50,7 @@ public class PonenteAdapter extends RecyclerView.Adapter<PonenteAdapter.PonenteV
 
     @Override
     public int getItemCount() {
-        return L.data.size();
+        return data.size();
     }
 
     public void onClickPonente(int position){

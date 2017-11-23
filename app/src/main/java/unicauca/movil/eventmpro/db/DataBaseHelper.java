@@ -47,6 +47,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         db.execSQL(" CREATE TABLE notification (_id INTEGER PRIMARY KEY AUTOINCREMENT"
                 +", mensaje VARCHAR"
+                +", fecha DATE"
+                +", hora TIME"
                 +")"
         );
     }
