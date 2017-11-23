@@ -84,8 +84,7 @@ public class Principal extends AppCompatActivity {
         dao = new NotificationDao(this);
 
 
-
-
+        //region Tomar datos de la notificacion de firebase
         if(getIntent().getExtras()!=null){
 
             for (String Key : getIntent().getExtras().keySet()){
@@ -100,61 +99,10 @@ public class Principal extends AppCompatActivity {
 
             }
         }
+        //endregion
 
-
-
-    //region bad
-       /* if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.READ_CONTACTS)) {
-
-                // Show an expanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
-            }
-        }
-        buttonOpenDialog = (LinearLayout) findViewById(R.id.btnExplorer);
-        buttonOpenDialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                showDialog(CUSTOM_DIALOG_ID);
-                performFileSearch();
-
-
-
-            }
-        });
-
-       // root = new File(Environment.getExternalStorageDirectory().getPath());
-        //String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString();
-        //curFolder = root;
-        */
-//endregion bad
 
     }
-
-
-   /* private ArrayList<Principal> prepareData() {
-
-        ArrayList<Principal> theimage = new ArrayList<>();
-        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-                .toString();
-        File f = new File(path);
-        File file[] = f.listFiles();
-        Log.e("Album","PrepareData");
-        for (int i = 0; i < file.length; i++) {
-            //If you want to use image_id then you have to set a value using setImage_ID here
-            theimage.add(file.getClass());
-        }
-        return theimage;
-    }*/
-
 
     public void goToExplorer(){
         //performFileSearch();
