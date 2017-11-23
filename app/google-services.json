@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "236191082064",
+    "firebase_url": "https://eventmpro.firebaseio.com",
+    "project_id": "eventmpro",
+    "storage_bucket": "eventmpro.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:236191082064:android:3777032f88a4363e",
+        "android_client_info": {
+          "package_name": "unicauca.movil.eventmpro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "236191082064-p42s1jorjuhsejdarrp7rsvgd190pmvm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "unicauca.movil.eventmpro",
+            "certificate_hash": "57a38f703fb3cdb23ec64e935a2ea6e52d771c50"
+          }
+        },
+        {
+          "client_id": "236191082064-6lbqg8qn295i7nbcqv5dj9ug7a2l3h76.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASPEA8AYfi8PDynNTayEEtMBisdTecmvU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "236191082064-6lbqg8qn295i7nbcqv5dj9ug7a2l3h76.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
