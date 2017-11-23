@@ -30,12 +30,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import unicauca.movil.eventmpro.databinding.ActivityPrincipalBinding;
+import unicauca.movil.eventmpro.db.NotificationDao;
+import unicauca.movil.eventmpro.models.Mensaje;
 
 public class Principal extends AppCompatActivity {
     ActivityPrincipalBinding binding;
+    NotificationDao dao;
+
 
 
     //LinearLayout buttonOpenDialog;
@@ -63,6 +68,38 @@ public class Principal extends AppCompatActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_principal);
         binding.setHandler(this);
+
+
+        Calendar calendario = Calendar.getInstance();
+        int hora, min,dia,mes,ano;
+        String fecha_sistema,hora_sistema;
+
+        dia = calendario.get(Calendar.DAY_OF_MONTH);
+        mes = calendario.get(Calendar.MONTH)+1;
+        ano = calendario.get(Calendar.YEAR);
+        hora = calendario.get(Calendar.HOUR_OF_DAY);
+        min = calendario.get(Calendar.MINUTE);
+        fecha_sistema = dia+"/"+mes+"/"+ano;
+        hora_sistema = ""+hora+":"+min+"";
+        dao = new NotificationDao(this);
+
+
+
+
+        if(getIntent().getExtras()!=null){
+
+            for (String Key : getIntent().getExtras().keySet()){
+                if (Key.equals("mensaje")){
+                    String men = getIntent().getExtras().getString(Key);
+                    Mensaje m = new Mensaje();
+                    m.setMensaje(men);
+                    m.setFecha(fecha_sistema);
+                    m.setHora(hora_sistema);
+                    dao.insert(m);
+                }
+
+            }
+        }
 
 
 
