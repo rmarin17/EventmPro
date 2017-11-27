@@ -35,11 +35,14 @@ import java.util.List;
 
 import unicauca.movil.eventmpro.databinding.ActivityPrincipalBinding;
 import unicauca.movil.eventmpro.db.NotificationDao;
+import unicauca.movil.eventmpro.db.PonenteDao;
 import unicauca.movil.eventmpro.models.Mensaje;
+import unicauca.movil.eventmpro.models.Ponente;
 
 public class Principal extends AppCompatActivity {
     ActivityPrincipalBinding binding;
     NotificationDao dao;
+    PonenteDao dao1;
 
 
 
@@ -82,6 +85,15 @@ public class Principal extends AppCompatActivity {
         fecha_sistema = dia+"/"+mes+"/"+ano;
         hora_sistema = ""+hora+":"+min+"";
         dao = new NotificationDao(this);
+        dao1 = new PonenteDao(this);
+
+        List<Ponente> list = dao1.getAll();
+        if (list.size() > 0){
+
+            Intent intent = new Intent(Principal.this, CargaDatos.class);
+            startActivity(intent);
+
+        }
 
 
         //region Tomar datos de la notificacion de firebase

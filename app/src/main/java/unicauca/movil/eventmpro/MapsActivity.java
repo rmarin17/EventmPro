@@ -36,11 +36,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng teatro = new LatLng(2.443176, -76.606018);
+        mMap.addMarker(new MarkerOptions().position(teatro).title("Teatro Guillermo Leon Valencia"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(teatro,16));
+
+        //chivas
+        LatLng chivas = new LatLng(2.444333, -76.605218);
+        mMap.addMarker(new MarkerOptions().position(chivas).title("Punto de Encuentro Paseo Turistico en Chivas"));
+
+        //salud
+        LatLng salud = new LatLng(2.451072, -76.598935);
+        mMap.addMarker(new MarkerOptions().position(salud).title("Facultad de Ciencias de la Salud"));
+
+        //club leones
+        LatLng club = new LatLng(2.442702, -76.607193);
+        mMap.addMarker(new MarkerOptions().position(club).title("Club de Leones (Fiesta de Clausura)"));
+
+        //casa mosquera
+        LatLng mosquera = new LatLng(2.442974, -76.605119);
+        mMap.addMarker(new MarkerOptions().position(mosquera).title("Casa Mosquera (Coctel de Bienvenida)"));
     }
 }

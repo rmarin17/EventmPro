@@ -455,6 +455,13 @@ public class CargaDatos extends AppCompatActivity {
 
     }
 
+    public void maps(){
+
+        Intent intent = new Intent(CargaDatos.this, MapsActivity.class);
+        startActivity(intent);
+
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode,

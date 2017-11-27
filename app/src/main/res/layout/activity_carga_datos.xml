@@ -102,6 +102,23 @@
 
         </TableRow>
 
+        <TableRow>
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:text="Notificaciones"
+                android:onClick="@{()->handler.noti()}"
+                />
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:text="MAPS"
+                android:onClick="@{()->handler.maps()}"
+                />
+
+
+        </TableRow>
+
         <TextView
             android:id="@+id/mostrar"
             style="@style/TextAppearance.AppCompat.Body1"
