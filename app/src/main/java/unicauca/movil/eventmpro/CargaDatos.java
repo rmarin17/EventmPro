@@ -1,9 +1,11 @@
 package unicauca.movil.eventmpro;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Xml;
@@ -37,7 +39,7 @@ import unicauca.movil.eventmpro.db.PonenteDao;
 import unicauca.movil.eventmpro.models.Ponente;
 import unicauca.movil.eventmpro.util.L;
 
-public class CargaDatos extends AppCompatActivity {
+public class CargaDatos extends AppCompatActivity implements DialogInterface.OnClickListener {
 
 
     public static final String EXTRA_POS = "pos";
@@ -270,10 +272,13 @@ public class CargaDatos extends AppCompatActivity {
 
 
             }
+
+            generateAlert();
+
             //dao.insert(p);
             //txtXml.setText(sb.toString());   --> para colocarlo en el edittext
             //Toast.makeText(this, "Archivo: " +sb.toString(), Toast.LENGTH_LONG).show();
-            binding.mostrar.setText(sb.toString());
+            //binding.mostrar.setText(sb.toString());
            // dao.insert(p);
             //L.data.add(a);
         } catch (XmlPullParserException e) {
@@ -487,6 +492,27 @@ public class CargaDatos extends AppCompatActivity {
     }
 
 
+    public void generateAlert(){
 
+        AlertDialog alert = new AlertDialog.Builder(this)
+                .setTitle(R.string.alert_title)
+                .setIcon(R.drawable.ic_check)
+                .setMessage(R.string.alert_msg)
+                .setPositiveButton(R.string.ok,this)
+                //.setNegativeButton(R.string.cancel, this)
+                .create();
+        alert.show();
+    }
 
+    @Override
+    public void onClick(DialogInterface dialogInterface, int i) {
+
+        if( i == DialogInterface.BUTTON_POSITIVE) {
+
+            Intent inten = new Intent(this, DetailEvent.class);
+            startActivity(inten);
+            finish();
+        }
+
+    }
 }

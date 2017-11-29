@@ -33,7 +33,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 +")"
             );
 
-        db.execSQL(" CREATE TABLE dias (_id INTEGER PRIMARY KEY AUTOINCREMENT"
+        db.execSQL(" CREATE TABLE dias (_id INTEGER PRIMARY KEY"
                 +", idd INTEGER"
                 +", ido INTEGER"
                 +", hora VARCHAR"

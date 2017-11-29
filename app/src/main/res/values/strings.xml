@@ -21,6 +21,13 @@
     <string name="btn_text_horario">Horario</string>
     <string name="btn_text_ponentes">Ponentes</string>
     <string name="btn_text_principal">Principal</string>
+    <string name="paso2">Ya tienes tu archivo seleccionado correctamente, el siguiente paso es cargarlo a la aplicación con el botón cargar datos o sino estas seguro del archivo seleccionado, puedes volver a seleccionar otro archivo con el botón buscar archivo.</string>
+    <string name="btn_text_backup">Cargar Datos</string>
+    <string name="btn_text_archivo">Buscar Archivo</string>
+    <string name="alert_msg">Datos cargados correctamente.</string>
+    <string name="ok">OK</string>
+    <string name="alert_title">Datos Cargados</string>
+    <string name="seleccion">Archivo Selecccionado.</string>
 
 
 </resources>

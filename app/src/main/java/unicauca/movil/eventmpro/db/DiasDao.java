@@ -18,6 +18,7 @@ import unicauca.movil.eventmpro.models.Dias;
 public class DiasDao {
 
     static final String TABLE = "dias";
+    static final String C_ID = "_id";
     static final String C_IDD = "idd";
     static final String C_IDO = "ido";
     static final String C_HORA = "hora";
@@ -36,6 +37,7 @@ public class DiasDao {
 
     public void insert (Dias dias){
         ContentValues cV = new ContentValues();
+        cV.put(C_ID, dias.getId());
         cV.put(C_IDD, dias.getIdd());
         cV.put(C_IDO, dias.getIdo());
         cV.put(C_HORA, dias.getHora());
@@ -44,9 +46,7 @@ public class DiasDao {
         cV.put(C_CONFERENCISTA, dias.getConferencista());
         cV.put(C_EMPRESA, dias.getEmpresa());
         cV.put(C_LUGAR, dias.getLugar());
-        long id = db.insert(TABLE,null,cV);
-        dias.setId(id);
-
+        db.insert(TABLE,null,cV);
     }
 
     public void update (Dias dias){

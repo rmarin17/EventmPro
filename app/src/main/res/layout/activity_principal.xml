@@ -10,7 +10,6 @@
             name="handler"
             type="unicauca.movil.eventmpro.Principal"
             />
-
     </data>
 
     <TableLayout

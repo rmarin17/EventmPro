@@ -92,7 +92,7 @@ public class Principal extends AppCompatActivity {
 
             Intent intent = new Intent(Principal.this, DetailEvent.class);
             startActivity(intent);
-
+            finish();
         }
 
 
@@ -120,6 +120,7 @@ public class Principal extends AppCompatActivity {
         //performFileSearch();
         Intent carga = new Intent(Principal.this, CargaDatos.class);
         startActivity(carga);
+        finish();
     }
 // region  manualchooser
  /*   @Override
