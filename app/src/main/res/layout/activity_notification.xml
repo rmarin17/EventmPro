@@ -3,23 +3,165 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-
+        <variable
+            name="handler"
+            type="unicauca.movil.eventmpro.Notification"
+            />
     </data>
 
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawer"
+    <TableLayout
+        android:id="@+id/activity_principal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#ffff"
+        android:stretchColumns="*"
+        >
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler"
+        <TableLayout
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <android.support.v4.widget.DrawerLayout
+                android:id="@+id/drawer"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent">
 
-        </FrameLayout>
-    </android.support.v4.widget.DrawerLayout>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                </FrameLayout>
+            </android.support.v4.widget.DrawerLayout>
+        </TableLayout>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/small">
+
+
+            <FrameLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnPonentes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:onClick="@{()->handler.goToPrincipal()}"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_btn"
+                        android:layout_height="@dimen/icon_btn"
+                        android:src="@drawable/ic_principal" />
+
+                    <TextView
+                        style="@style/Base.TextAppearance.AppCompat.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_text_principal"
+                        android:textColor="@color/txtBtn" />
+                </LinearLayout>
+
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="80dp"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/btnHorario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:onClick="@{()->handler.goToPonente()}"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_btn"
+                        android:layout_height="@dimen/icon_btn"
+                        android:src="@drawable/ic_ponentes" />
+
+                    <TextView
+                        style="@style/Base.TextAppearance.AppCompat.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_text_ponentes"
+                        android:textColor="@color/txtBtn" />
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <FrameLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnMapa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:onClick="@{()->handler.goToHorario()}"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_btn"
+                        android:layout_height="@dimen/icon_btn"
+                        android:src="@drawable/ic_clock" />
+
+                    <TextView
+                        style="@style/Base.TextAppearance.AppCompat.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_text_horario"
+                        android:textColor="@color/txtBtn" />
+
+                </LinearLayout>
+            </FrameLayout>
+
+            <FrameLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnNoti"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:onClick="@{()->handler.goToUbicacion()}"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_btn"
+                        android:layout_height="@dimen/icon_btn"
+                        android:src="@drawable/ic_place" />
+
+                    <TextView
+                        style="@style/Base.TextAppearance.AppCompat.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_text_ubi"
+                        android:textColor="@color/txtBtn" />
+
+                </LinearLayout>
+            </FrameLayout>
+
+
+        </TableRow>
+    </TableLayout>
 </layout>

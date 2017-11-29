@@ -10,6 +10,7 @@
     <dimen name="template_img">140dp</dimen>
     <dimen name="icon">25dp</dimen>
     <dimen name="img_ponen">100dp</dimen>
+    <dimen name="cardelevation">8dp</dimen>
 
 
 </resources>

@@ -1,5 +1,8 @@
 package unicauca.movil.eventmpro;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -10,14 +13,21 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import unicauca.movil.eventmpro.databinding.ActivityMapsBinding;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
+    ActivityMapsBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        //setContentView(R.layout.activity_maps);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_maps);
+        binding.setHandler(this);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -59,5 +69,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //casa mosquera
         LatLng mosquera = new LatLng(2.442974, -76.605119);
         mMap.addMarker(new MarkerOptions().position(mosquera).title("Casa Mosquera (Coctel de Bienvenida)"));
+    }
+
+    public void goToPrincipal(){
+        Intent inten = new Intent(MapsActivity.this, DetailEvent.class);
+        startActivity(inten);
+    }
+    public void goToPonente(){
+        Intent inten = new Intent(MapsActivity.this, Ponentes.class);
+        startActivity(inten);
+    }
+    public void goToHorario(){
+        Intent inten = new Intent(MapsActivity.this, Programacion.class);
+        startActivity(inten);
+    }
+    public void goToNotificaciones(){
+        Intent inten = new Intent(MapsActivity.this, Notification.class);
+        startActivity(inten);
     }
 }

@@ -90,7 +90,7 @@ public class Principal extends AppCompatActivity {
         List<Ponente> list = dao1.getAll();
         if (list.size() > 0){
 
-            Intent intent = new Intent(Principal.this, CargaDatos.class);
+            Intent intent = new Intent(Principal.this, DetailEvent.class);
             startActivity(intent);
 
         }

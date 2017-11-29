@@ -16,6 +16,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">Map</string>
+    <string name="btn_text_noti">Notificaciones</string>
+    <string name="btn_text_ubi">Ubicación</string>
+    <string name="btn_text_horario">Horario</string>
+    <string name="btn_text_ponentes">Ponentes</string>
+    <string name="btn_text_principal">Principal</string>
 
 
 </resources>

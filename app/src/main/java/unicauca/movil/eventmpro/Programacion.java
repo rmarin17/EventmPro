@@ -2,6 +2,7 @@ package unicauca.movil.eventmpro;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -39,6 +40,7 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_programacion);
+        binding.setHandler(this);
 
         dao = new DiasDao(this);
         gson = new Gson();
@@ -531,6 +533,24 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
             }
         }
         return bConectado;
+    }
+
+    public void goToPrincipal(){
+        Intent inten = new Intent(Programacion.this, DetailEvent.class);
+        startActivity(inten);
+    }
+    public void goToPonente(){
+        Intent inten = new Intent(Programacion.this, Ponentes.class);
+        startActivity(inten);
+    }
+
+    public void goToUbicacion(){
+        Intent inten = new Intent(Programacion.this, MapsActivity.class);
+        startActivity(inten);
+    }
+    public void goToNotificaciones(){
+        Intent inten = new Intent(Programacion.this, Notification.class);
+        startActivity(inten);
     }
 
 }

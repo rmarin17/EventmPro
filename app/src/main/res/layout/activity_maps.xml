@@ -1,8 +1,160 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="unicauca.movil.eventmpro.MapsActivity" />
+    >
+
+    <data>
+        <variable
+            name="handler"
+            type="unicauca.movil.eventmpro.MapsActivity"
+            />
+    </data>
+
+    <TableLayout
+        android:id="@+id/activity_principal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffff"
+        android:stretchColumns="*"
+        >
+
+        <TableLayout
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="unicauca.movil.eventmpro.MapsActivity" />
+        </TableLayout>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/small">
+
+
+            <FrameLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnPonentes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:onClick="@{()->handler.goToPrincipal()}"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_btn"
+                        android:layout_height="@dimen/icon_btn"
+                        android:src="@drawable/ic_principal" />
+
+                    <TextView
+                        style="@style/Base.TextAppearance.AppCompat.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_text_principal"
+                        android:textColor="@color/txtBtn" />
+                </LinearLayout>
+
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="80dp"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/btnHorario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:onClick="@{()->handler.goToPonente()}"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_btn"
+                        android:layout_height="@dimen/icon_btn"
+                        android:src="@drawable/ic_ponentes" />
+
+                    <TextView
+                        style="@style/Base.TextAppearance.AppCompat.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_text_ponentes"
+                        android:textColor="@color/txtBtn" />
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <FrameLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnMapa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:onClick="@{()->handler.goToHorario()}"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_btn"
+                        android:layout_height="@dimen/icon_btn"
+                        android:src="@drawable/ic_clock" />
+
+                    <TextView
+                        style="@style/Base.TextAppearance.AppCompat.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_text_horario"
+                        android:textColor="@color/txtBtn" />
+
+                </LinearLayout>
+            </FrameLayout>
+
+            <FrameLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnNoti"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:onClick="@{()->handler.goToNotificaciones()}"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_btn"
+                        android:layout_height="@dimen/icon_btn"
+                        android:src="@drawable/ic_notification" />
+
+                    <TextView
+                        style="@style/Base.TextAppearance.AppCompat.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_text_noti"
+                        android:textColor="@color/txtBtn" />
+
+                </LinearLayout>
+            </FrameLayout>
+
+
+        </TableRow>
+
+    </TableLayout>
+</layout>
+

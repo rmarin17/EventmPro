@@ -1,5 +1,6 @@
 package unicauca.movil.eventmpro;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,7 +33,7 @@ public class Notification extends AppCompatActivity implements MensajeAdapter.On
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_notification);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_notification);
-
+        binding.setHandler(this);
         L.data2 = new ArrayList<>();
         adapter = new MensajeAdapter(getLayoutInflater(), L.data2,this);
         binding.recycler.setAdapter(adapter);
@@ -57,6 +58,23 @@ public class Notification extends AppCompatActivity implements MensajeAdapter.On
             Toast.makeText(this, R.string.empy, Toast.LENGTH_LONG).show();
         }
 
+    }
+
+    public void goToPrincipal(){
+        Intent inten = new Intent(Notification.this, DetailEvent.class);
+        startActivity(inten);
+    }
+    public void goToPonente(){
+        Intent inten = new Intent(Notification.this, Ponentes.class);
+        startActivity(inten);
+    }
+    public void goToHorario(){
+        Intent inten = new Intent(Notification.this, Programacion.class);
+        startActivity(inten);
+    }
+    public void goToUbicacion(){
+        Intent inten = new Intent(Notification.this, MapsActivity.class);
+        startActivity(inten);
     }
 
     @Override

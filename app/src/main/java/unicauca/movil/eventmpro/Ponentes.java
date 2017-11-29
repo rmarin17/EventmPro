@@ -31,6 +31,7 @@ public class Ponentes extends AppCompatActivity implements PonenteAdapter.OnPone
         //setContentView(R.layout.activity_ponentes);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_ponentes);
+        binding.setHandler(this);
 
 
         L.data = new ArrayList<>();
@@ -58,6 +59,23 @@ public class Ponentes extends AppCompatActivity implements PonenteAdapter.OnPone
             Toast.makeText(this, R.string.empy, Toast.LENGTH_LONG).show();
         }
 
+    }
+
+    public void goToPrincipal(){
+        Intent inten = new Intent(Ponentes.this, DetailEvent.class);
+        startActivity(inten);
+    }
+    public void goToHorario(){
+        Intent inten = new Intent(Ponentes.this, Programacion.class);
+        startActivity(inten);
+    }
+    public void goToUbicacion(){
+        Intent inten = new Intent(Ponentes.this, MapsActivity.class);
+        startActivity(inten);
+    }
+    public void goToNotificaciones(){
+        Intent inten = new Intent(Ponentes.this, Notification.class);
+        startActivity(inten);
     }
 
     @Override
