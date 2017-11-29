@@ -34,8 +34,10 @@ import java.util.Calendar;
 import java.util.List;
 
 import unicauca.movil.eventmpro.databinding.ActivityPrincipalBinding;
+import unicauca.movil.eventmpro.db.EventoDao;
 import unicauca.movil.eventmpro.db.NotificationDao;
 import unicauca.movil.eventmpro.db.PonenteDao;
+import unicauca.movil.eventmpro.models.Evento;
 import unicauca.movil.eventmpro.models.Mensaje;
 import unicauca.movil.eventmpro.models.Ponente;
 
@@ -43,6 +45,7 @@ public class Principal extends AppCompatActivity {
     ActivityPrincipalBinding binding;
     NotificationDao dao;
     PonenteDao dao1;
+    EventoDao dao2;
 
 
 
@@ -86,6 +89,19 @@ public class Principal extends AppCompatActivity {
         hora_sistema = ""+hora+":"+min+"";
         dao = new NotificationDao(this);
         dao1 = new PonenteDao(this);
+        dao2 = new EventoDao(this);
+
+        Evento e = new Evento();
+        e.setId(1);
+        e.setNombre("TET 2016");
+        e.setObjetivo("Facilitar el acceso a información de primera mano a estudiantes, profesores y profesionales afines con el área de Telecomunicaciones, que buscan aumentar y actualizar su conocimiento sobre las tecnologías que mayor penetran e impactan a la sociedad.");
+        e.setLugar("Popayan (Cauca) - Teatro Guillermo Leon Valencia");
+        e.setDescripcion("Seminario de Tecnologias Emergentes en Telecomunicaciones");
+        e.setFecha("20, 21 y 22 de Octubre de 2016");
+
+        dao2.insert(e);
+
+
 
         List<Ponente> list = dao1.getAll();
         if (list.size() > 0){

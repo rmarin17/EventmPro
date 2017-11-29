@@ -11,6 +11,10 @@
             name="event"
             type="unicauca.movil.eventmpro.models.Evento"/>
 
+        <variable
+            name="handler"
+            type="unicauca.movil.eventmpro.DetailEvent"/>
+
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -19,21 +23,22 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.CardView
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             app:cardElevation="@dimen/cardelevation"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
 
                 <ImageView
@@ -42,6 +47,7 @@
                     android:layout_height="@dimen/principal_icon"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
+                    android:contentDescription="@string/desimg"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_format" />
@@ -53,12 +59,13 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="Objetivo"
+                    android:text="@string/prin_obj"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView13"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView13"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
                     tools:text="Objetivo" />
 
                 <TextView
@@ -80,6 +87,7 @@
                     android:layout_height="@dimen/principal_icon"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
+                    android:contentDescription="@string/desimg"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/objetivo"
                     app:srcCompat="@drawable/ic_date" />
@@ -91,7 +99,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="Fecha"
+                    android:text="@string/prin_date"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView14"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -118,6 +126,7 @@
                     android:layout_height="@dimen/principal_icon"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
+                    android:contentDescription="@string/desimg"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fecha"
                     app:srcCompat="@drawable/ic_place" />
@@ -129,7 +138,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="Lugar"
+                    android:text="@string/prin_place"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView15"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -149,6 +158,48 @@
                     app:layout_constraintStart_toEndOf="@+id/imageView15"
                     app:layout_constraintTop_toBottomOf="@+id/textView15"
                     tools:text="Lugar del evento" />
+
+                <ImageView
+                    android:id="@+id/imageView10"
+                    android:layout_width="@dimen/principal_icon"
+                    android:layout_height="@dimen/principal_icon"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:contentDescription="@string/desimg"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView16"
+                    app:srcCompat="@drawable/ic_des" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/prin_des"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView10"
+                    app:layout_constraintTop_toBottomOf="@+id/textView16"
+                    tools:text="Descripción" />
+
+                <TextView
+                    android:id="@+id/des"
+                    android:layout_width="0dp"
+                    android:layout_height="17dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/imageView10"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:text="Descripción del evento" />
             </android.support.constraint.ConstraintLayout>
         </android.support.v7.widget.CardView>
     </android.support.constraint.ConstraintLayout>

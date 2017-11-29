@@ -51,6 +51,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 +", hora TIME"
                 +")"
         );
+
+        db.execSQL(" CREATE TABLE evento (_id INTEGER PRIMARY KEY"
+                +", nombre VARCHAR"
+                +", objetivo VARCHAR"
+                +", lugar VARCHAR"
+                +", descripcion VARCHAR"
+                +", fecha VARCHAR"
+                +")"
+        );
     }
 
     @Override

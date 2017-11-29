@@ -75,6 +75,7 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
             Toast.makeText(this,
                     "Por favor conectate a internet para obtener la programacion mas reciente.", Toast.LENGTH_SHORT)
                     .show();
+            //region bad insert
             /*List<Dias> list = dao.getAllByDay(dia);
 
             if (list.size() <= 0) {
@@ -487,6 +488,7 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
             for (Dias d : list){
                 L.data1.add(d);
             }*/
+            //endregion
 
         }
 
@@ -512,7 +514,7 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
 
 
         for (Dias d : res) {
-            dao.update(d);
+            dao.insert(d);
         }
 
 
