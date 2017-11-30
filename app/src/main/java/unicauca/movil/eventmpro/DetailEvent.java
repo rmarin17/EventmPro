@@ -11,18 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import unicauca.movil.eventmpro.databinding.ActivityDetailEventBinding;
-import unicauca.movil.eventmpro.databinding.ActivityDetailPonenteBinding;
-import unicauca.movil.eventmpro.databinding.ContentDetailEventBinding;
 import unicauca.movil.eventmpro.db.EventoDao;
 import unicauca.movil.eventmpro.models.Evento;
-import unicauca.movil.eventmpro.models.Ponente;
 import unicauca.movil.eventmpro.util.L;
 
 public class DetailEvent extends AppCompatActivity {
 
 
     ActivityDetailEventBinding binding;
-    ContentDetailEventBinding binding2;
     EventoDao dao;
 
     int pos;
