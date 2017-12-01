@@ -17,17 +17,14 @@ import unicauca.movil.eventmpro.databinding.ActivityMapsBinding;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
-
     ActivityMapsBinding binding;
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_maps);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_maps);
         binding.setHandler(this);
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -46,7 +43,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
@@ -72,19 +68,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void goToPrincipal(){
-        Intent inten = new Intent(MapsActivity.this, DetailEvent.class);
-        startActivity(inten);
+        Intent intent = new Intent(MapsActivity.this, CargaDatos.class);
+        startActivity(intent);
     }
     public void goToPonente(){
-        Intent inten = new Intent(MapsActivity.this, Ponentes.class);
-        startActivity(inten);
+        Intent intent = new Intent(MapsActivity.this, Ponentes.class);
+        startActivity(intent);
     }
     public void goToHorario(){
-        Intent inten = new Intent(MapsActivity.this, Programacion.class);
-        startActivity(inten);
+        Intent intent = new Intent(MapsActivity.this, Programacion.class);
+        startActivity(intent);
     }
     public void goToNotificaciones(){
-        Intent inten = new Intent(MapsActivity.this, Notification.class);
-        startActivity(inten);
+        Intent intent = new Intent(MapsActivity.this, Notification.class);
+        startActivity(intent);
     }
+
 }
