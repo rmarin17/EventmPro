@@ -273,8 +273,6 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
 
             }
 
-            generateAlert();
-
             //dao.insert(p);
             //txtXml.setText(sb.toString());   --> para colocarlo en el edittext
             //Toast.makeText(this, "Archivo: " +sb.toString(), Toast.LENGTH_LONG).show();
@@ -508,6 +506,9 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
     public void onClick(DialogInterface dialogInterface, int i) {
 
         if( i == DialogInterface.BUTTON_POSITIVE) {
+
+            readXmlPullParser();
+
 
             Intent inten = new Intent(this, DetailEvent.class);
             startActivity(inten);
