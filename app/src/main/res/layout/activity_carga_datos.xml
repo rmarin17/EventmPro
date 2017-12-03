@@ -99,7 +99,7 @@
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
                     android:gravity="center"
-                    android:onClick="@{()->handler.readXmlPullParser()}"
+                    android:onClick="@{()->handler.generateAlert()}"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.25"

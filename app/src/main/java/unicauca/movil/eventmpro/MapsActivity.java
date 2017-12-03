@@ -2,10 +2,14 @@ package unicauca.movil.eventmpro;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.widget.Toast;
 
+import com.estimote.coresdk.common.requirements.SystemRequirementsChecker;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -13,12 +17,23 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import unicauca.movil.eventmpro.beacons.BeaconLocationService;
+import unicauca.movil.eventmpro.beacons.BeaconReceiver;
 import unicauca.movil.eventmpro.databinding.ActivityMapsBinding;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     ActivityMapsBinding binding;
     private GoogleMap mMap;
+
+
+    Intent intent;
+    BeaconReceiver receiver;
+
+    Disposable disposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +45,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
-
 
     /**
      * Manipulates the map once available.
@@ -67,8 +81,50 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(mosquera).title("Casa Mosquera (Coctel de Bienvenida)"));
     }
 
+
+    public void start() {
+
+            Toast.makeText(this, "Buscando Sugerencias", Toast.LENGTH_SHORT).show();
+
+            //BEACONS
+            intent = new Intent(this, BeaconLocationService.class);
+            startService(intent);
+            receiver = new BeaconReceiver();
+            IntentFilter filter = new IntentFilter(BeaconReceiver.ACTION_BEACON);
+            registerReceiver(receiver, filter);
+            disposable = receiver.getBeaconNotify()
+                    .distinctUntilChanged(new Function<Integer[], Object>() {
+                        @Override
+                        public Object apply(Integer[] integers) throws Exception {
+                            return integers[0];
+                        }
+                    })
+                    .subscribe(new Consumer<Integer[]>() {
+                        @Override
+                        public void accept(Integer[] integers) throws Exception {
+
+                            // integer = MAJOR del beacon.
+                            Integer major1 = integers[0];
+                            Integer major2 = integers[0];
+
+
+                            //Toast.makeText(MainActivity.this, "" + integers[0] + " " + integers[1], Toast.LENGTH_SHORT).show();
+                            //Log.i("BEACONINFO", "MARJOR1: " + integers[0] + " MAJOR2:" + integers[1]);
+                        }
+                    });
+
+    }
+
+    public void stop(){
+
+        Toast.makeText(this, "Detener Servicio", Toast.LENGTH_SHORT).show();
+        stopService(intent);
+        disposable.dispose();
+        unregisterReceiver(receiver);
+    }
+
     public void goToPrincipal(){
-        Intent intent = new Intent(MapsActivity.this, CargaDatos.class);
+        Intent intent = new Intent(MapsActivity.this, DetailEvent.class);
         startActivity(intent);
     }
     public void goToPonente(){

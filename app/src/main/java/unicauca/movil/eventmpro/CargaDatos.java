@@ -497,7 +497,7 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
                 .setIcon(R.drawable.ic_check)
                 .setMessage(R.string.alert_msg)
                 .setPositiveButton(R.string.ok,this)
-                //.setNegativeButton(R.string.cancel, this)
+                .setNegativeButton(R.string.cancel, this)
                 .create();
         alert.show();
     }
@@ -513,6 +513,10 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
             Intent inten = new Intent(this, DetailEvent.class);
             startActivity(inten);
             finish();
+        }
+
+        if( i == DialogInterface.BUTTON_NEGATIVE) {
+
         }
 
     }
