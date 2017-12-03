@@ -53,6 +53,7 @@
             android:theme="@style/NoActionBar"
             android:screenOrientation="portrait"/>
         <activity android:name=".DetailPonente"
+            android:theme="@style/NoActionBar"
             android:screenOrientation="portrait"/>
         <activity android:name=".Programacion"
             android:theme="@style/NoActionBar"

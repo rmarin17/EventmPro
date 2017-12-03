@@ -482,7 +482,7 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
             Uri uri = null;
             if (resultData != null) {
                 uri = resultData.getData();
-                Toast.makeText(this, "URI: " +uri.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "ARCHIVO: " +uri.toString(), Toast.LENGTH_LONG).show();
                 archivo = uri;
             }
 

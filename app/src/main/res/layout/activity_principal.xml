@@ -22,18 +22,17 @@
         <FrameLayout>
 
             <ImageView
-                android:layout_marginTop="@dimen/small"
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/login_img"
-                android:scaleType="fitCenter"
+                android:scaleType="centerCrop"
                 android:src="@drawable/events" />
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/mask"
-                />
+                android:scaleType="centerCrop" />
         </FrameLayout>
 
 
@@ -70,8 +69,8 @@
                     style="@style/Base.TextAppearance.AppCompat.Body1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/textBody"
-                    android:text="@string/principal_description" />
+                    android:text="@string/principal_description"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             </LinearLayout>
         </TableRow>
@@ -97,13 +96,13 @@
                     android:layout_height="@dimen/icon_btn"
                     app:srcCompat="@drawable/ic_folder"
                     />
+
                 <TextView
                     style="@style/Base.TextAppearance.AppCompat.Body2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/btn_text_cargar"
-                    android:textColor="@color/txtBtn"
-                    />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
             </LinearLayout>
 
 
