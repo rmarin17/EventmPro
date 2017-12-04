@@ -74,7 +74,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         PendingIntent pendingIntent = PendingIntent.getActivities(this, 0,
                 new Intent[]{notifyIntent}, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = new Notification.Builder(this)
-                .setSmallIcon(R.drawable.ic_notification)
+                .setSmallIcon(R.drawable.logo)
                 .setContentTitle("EventmPro")
                 .setContentText(body)
                 .setAutoCancel(true)

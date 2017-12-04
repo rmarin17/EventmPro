@@ -60,7 +60,7 @@ public class NotificationDao {
 
     public List<Mensaje> getAll (){
 
-        Cursor c = db.rawQuery("SELECT * FROM notification",null);
+        Cursor c = db.rawQuery("SELECT * FROM notification ORDER BY _id DESC",null);
         return cursorToList(c);
     }
 

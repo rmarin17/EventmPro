@@ -120,7 +120,7 @@
                     <ImageView
                         android:layout_width="@dimen/carga_icon"
                         android:layout_height="@dimen/carga_icon"
-                        android:src="@drawable/ic_backup" />
+                        app:srcCompat="@drawable/ic_backup" />
 
                     <TextView
                         style="@style/Base.TextAppearance.AppCompat.Body2"
@@ -151,7 +151,7 @@
                     <ImageView
                         android:layout_width="@dimen/carga_icon"
                         android:layout_height="@dimen/carga_icon"
-                        android:src="@drawable/ic_folder" />
+                        app:srcCompat="@drawable/ic_folder" />
 
                     <TextView
                         style="@style/Base.TextAppearance.AppCompat.Body2"

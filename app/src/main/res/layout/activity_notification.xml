@@ -62,7 +62,7 @@
                     <ImageView
                         android:layout_width="@dimen/icon_btn"
                         android:layout_height="@dimen/icon_btn"
-                        android:src="@drawable/ic_principal" />
+                        app:srcCompat="@drawable/ic_principal" />
 
                     <TextView
                         style="@style/Base.TextAppearance.AppCompat.Body2"
@@ -93,7 +93,7 @@
                     <ImageView
                         android:layout_width="@dimen/icon_btn"
                         android:layout_height="@dimen/icon_btn"
-                        android:src="@drawable/ic_ponentes" />
+                        app:srcCompat="@drawable/ic_ponentes" />
 
                     <TextView
                         style="@style/Base.TextAppearance.AppCompat.Body2"
@@ -121,7 +121,7 @@
                     <ImageView
                         android:layout_width="@dimen/icon_btn"
                         android:layout_height="@dimen/icon_btn"
-                        android:src="@drawable/ic_clock" />
+                        app:srcCompat="@drawable/ic_clock" />
 
                     <TextView
                         style="@style/Base.TextAppearance.AppCompat.Body2"
@@ -149,7 +149,7 @@
                     <ImageView
                         android:layout_width="@dimen/icon_btn"
                         android:layout_height="@dimen/icon_btn"
-                        android:src="@drawable/ic_place" />
+                        app:srcCompat="@drawable/ic_place" />
 
                     <TextView
                         style="@style/Base.TextAppearance.AppCompat.Body2"
