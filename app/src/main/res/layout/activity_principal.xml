@@ -12,102 +12,105 @@
             />
     </data>
 
-    <TableLayout
-        android:id="@+id/activity_login"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:stretchColumns="*"
-        tools:context="unicauca.movil.eventmpro.Principal">
+        android:layout_height="match_parent">
 
-        <FrameLayout>
+        <TableLayout
+            android:id="@+id/activity_login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="*"
+            tools:context="unicauca.movil.eventmpro.Principal">
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/login_img"
-                android:scaleType="centerCrop"
-                android:src="@drawable/events" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/mask"
-                android:scaleType="centerCrop" />
-        </FrameLayout>
-
-
-    <TableLayout
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        >
-        <TableRow
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_horizontal_margin"
-            >
-
-            <ImageView
-                android:layout_width="@dimen/principal_icon"
-                android:layout_height="@dimen/principal_icon"
-                android:layout_marginRight="@dimen/small"
-                app:srcCompat="@drawable/ic_des" />
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                >
-                <TextView
-                    style="@style/TextAppearance.AppCompat.Title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/principal_objetivo"
-                    android:textColor="@color/textTitle"
-                    android:layout_marginBottom="@dimen/small"
-                    />
-
-                <TextView
-                    style="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/principal_description"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-            </LinearLayout>
-        </TableRow>
-
-        </TableLayout>
-
-        <FrameLayout
-            android:layout_weight="1">
-            <LinearLayout
-                android:id="@+id/btnExplorer"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:clickable="true"
-                android:onClick="@{()->handler.goToExplorer()}"
-                >
+            <FrameLayout>
 
                 <ImageView
-                    android:layout_width="@dimen/icon_btn"
-                    android:layout_height="@dimen/icon_btn"
-                    app:srcCompat="@drawable/ic_folder"
-                    />
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/login_img"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/events" />
 
-                <TextView
-                    style="@style/Base.TextAppearance.AppCompat.Body2"
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/mask"
+                    android:scaleType="centerCrop" />
+            </FrameLayout>
+
+
+            <TableLayout
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <TableRow
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingTop="@dimen/activity_horizontal_margin">
+
+                    <ImageView
+                        android:layout_width="@dimen/principal_icon"
+                        android:layout_height="@dimen/principal_icon"
+                        android:layout_marginRight="@dimen/small"
+                        app:srcCompat="@drawable/ic_des" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_weight="1">
+
+                        <TextView
+                            style="@style/TextAppearance.AppCompat.Title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/principal_objetivo"
+                            android:textColor="@color/textTitle"
+                            android:layout_marginBottom="@dimen/small" />
+
+                        <TextView
+                            style="@style/Base.TextAppearance.AppCompat.Body1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/principal_description"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                    </LinearLayout>
+                </TableRow>
+
+            </TableLayout>
+
+            <FrameLayout android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/btnExplorer"
+                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/btn_text_cargar"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
-            </LinearLayout>
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:onClick="@{()->handler.goToExplorer()}">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_btn"
+                        android:layout_height="@dimen/icon_btn"
+                        app:srcCompat="@drawable/ic_folder" />
+
+                    <TextView
+                        style="@style/Base.TextAppearance.AppCompat.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_text_cargar"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+                </LinearLayout>
 
 
-        </FrameLayout>
+            </FrameLayout>
 
 
-</TableLayout>
+        </TableLayout>
+    </android.support.constraint.ConstraintLayout>
+
 </layout>
