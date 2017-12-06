@@ -51,6 +51,10 @@ public class NotificationDao {
         db.delete(TABLE,"_id = "+id, null);
     }
 
+    public void deleteAll (){
+        db.execSQL("DELETE FROM notification");
+    }
+
     public  Mensaje getByid (long id){
 
         Cursor c = db.rawQuery("SELECT * FROM notification WHERE _id="+id,null);

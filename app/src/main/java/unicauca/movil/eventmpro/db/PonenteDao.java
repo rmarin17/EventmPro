@@ -70,6 +70,10 @@ public class PonenteDao {
         db.delete(TABLE,"_id = "+id, null);
     }
 
+    public void deleteAll (){
+        db.execSQL("DELETE FROM ponente");
+    }
+
     public  Ponente getByid (long id){
 
         Cursor c = db.rawQuery("SELECT * FROM ponente WHERE _id="+id,null);

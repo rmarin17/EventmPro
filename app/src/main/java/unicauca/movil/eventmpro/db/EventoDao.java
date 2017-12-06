@@ -57,6 +57,10 @@ public class EventoDao {
         db.delete(TABLE,"_id = "+id, null);
     }
 
+    public void deleteAll (){
+        db.execSQL("DELETE FROM evento");
+    }
+
     public  Evento getByid (long id){
 
         Cursor c = db.rawQuery("SELECT * FROM evento WHERE _id="+id,null);

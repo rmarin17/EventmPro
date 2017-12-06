@@ -67,6 +67,10 @@ public class DiasDao {
         db.delete(TABLE,"_id = "+id, null);
     }
 
+    public void deleteAll (){
+        db.execSQL("DELETE FROM dias");
+    }
+
     public  Dias getByid (long id){
 
         Cursor c = db.rawQuery("SELECT * FROM dias WHERE _id="+id,null);
