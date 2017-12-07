@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import unicauca.movil.eventmpro.models.Conections;
-import unicauca.movil.eventmpro.models.Dias;
 
 /**
  * Created by RicardoM on 07/12/2017.

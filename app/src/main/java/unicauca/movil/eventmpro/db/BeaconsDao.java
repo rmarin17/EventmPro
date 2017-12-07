@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import unicauca.movil.eventmpro.models.Beacons;
-import unicauca.movil.eventmpro.models.Dias;
-
-import static unicauca.movil.eventmpro.db.DiasDao.C_IDD;
 
 /**
  * Created by RicardoM on 07/12/2017.

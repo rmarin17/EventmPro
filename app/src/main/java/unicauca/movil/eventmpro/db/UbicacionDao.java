@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import unicauca.movil.eventmpro.models.Beacons;
 import unicauca.movil.eventmpro.models.Ubicacion;
 
 /**
