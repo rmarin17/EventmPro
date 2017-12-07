@@ -60,11 +60,37 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 +", fecha VARCHAR"
                 +")"
         );
+
+        db.execSQL(" CREATE TABLE conections (_id INTEGER PRIMARY KEY"
+                +", dias VARCHAR"
+                +", ponentes VARCHAR"
+                +", ubicacion VARCHAR"
+                +", beacons VARCHAR"
+                +")"
+        );
+
+        db.execSQL(" CREATE TABLE ubicacion (_id INTEGER PRIMARY KEY"
+                +", titulo VARCHAR"
+                +", lat DOUBLE"
+                +", lng DOUBLE"
+                +")"
+        );
+        db.execSQL(" CREATE TABLE beacons (_id INTEGER PRIMARY KEY"
+                +", uuid VARCHAR"
+                +", major VARCHAR"
+                +", minor VARCHAR"
+                +")"
+        );
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             db.execSQL("DROP TABLE ponente");
+            db.execSQL("DROP TABLE dias");
+            db.execSQL("DROP TABLE notification");
+            db.execSQL("DROP TABLE conections");
+            db.execSQL("DROP TABLE ubicacion");
+            db.execSQL("DROP TABLE beacons");
             onCreate(db);
     }
 }
