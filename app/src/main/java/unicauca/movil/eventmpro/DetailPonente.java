@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.graphics.Palette;
@@ -79,4 +80,6 @@ public class DetailPonente extends AppCompatActivity implements Callback {
     public void onError() {
 
     }
+
+
 }

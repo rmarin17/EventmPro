@@ -37,6 +37,8 @@
     <string name="action_more">Mas</string>
     <string name="action_out">Salir del Evento</string>
     <string name="action_info">Info</string>
+    <string name="alert_title_event">Salir del Evento</string>
+    <string name="alert_msg_event">¿Está seguro de borrar todos los datos del evento? (Tenga en cuenta que una vez salga del evento, tiene que volver a cargar otro evento)</string>
 
 
 </resources>

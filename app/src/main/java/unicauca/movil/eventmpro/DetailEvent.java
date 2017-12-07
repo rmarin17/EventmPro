@@ -1,8 +1,10 @@
 package unicauca.movil.eventmpro;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,7 +22,7 @@ import unicauca.movil.eventmpro.db.PonenteDao;
 import unicauca.movil.eventmpro.models.Evento;
 import unicauca.movil.eventmpro.util.L;
 
-public class DetailEvent extends AppCompatActivity {
+public class DetailEvent extends AppCompatActivity implements DialogInterface.OnClickListener{
 
 
     ActivityDetailEventBinding binding;
@@ -97,18 +99,47 @@ public class DetailEvent extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.salir:
 
-                dao.deleteAll();
-                diasdao.deleteAll();
-                notidao.deleteAll();
-                pdao.deleteAll();
-
-                Intent inten = new Intent(DetailEvent.this, Principal.class);
-                startActivity(inten);
+                generateAlert();
 
                 break;
         }
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void generateAlert(){
+
+        AlertDialog alert = new AlertDialog.Builder(this)
+                .setTitle(R.string.alert_title_event)
+                .setIcon(R.drawable.ic_warning)
+                .setMessage(R.string.alert_msg_event)
+                .setPositiveButton(R.string.ok,this)
+                .setNegativeButton(R.string.cancel, this)
+                .create();
+        alert.show();
+    }
+
+    @Override
+    public void onClick(DialogInterface dialogInterface, int i) {
+
+        if( i == DialogInterface.BUTTON_POSITIVE) {
+
+            dao.deleteAll();
+            diasdao.deleteAll();
+            notidao.deleteAll();
+            pdao.deleteAll();
+
+            Intent inten = new Intent(this, Principal.class);
+            inten.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(inten);
+            //finish();
+
+        }
+
+        if( i == DialogInterface.BUTTON_NEGATIVE) {
+
+        }
+
     }
 }

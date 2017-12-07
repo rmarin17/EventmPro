@@ -8,5 +8,6 @@
     <color name="textBody">#555</color>
     <color name="txtBtn">#666</color>
     <color name="Imgbg">#333333</color>
+    <color name="icon_alert">#E53935</color>
 
 </resources>
