@@ -42,7 +42,8 @@ import unicauca.movil.eventmpro.util.L;
 public class CargaDatos extends AppCompatActivity implements DialogInterface.OnClickListener {
 
 
-    public static final String EXTRA_POS = "pos";
+
+    public static final String EXTRA_FILE = "pos";
     private static final int READ_REQUEST_CODE = 42;
 
     Uri archivo;
@@ -52,6 +53,8 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
 
     String img = "https://drive.google.com/open?id=0B1zSUe5TNtbmTFdUV2VUYkRsXzQ";
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +62,8 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_carga_datos);
 
+        //String uri =  getIntent().getExtras().getString(EXTRA_FILE);
+        //archivo = Uri.parse(uri);
 
         binding.setHandler(this);
 
@@ -66,6 +71,8 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
         dao = new PonenteDao(this);
 
         //archivo = (TextView) findViewById();
+
+
         performFileSearch();
 
 
@@ -435,12 +442,6 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
         intent.setType("*/*");
 
         startActivityForResult(intent, READ_REQUEST_CODE);
-    }
-
-    public void continuar(){
-
-        Intent conti = new Intent(CargaDatos.this, Ponentes.class);
-        startActivity(conti);
 
     }
 
@@ -448,20 +449,6 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
 
         Intent prog = new Intent(CargaDatos.this, Programacion.class);
         startActivity(prog);
-
-    }
-
-    public void noti(){
-
-        Intent intent = new Intent(CargaDatos.this, Notification.class);
-        startActivity(intent);
-
-    }
-
-    public void maps(){
-
-        Intent intent = new Intent(CargaDatos.this, MapsActivity.class);
-        startActivity(intent);
 
     }
 
@@ -484,7 +471,19 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
                 uri = resultData.getData();
                 Toast.makeText(this, "ARCHIVO: " +uri.toString(), Toast.LENGTH_LONG).show();
                 archivo = uri;
+
             }
+
+        }
+
+        if (requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_CANCELED) {
+            // The document selected by the user won't be returned in the intent.
+            // Instead, a URI to that document will be contained in the return intent
+            // provided to this method as a parameter.
+            // Pull that URI using resultData.getData().
+
+            Intent inten = new Intent(this, Principal.class);
+            startActivity(inten);
 
         }
     }

@@ -29,6 +29,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -63,7 +64,7 @@ public class Principal extends AppCompatActivity {
     //int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 10001;
     private static final int READ_REQUEST_CODE = 42;
 
-    String archivo = " ";
+    String archivo;
     //private List<String> fileList = new ArrayList<String>();
 
     @Override
@@ -91,7 +92,7 @@ public class Principal extends AppCompatActivity {
         dao1 = new PonenteDao(this);
         dao2 = new EventoDao(this);
 
-        Evento e = new Evento();
+        /*Evento e = new Evento();
         e.setId(1);
         e.setNombre("TET 2016");
         e.setObjetivo("Facilitar el acceso a información de primera mano a estudiantes, profesores y profesionales afines con el área de Telecomunicaciones, que buscan aumentar y actualizar su conocimiento sobre las tecnologías que mayor penetran e impactan a la sociedad.");
@@ -99,7 +100,7 @@ public class Principal extends AppCompatActivity {
         e.setDescripcion("Seminario de Tecnologias Emergentes en Telecomunicaciones");
         e.setFecha("20, 21 y 22 de Octubre de 2016");
 
-        dao2.insert(e);
+        dao2.insert(e);*/
 
 
 
@@ -110,6 +111,7 @@ public class Principal extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+
 
 
         //region Tomar datos de la notificacion de firebase
@@ -260,9 +262,15 @@ public class Principal extends AppCompatActivity {
                 uri = resultData.getData();
                 Toast.makeText(this, "URI: " +uri.toString(), Toast.LENGTH_LONG).show();
                 archivo = uri.toString();
+
+                //uri(archivo);
+                //Intent inten = new Intent(this, CargaDatos.class);
+                //startActivity(inten);
+
             }
         }
     }
+
 
 
 
