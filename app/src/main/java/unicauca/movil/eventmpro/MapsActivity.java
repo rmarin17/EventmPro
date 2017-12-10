@@ -1,12 +1,14 @@
 package unicauca.movil.eventmpro;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
 import com.estimote.coresdk.common.requirements.SystemRequirementsChecker;
@@ -25,19 +27,27 @@ import io.reactivex.functions.Function;
 import unicauca.movil.eventmpro.beacons.BeaconLocationService;
 import unicauca.movil.eventmpro.beacons.BeaconReceiver;
 import unicauca.movil.eventmpro.databinding.ActivityMapsBinding;
+import unicauca.movil.eventmpro.db.BeaconsDao;
 import unicauca.movil.eventmpro.db.UbicacionDao;
+import unicauca.movil.eventmpro.models.Beacons;
 import unicauca.movil.eventmpro.models.Ponente;
 import unicauca.movil.eventmpro.models.Ubicacion;
 import unicauca.movil.eventmpro.util.L;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, DialogInterface.OnClickListener {
 
     ActivityMapsBinding binding;
     private GoogleMap mMap;
 
+    int beacon;
 
     Ubicacion u;
+    Beacons b;
     UbicacionDao udao;
+    BeaconsDao bdao;
+
+    Double blat,blng;
+    String titulo;
 
     Intent intent;
     BeaconReceiver receiver;
@@ -51,7 +61,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding.setHandler(this);
 
         u = new Ubicacion();
+        b = new Beacons();
         udao = new UbicacionDao(this);
+        bdao = new BeaconsDao(this);
 
         start();
 
@@ -132,10 +144,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                             // integer = MAJOR del beacon.
                             Integer major1 = integers[0];
-                            Integer major2 = integers[1];
 
+                            List<Beacons> list = bdao.getAll();
 
-                            Toast.makeText(MapsActivity.this, "" + integers[0] + " " + integers[1], Toast.LENGTH_SHORT).show();
+                            if(list.size() > 0 ) {
+
+                                for (Beacons b : list) {
+                                    if (major1 == b.getMajor()) {
+                                        titulo = b.getBtitulo();
+                                        blat = b.getBlat();
+                                        blng = b.getBlong();
+                                        beaconAlert(titulo);
+                                    }
+                                }
+                            }
+                            //Toast.makeText(MapsActivity.this, "" + integers[0] + " " + integers[1], Toast.LENGTH_SHORT).show();
                             //Log.i("BEACONINFO", "MARJOR1: " + integers[0] + " MAJOR2:" + integers[1]);
                         }
                     });
@@ -150,6 +173,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         unregisterReceiver(receiver);
     }
 
+    public void beaconAlert(String titulo) {
+
+        AlertDialog alert = new AlertDialog.Builder(this)
+                .setTitle(titulo)
+                .setIcon(R.drawable.ic_warning)
+                .setMessage(R.string.alert_msg_beacon)
+                .setPositiveButton(R.string.ok,this)
+                .setNegativeButton(R.string.cancel, this)
+                .create();
+        alert.show();
+
+    }
+
+    /*public void beaconAlert2() {
+
+        AlertDialog alert = new AlertDialog.Builder(this)
+                .setTitle(R.string.alert_beacon2)
+                .setIcon(R.drawable.ic_warning)
+                .setMessage(R.string.alert_msg_beacon)
+                .setPositiveButton(R.string.ok,this)
+                .setNegativeButton(R.string.cancel, this)
+                .create();
+        alert.show();
+
+    }
+*/
     public void goToPrincipal(){
         Intent intent = new Intent(MapsActivity.this, DetailEvent.class);
         startActivity(intent);
@@ -167,4 +216,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         startActivity(intent);
     }
 
+    @Override
+    public void onClick(DialogInterface dialogInterface, int i) {
+
+        if( i == DialogInterface.BUTTON_POSITIVE) {
+                LatLng encuentro = new LatLng(blat, blng);
+                mMap.addMarker(new MarkerOptions().position(encuentro).title(titulo));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(encuentro, 30));
+        }
+
+    }
 }

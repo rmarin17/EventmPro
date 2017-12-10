@@ -18,9 +18,11 @@ public class BeaconsDao {
 
     static final String TABLE = "beacons";
     static final String C_ID = "_id";
-    static final String C_UUID = "uuid";
+    static final String C_TITLE = "btitulo";
     static final String C_MAJOR = "major";
     static final String C_MINOR = "minor";
+    static final String C_BLAT = "blat";
+    static final String C_BLONG = "blng";
 
     SQLiteDatabase db;
 
@@ -32,18 +34,22 @@ public class BeaconsDao {
     public void insert (Beacons beacon){
         ContentValues cV = new ContentValues();
         cV.put(C_ID, beacon.getId());
-        cV.put(C_UUID, beacon.getUuid());
+        cV.put(C_TITLE, beacon.getBtitulo());
         cV.put(C_MAJOR, beacon.getMajor());
         cV.put(C_MINOR, beacon.getMinor());
+        cV.put(C_BLAT, beacon.getBlat());
+        cV.put(C_BLONG, beacon.getBlong());
         db.insert(TABLE,null,cV);
     }
 
     public void update (Beacons beacon){
 
         ContentValues cV = new ContentValues();
-        cV.put(C_UUID, beacon.getUuid());
+        cV.put(C_TITLE, beacon.getBtitulo());
         cV.put(C_MAJOR, beacon.getMajor());
         cV.put(C_MINOR, beacon.getMinor());
+        cV.put(C_BLAT, beacon.getBlat());
+        cV.put(C_BLONG, beacon.getBlong());
         long id = db.update(TABLE,cV,"_id = ?",new String[]{beacon.getId()+" "});
     }
 
@@ -82,9 +88,11 @@ public class BeaconsDao {
         if (c.moveToNext()){
             beacons = new Beacons();
             beacons.setId(c.getLong(0));
-            beacons.setUuid(c.getString(1));
-            beacons.setMajor(c.getString(2));
-            beacons.setMinor(c.getString(3));
+            beacons.setBtitulo(c.getString(1));
+            beacons.setMajor(c.getInt(2));
+            beacons.setMinor(c.getInt(3));
+            beacons.setBlat(c.getDouble(4));
+            beacons.setBlong(c.getDouble(5));
         }
         return beacons;
     }

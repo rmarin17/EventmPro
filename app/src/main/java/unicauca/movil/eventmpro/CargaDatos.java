@@ -315,7 +315,6 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
                             break;
                         //endregion
 
-
                         //region Beacons
                         case "idb":
                             parser.require(XmlPullParser.START_TAG, null, condi);
@@ -323,22 +322,34 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
                             b.setId(Integer.parseInt(idb));
                             break;
 
-                        case "uuid":
+                        case "btitulo":
                             parser.require(XmlPullParser.START_TAG, null, condi);
                             String uuid = readText(parser);
-                            b.setUuid(uuid);
+                            b.setBtitulo(uuid);
                             break;
 
                         case "major":
                             parser.require(XmlPullParser.START_TAG, null, condi);
                             String major = readText(parser);
-                            b.setMajor(major);
+                            b.setMajor(Integer.parseInt(major));
                             break;
 
                         case "minor":
                             parser.require(XmlPullParser.START_TAG, null, condi);
                             String minor = readText(parser);
-                            b.setMinor(minor);
+                            b.setMinor(Integer.parseInt(minor));
+                            break;
+
+                        case "blat":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String blat = readText(parser);
+                            b.setBlat(Double.parseDouble(blat));
+                            break;
+
+                        case "blng":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String blng = readText(parser);
+                            b.setBlong(Double.parseDouble(blng));
                             bdao.insert(b);
                             break;
                         //endregion
@@ -375,7 +386,6 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
                             cdao.insert(c);
                             break;
                         //endregion
-
                     }
                 }
                 eventType = parser.next();

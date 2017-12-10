@@ -6,7 +6,9 @@ package unicauca.movil.eventmpro.models;
 
 public class Beacons {
     long id;
-    String uuid, major, minor;
+    String btitulo;
+    int major, minor;
+    Double blat,blng;
 
     public long getId() {
         return id;
@@ -16,27 +18,43 @@ public class Beacons {
         this.id = id;
     }
 
-    public String getUuid() {
-        return uuid;
+    public String getBtitulo() {
+        return btitulo;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setBtitulo(String btitulo) {
+        this.btitulo = btitulo;
     }
 
-    public String getMajor() {
+    public int getMajor() {
         return major;
     }
 
-    public void setMajor(String major) {
+    public void setMajor(int major) {
         this.major = major;
     }
 
-    public String getMinor() {
+    public int getMinor() {
         return minor;
     }
 
-    public void setMinor(String minor) {
+    public void setMinor(int minor) {
         this.minor = minor;
+    }
+
+    public Double getBlat() {
+        return blat;
+    }
+
+    public void setBlat(Double blat) {
+        this.blat = blat;
+    }
+
+    public Double getBlong() {
+        return blng;
+    }
+
+    public void setBlong(Double blng) {
+        this.blng = blng;
     }
 }

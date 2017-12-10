@@ -60,21 +60,20 @@ public class BeaconLocationService extends Service {
                     Log.e("Reactive", "size "+list.size());
                     switch (list.size()){
 
-                        case 1:
+                        default:
                             Log.e("Reactive", "case 1");
                             intent.putExtra(BeaconReceiver.EXTRA_MAJOR, nearestBeacon.getMajor());
                             intent.putExtra(BeaconReceiver.EXTRA_MINOR, nearestBeacon.getMinor());
-
                             break;
-                        default:
+                        /*default:
                             Log.e("Reactive", "case 2");
                             Beacon nearestBeacon2 = list.get(1);
                             intent.putExtra(BeaconReceiver.EXTRA_MAJOR, nearestBeacon.getMajor());
                             intent.putExtra(BeaconReceiver.EXTRA_MINOR, nearestBeacon.getMinor());
-/**************************************************************************************************************************/
+*//**************************************************************************************************************************//*
                             intent.putExtra(BeaconReceiver.EXTRA_MAJOR2, nearestBeacon2.getMajor());
                             intent.putExtra(BeaconReceiver.EXTRA_MINOR2, nearestBeacon2.getMinor());
-                            break;
+                            break;*/
 
 
 

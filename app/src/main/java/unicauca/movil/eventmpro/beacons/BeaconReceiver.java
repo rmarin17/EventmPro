@@ -40,7 +40,7 @@ public class BeaconReceiver extends BroadcastReceiver {
         Log.e("Reactive", "major: "+ major);
         Log.e("Reactive", "major: "+ major2);
 
-        subject.onNext(new Integer[]{major, major2});
+        subject.onNext(new Integer[]{major});
         //subject.onNext(new Integer[]{major});
 
 

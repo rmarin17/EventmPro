@@ -20,7 +20,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-            db.execSQL(" CREATE TABLE ponente (_id INTEGER PRIMARY KEY AUTOINCREMENT"
+            db.execSQL(" CREATE TABLE ponente (_id INTEGER PRIMARY KEY"
                 +", nombre VARCHAR"
                 +", apellidos VARCHAR"
                 +", empresa VARCHAR"
@@ -76,9 +76,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 +")"
         );
         db.execSQL(" CREATE TABLE beacons (_id INTEGER PRIMARY KEY"
-                +", uuid VARCHAR"
-                +", major VARCHAR"
-                +", minor VARCHAR"
+                +", btitulo VARCHAR"
+                +", major INTEGER"
+                +", minor INTEGER"
+                +", blat DOUBLE"
+                +", blng DOUBLE"
                 +")"
         );
     }
