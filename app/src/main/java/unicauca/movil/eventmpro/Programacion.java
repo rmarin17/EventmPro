@@ -22,8 +22,11 @@ import unicauca.movil.eventmpro.adapters.PagerAdapter;
 import unicauca.movil.eventmpro.databinding.ActivityDetailPonenteBinding;
 import unicauca.movil.eventmpro.databinding.ActivityPonentesBinding;
 import unicauca.movil.eventmpro.databinding.ActivityProgramacionBinding;
+import unicauca.movil.eventmpro.db.ConectionsDao;
 import unicauca.movil.eventmpro.db.DiasDao;
 import unicauca.movil.eventmpro.fragments.ProgramacionFragment;
+import unicauca.movil.eventmpro.models.Beacons;
+import unicauca.movil.eventmpro.models.Conections;
 import unicauca.movil.eventmpro.models.Dias;
 import unicauca.movil.eventmpro.net.HttpAsyncTask;
 import unicauca.movil.eventmpro.util.L;
@@ -34,6 +37,10 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
     DiasDao dao;
     Gson gson;
 
+
+    Conections c;
+    ConectionsDao cdao;
+
     String comando1, comando2, comando3;
 
     @Override
@@ -42,10 +49,14 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
         binding = DataBindingUtil.setContentView(this, R.layout.activity_programacion);
         binding.setHandler(this);
 
+        c = new Conections();
+        cdao = new ConectionsDao(this);
+
         dao = new DiasDao(this);
         gson = new Gson();
         //region Otra forma anteriro
         List<Fragment> data = new ArrayList<>();
+
 
             ProgramacionFragment dia1 = ProgramacionFragment.newInstance(1);//, "http://www.unicauca.edu.co/moocmaker/pagapp/consultandroid.php?idd=1");
             ProgramacionFragment dia2 = ProgramacionFragment.newInstance(2);//, "http://www.unicauca.edu.co/moocmaker/pagapp/consultandroid.php?idd=2");
@@ -54,10 +65,24 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
             data.add(dia1);
             data.add(dia2);
             data.add(dia3);
+
+
         //endregion
-            comando1 = "http://www.unicauca.edu.co/moocmaker/pagapp/consultandroid.php?idd=1";
+
+        List<Conections> list = cdao.getAll();
+
+        if(list.size() > 0 ) {
+
+            for (Conections c : list) {
+                comando1 = c.getDias();
+                comando2 = c.getPonentes();
+                comando3 = c.getUbicacion();
+            }
+        }
+
+            /*comando1 = "http://www.unicauca.edu.co/moocmaker/pagapp/consultandroid.php?idd=1";
             comando2 = "http://www.unicauca.edu.co/moocmaker/pagapp/consultandroid.php?idd=2";
-            comando3 = "http://www.unicauca.edu.co/moocmaker/pagapp/consultandroid.php?idd=3";
+            comando3 = "http://www.unicauca.edu.co/moocmaker/pagapp/consultandroid.php?idd=3";*/
 
             loadData();
 
@@ -512,14 +537,10 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
         }.getType();
         List<Dias> res = gson.fromJson(json, lista);
 
-
         for (Dias d : res) {
             dao.update(d);
             dao.insert(d);
-
         }
-
-
 
     }
 
