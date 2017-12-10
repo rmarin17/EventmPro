@@ -498,7 +498,7 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
             }
 
             else{
-                Toast.makeText(this, "El archivo selecionado es no valido o esta dañado (Recuerde que el tipo de archivo es .xml)", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.msj_carga, Toast.LENGTH_LONG).show();
             }
 
         }

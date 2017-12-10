@@ -39,6 +39,8 @@
     <string name="action_info">Info</string>
     <string name="alert_title_event">Salir del Evento</string>
     <string name="alert_msg_event">¿Está seguro de borrar todos los datos del evento? (Tenga en cuenta que una vez salga del evento, tiene que volver a cargar otro evento)</string>
+    <string name="msj_carga">El archivo selecionado es no valido o esta dañado (Recuerde que el tipo de archivo es .xml)</string>
+    <string name="conection_internet">Por favor conectate a internet para obtener la programacion mas reciente.</string>
 
 
 </resources>

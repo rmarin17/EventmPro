@@ -17,18 +17,27 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.List;
+
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import unicauca.movil.eventmpro.beacons.BeaconLocationService;
 import unicauca.movil.eventmpro.beacons.BeaconReceiver;
 import unicauca.movil.eventmpro.databinding.ActivityMapsBinding;
+import unicauca.movil.eventmpro.db.UbicacionDao;
+import unicauca.movil.eventmpro.models.Ponente;
+import unicauca.movil.eventmpro.models.Ubicacion;
+import unicauca.movil.eventmpro.util.L;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     ActivityMapsBinding binding;
     private GoogleMap mMap;
 
+
+    Ubicacion u;
+    UbicacionDao udao;
 
     Intent intent;
     BeaconReceiver receiver;
@@ -40,6 +49,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_maps);
         binding.setHandler(this);
+
+        u = new Ubicacion();
+        udao = new UbicacionDao(this);
+
+        start();
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -59,7 +74,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
+        List<Ubicacion> list = udao.getAll();
+
+        if(list.size() > 0 ) {
+            for (Ubicacion u : list) {
+                LatLng mark = new LatLng(u.getLat(), u.getLng());
+                mMap.addMarker(new MarkerOptions().position(mark).title(u.getTitulo()));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mark,16));
+            }
+        }
+
+       /* // Add a marker in Sydney and move the camera
         LatLng teatro = new LatLng(2.443176, -76.606018);
         mMap.addMarker(new MarkerOptions().position(teatro).title("Teatro Guillermo Leon Valencia"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(teatro,16));
@@ -78,11 +103,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //casa mosquera
         LatLng mosquera = new LatLng(2.442974, -76.605119);
-        mMap.addMarker(new MarkerOptions().position(mosquera).title("Casa Mosquera (Coctel de Bienvenida)"));
+        mMap.addMarker(new MarkerOptions().position(mosquera).title("Casa Mosquera (Coctel de Bienvenida)"));*/
     }
 
 
     public void start() {
+
+            SystemRequirementsChecker.checkWithDefaultDialogs(this);
 
             Toast.makeText(this, "Buscando Sugerencias", Toast.LENGTH_SHORT).show();
 
@@ -105,10 +132,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                             // integer = MAJOR del beacon.
                             Integer major1 = integers[0];
-                            Integer major2 = integers[0];
+                            Integer major2 = integers[1];
 
 
-                            //Toast.makeText(MainActivity.this, "" + integers[0] + " " + integers[1], Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MapsActivity.this, "" + integers[0] + " " + integers[1], Toast.LENGTH_SHORT).show();
                             //Log.i("BEACONINFO", "MARJOR1: " + integers[0] + " MAJOR2:" + integers[1]);
                         }
                     });

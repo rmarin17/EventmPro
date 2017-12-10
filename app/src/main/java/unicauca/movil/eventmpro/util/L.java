@@ -6,6 +6,7 @@ import unicauca.movil.eventmpro.models.Dias;
 import unicauca.movil.eventmpro.models.Evento;
 import unicauca.movil.eventmpro.models.Mensaje;
 import unicauca.movil.eventmpro.models.Ponente;
+import unicauca.movil.eventmpro.models.Ubicacion;
 
 /**
  * Created by RicardoM on 04/08/2017.
@@ -17,4 +18,5 @@ public class L {
     public static List<Dias> data1;
     public static List<Mensaje> data2;
     public static List<Evento> data3;
+    public static List<Ubicacion> udata;
 }

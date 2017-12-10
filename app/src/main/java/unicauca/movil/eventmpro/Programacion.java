@@ -73,7 +73,7 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
 
         if (!verificaConexion(this)) {
             Toast.makeText(this,
-                    "Por favor conectate a internet para obtener la programacion mas reciente.", Toast.LENGTH_SHORT)
+                    R.string.conection_internet, Toast.LENGTH_SHORT)
                     .show();
             //region bad insert
             /*List<Dias> list = dao.getAllByDay(dia);
