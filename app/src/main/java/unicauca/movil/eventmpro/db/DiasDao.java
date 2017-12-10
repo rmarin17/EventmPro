@@ -71,10 +71,10 @@ public class DiasDao {
         db.execSQL("DELETE FROM dias");
     }
 
-    public  Dias getByid (long id){
+    public  List<Dias> getAll(){
 
-        Cursor c = db.rawQuery("SELECT * FROM dias WHERE _id="+id,null);
-        return cursorToDia(c);
+        Cursor c = db.rawQuery("SELECT * FROM dias",null);
+        return cursorToList(c);
 
     }
 

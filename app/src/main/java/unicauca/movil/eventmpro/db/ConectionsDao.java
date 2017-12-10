@@ -65,9 +65,9 @@ public class ConectionsDao {
 
     }
 
-    public List<Conections> getAllByDay (int day){
+    public List<Conections> getAll(){
 
-        Cursor c = db.rawQuery("SELECT * FROM conections WHERE idd = "+day,null);
+        Cursor c = db.rawQuery("SELECT * FROM conections",null);
         return cursorToList(c);
 
     }

@@ -62,7 +62,7 @@ public class BeaconsDao {
 
     }
 
-    public List<Beacons> getAll (int day){
+    public List<Beacons> getAll (){
 
         Cursor c = db.rawQuery("SELECT * FROM beacons",null);
         return cursorToList(c);

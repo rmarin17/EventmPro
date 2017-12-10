@@ -15,10 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import unicauca.movil.eventmpro.databinding.ActivityDetailEventBinding;
+import unicauca.movil.eventmpro.db.BeaconsDao;
+import unicauca.movil.eventmpro.db.ConectionsDao;
 import unicauca.movil.eventmpro.db.DiasDao;
 import unicauca.movil.eventmpro.db.EventoDao;
 import unicauca.movil.eventmpro.db.NotificationDao;
 import unicauca.movil.eventmpro.db.PonenteDao;
+import unicauca.movil.eventmpro.db.UbicacionDao;
 import unicauca.movil.eventmpro.models.Evento;
 import unicauca.movil.eventmpro.util.L;
 
@@ -26,10 +29,13 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
 
 
     ActivityDetailEventBinding binding;
-    EventoDao dao;
-    DiasDao diasdao;
-    NotificationDao notidao;
+    EventoDao edao;
+    DiasDao ddao;
+    NotificationDao ndao;
     PonenteDao pdao;
+    BeaconsDao bdao;
+    UbicacionDao udao;
+    ConectionsDao cdao;
 
 
     int pos;
@@ -43,10 +49,13 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
 
         L.data3 = new ArrayList<>();
 
-        dao = new EventoDao(this);
-        diasdao = new DiasDao(this);
-        notidao = new NotificationDao(this);
+        edao = new EventoDao(this);
+        ddao = new DiasDao(this);
+        ndao = new NotificationDao(this);
         pdao = new PonenteDao(this);
+        bdao = new BeaconsDao(this);
+        udao = new UbicacionDao(this);
+        cdao = new ConectionsDao(this);
 
         loadData();
 
@@ -55,7 +64,7 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
 
     public void loadData() {
 
-        List<Evento> list = dao.getAll();
+        List<Evento> list = edao.getAll();
 
 
         if(list.size() > 0 ) {
@@ -125,10 +134,13 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
 
         if( i == DialogInterface.BUTTON_POSITIVE) {
 
-            dao.deleteAll();
-            diasdao.deleteAll();
-            notidao.deleteAll();
+            edao.deleteAll();
+            ddao.deleteAll();
+            ndao.deleteAll();
             pdao.deleteAll();
+            cdao.deleteAll();
+            udao.deleteAll();
+            bdao.deleteAll();
 
             Intent inten = new Intent(this, Principal.class);
             inten.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

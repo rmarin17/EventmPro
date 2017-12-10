@@ -63,7 +63,7 @@ public class UbicacionDao {
 
     }
 
-    public List<Ubicacion> getAll (int day){
+    public List<Ubicacion> getAll(){
 
         Cursor c = db.rawQuery("SELECT * FROM ubicacion",null);
         return cursorToList(c);
