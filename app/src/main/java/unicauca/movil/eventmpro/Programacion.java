@@ -514,7 +514,9 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
 
 
         for (Dias d : res) {
+            dao.update(d);
             dao.insert(d);
+
         }
 
 

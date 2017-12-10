@@ -35,21 +35,39 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import unicauca.movil.eventmpro.databinding.ActivityCargaDatosBinding;
+import unicauca.movil.eventmpro.db.BeaconsDao;
+import unicauca.movil.eventmpro.db.ConectionsDao;
+import unicauca.movil.eventmpro.db.DiasDao;
+import unicauca.movil.eventmpro.db.EventoDao;
 import unicauca.movil.eventmpro.db.PonenteDao;
+import unicauca.movil.eventmpro.db.UbicacionDao;
+import unicauca.movil.eventmpro.models.Beacons;
+import unicauca.movil.eventmpro.models.Conections;
+import unicauca.movil.eventmpro.models.Dias;
+import unicauca.movil.eventmpro.models.Evento;
 import unicauca.movil.eventmpro.models.Ponente;
+import unicauca.movil.eventmpro.models.Ubicacion;
 import unicauca.movil.eventmpro.util.L;
 
 public class CargaDatos extends AppCompatActivity implements DialogInterface.OnClickListener {
 
 
-
-    public static final String EXTRA_FILE = "pos";
     private static final int READ_REQUEST_CODE = 42;
 
     Uri archivo;
     ActivityCargaDatosBinding binding;
     Ponente p;
-    PonenteDao dao;
+    Dias d;
+    Beacons b;
+    Conections c;
+    Evento e;
+    Ubicacion u;
+    PonenteDao pdao;
+    BeaconsDao bdao;
+    ConectionsDao cdao;
+    DiasDao ddao;
+    EventoDao edao;
+    UbicacionDao udao;
 
     String img = "https://drive.google.com/open?id=0B1zSUe5TNtbmTFdUV2VUYkRsXzQ";
 
@@ -62,20 +80,23 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_carga_datos);
 
-        //String uri =  getIntent().getExtras().getString(EXTRA_FILE);
-        //archivo = Uri.parse(uri);
-
         binding.setHandler(this);
 
         p = new Ponente();
-        dao = new PonenteDao(this);
-
-        //archivo = (TextView) findViewById();
+        d = new Dias();
+        b = new Beacons();
+        u = new Ubicacion();
+        e = new Evento();
+        c = new Conections();
+        pdao = new PonenteDao(this);
+        bdao = new BeaconsDao(this);
+        cdao = new ConectionsDao(this);
+        ddao = new DiasDao(this);
+        edao = new EventoDao(this);
+        udao = new UbicacionDao(this);
 
 
         performFileSearch();
-
-
     }
 
     public void readXMLDOM() {
@@ -176,7 +197,17 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
                     String condi = parser.getName();
 
 
+
                     switch (condi){
+
+                        case "idp":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String idp = readText(parser);
+                            sb.append(" Nombre: "+idp+ "\n");
+                            p.setId(Integer.parseInt(idp));
+                            //dao.insert(p);
+                            break;
+
                         case "nombre":
                             parser.require(XmlPullParser.START_TAG, null, condi);
                             nombre = readText(parser);
@@ -253,7 +284,239 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
                             sb.append(" Habilidad: "+habilidad+ "\n");
                             p.setHabilidad(habilidad);
                             //p.setImagen(img);
-                            dao.insert(p);
+                            pdao.insert(p);
+                            break;
+
+                        case "idh":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String idh = readText(parser);
+                            sb.append(" Habilidad: "+idh+ "\n");
+                            d.setId(Integer.parseInt(idh));
+                            //p.setImagen(img);
+                            break;
+
+                        case "idd":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String idd = readText(parser);
+                            sb.append(" Habilidad: "+idd+ "\n");
+                            d.setIdd(Integer.parseInt(idd));
+                            //p.setImagen(img);
+
+                            break;
+
+                        case "ido":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String ido = readText(parser);
+                            sb.append(" Habilidad: "+ido+ "\n");
+                            d.setIdo(Integer.parseInt(ido));
+                            //p.setImagen(img);
+
+                            break;
+
+                        case "hora":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String hora = readText(parser);
+                            sb.append(" Habilidad: "+hora+ "\n");
+                            d.setHora(hora);
+                            //p.setImagen(img);
+                            break;
+
+                        case "evento":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String evento = readText(parser);
+                            sb.append(" Habilidad: "+evento+ "\n");
+                            d.setEvento(evento);
+                            //p.setImagen(img);
+                            break;
+
+                        case "titulo":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String titulo = readText(parser);
+                            sb.append(" Habilidad: "+titulo+ "\n");
+                            d.setTitulo(titulo);
+                            //p.setImagen(img);
+                            break;
+
+                        case "conferencista":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String confe = readText(parser);
+                            sb.append(" Habilidad: "+confe+ "\n");
+                            d.setConferencista(confe);
+                            //p.setImagen(img);
+                            break;
+
+                        case "empresadias":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String empd = readText(parser);
+                            sb.append(" Habilidad: "+empd+ "\n");
+                            d.setEmpresa(empd);
+                            //p.setImagen(img);
+                            break;
+
+                        case "lugar":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String lugar = readText(parser);
+                            sb.append(" Habilidad: "+lugar+ "\n");
+                            d.setLugar(lugar);
+                            //p.setImagen(img);
+                            ddao.insert(d);
+                            break;
+
+                        case "ide":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String ide = readText(parser);
+                            sb.append(" Habilidad: "+ide+ "\n");
+                            e.setId(Integer.parseInt(ide));
+                            //p.setImagen(img);
+                            break;
+
+                        case "eventonombre":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String en = readText(parser);
+                            sb.append(" Habilidad: "+en+ "\n");
+                            e.setNombre(en);
+                            //p.setImagen(img);
+                            break;
+
+                        case "objetivo":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String obj = readText(parser);
+                            sb.append(" Habilidad: "+obj+ "\n");
+                            e.setObjetivo(obj);
+                            //p.setImagen(img);
+                            break;
+
+                        case "lugarevento":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String el = readText(parser);
+                            sb.append(" Habilidad: "+el+ "\n");
+                            e.setLugar(el);
+                            //p.setImagen(img);
+                            break;
+
+                        case "descripcion":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String des = readText(parser);
+                            sb.append(" Habilidad: "+des+ "\n");
+                            e.setDescripcion(des);
+                            //p.setImagen(img);
+                            break;
+
+                        case "fecha":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String fecha = readText(parser);
+                            sb.append(" Habilidad: "+fecha+ "\n");
+                            e.setFecha(fecha);
+                            //p.setImagen(img);
+                            edao.insert(e);
+                            break;
+
+                        case "idu":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String idu = readText(parser);
+                            sb.append(" Habilidad: "+idu+ "\n");
+                            u.setId(Integer.parseInt(idu));
+                            //p.setImagen(img);
+                            break;
+
+                        case "tituloubicacion":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String titu = readText(parser);
+                            sb.append(" Habilidad: "+titu+ "\n");
+                            u.setTitulo(titu);
+                            //p.setImagen(img);
+                            break;
+
+                        case "lat":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String lat = readText(parser);
+                            sb.append(" Habilidad: "+lat+ "\n");
+                            u.setLat(Double.parseDouble(lat));
+                            //p.setImagen(img);
+                            break;
+
+                        case "lng":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String lng = readText(parser);
+                            sb.append(" Habilidad: "+lng+ "\n");
+                            u.setLng(Double.parseDouble(lng));
+                            //p.setImagen(img);
+                            udao.insert(u);
+                            break;
+
+
+                        case "idb":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String idb = readText(parser);
+                            sb.append(" Habilidad: "+idb+ "\n");
+                            b.setId(Integer.parseInt(idb));
+                            //p.setImagen(img);
+                            break;
+
+                        case "uuid":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String uuid = readText(parser);
+                            sb.append(" Habilidad: "+uuid+ "\n");
+                            b.setUuid(uuid);
+                            //p.setImagen(img);
+                            break;
+
+                        case "major":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String major = readText(parser);
+                            sb.append(" Habilidad: "+major+ "\n");
+                            b.setMajor(major);
+                            //p.setImagen(img);
+                            break;
+
+                        case "minor":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String minor = readText(parser);
+                            sb.append(" Habilidad: "+minor+ "\n");
+                            b.setMinor(minor);
+                            //p.setImagen(img);
+                            bdao.insert(b);
+                            break;
+
+                        case "idc":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String idc = readText(parser);
+                            sb.append(" Habilidad: "+idc+ "\n");
+                            c.setId(Integer.parseInt(idc));
+                            //p.setImagen(img);
+                            break;
+
+                        case "cdias":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String cdias = readText(parser);
+                            sb.append(" Habilidad: "+cdias+ "\n");
+                            c.setDias(cdias);
+                            //p.setImagen(img);
+                            break;
+
+                        case "cponentes":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String cp = readText(parser);
+                            sb.append(" Habilidad: "+cp+ "\n");
+                            c.setPonentes(cp);
+                            //p.setImagen(img);
+                            break;
+
+                        case "cubicacion":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String cu = readText(parser);
+                            sb.append(" Habilidad: "+cu+ "\n");
+                            c.setUbicacion(cu);
+                            //p.setImagen(img);
+                            break;
+
+                        case "cbeacons":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String cb = readText(parser);
+                            sb.append(" Habilidad: "+cb+ "\n");
+                            c.setBeacons(cb);
+                            //p.setImagen(img);
+                            cdao.insert(c);
                             break;
 
                     }
@@ -484,7 +747,7 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
 
             Intent inten = new Intent(this, Principal.class);
             startActivity(inten);
-
+            finish();
         }
     }
 
@@ -507,7 +770,6 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
         if( i == DialogInterface.BUTTON_POSITIVE) {
 
             readXmlPullParser();
-
 
             Intent inten = new Intent(this, DetailEvent.class);
             startActivity(inten);
