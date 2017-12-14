@@ -1,11 +1,8 @@
 package unicauca.movil.eventmpro.fragments;
 
 
-import android.content.Context;
-import android.content.Intent;
+
 import android.databinding.DataBindingUtil;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,26 +10,19 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import unicauca.movil.eventmpro.DetailPonente;
-import unicauca.movil.eventmpro.Programacion;
+import unicauca.movil.eventmpro.DetailProgramacion;
 import unicauca.movil.eventmpro.R;
-import unicauca.movil.eventmpro.adapters.PonenteAdapter;
 import unicauca.movil.eventmpro.adapters.ProgramacionAdapter;
 import unicauca.movil.eventmpro.databinding.FragmentProgramacionBinding;
 import unicauca.movil.eventmpro.db.DiasDao;
-import unicauca.movil.eventmpro.db.PonenteDao;
 import unicauca.movil.eventmpro.models.Dias;
-import unicauca.movil.eventmpro.net.HttpAsyncTask;
 import unicauca.movil.eventmpro.util.L;
 
 /**
@@ -571,6 +561,10 @@ public class ProgramacionFragment extends Fragment implements ProgramacionAdapte
 
     @Override
     public void onProgramacionClick(int position) {
+
+      /*  Intent intent = new Intent(getContext(), DetailProgramacion.class);
+        intent.putExtra(DetailProgramacion.EXTRA_POS, position);
+        startActivity(intent);*/
 
     }
 

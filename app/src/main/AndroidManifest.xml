@@ -21,9 +21,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/NoActionBarTransparent"
-        >
-
+        android:theme="@style/NoActionBarTransparent">
         <service android:name=".beacons.BeaconLocationService" />
 
         <!--
@@ -41,7 +39,8 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/iconInfo" />
 
-        <activity android:name=".Principal"
+        <activity
+            android:name=".Principal"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,19 +48,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CargaDatos"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Ponentes"
-            android:theme="@style/NoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".DetailPonente"
-            android:theme="@style/NoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Programacion"
-            android:theme="@style/NoActionBar"
+        <activity
+            android:name=".CargaDatos"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Ponentes"
             android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".DetailPonente"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".Programacion"
             android:label="Horario"
-            />
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar" />
 
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
@@ -69,16 +71,19 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".Notification"
-            android:theme="@style/NoActionBar"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Notification"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".MapsActivity"
+            android:label="@string/title_activity_maps"
             android:screenOrientation="portrait"
-            android:label="@string/title_activity_maps" />
-        <activity android:name=".DetailEvent"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"/>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".DetailEvent"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -90,6 +95,8 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAdMSRBTVaRzTHSnvf7uQG6daiMmqpkWxA" />
+
+        <activity android:name=".DetailProgramacion"></activity>
     </application>
 
 </manifest>

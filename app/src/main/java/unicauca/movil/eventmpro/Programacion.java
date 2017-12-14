@@ -1,6 +1,6 @@
 package unicauca.movil.eventmpro;
 
-import android.app.Activity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -19,17 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import unicauca.movil.eventmpro.adapters.PagerAdapter;
-import unicauca.movil.eventmpro.databinding.ActivityDetailPonenteBinding;
-import unicauca.movil.eventmpro.databinding.ActivityPonentesBinding;
 import unicauca.movil.eventmpro.databinding.ActivityProgramacionBinding;
 import unicauca.movil.eventmpro.db.ConectionsDao;
 import unicauca.movil.eventmpro.db.DiasDao;
 import unicauca.movil.eventmpro.fragments.ProgramacionFragment;
-import unicauca.movil.eventmpro.models.Beacons;
 import unicauca.movil.eventmpro.models.Conections;
 import unicauca.movil.eventmpro.models.Dias;
 import unicauca.movil.eventmpro.net.HttpAsyncTask;
-import unicauca.movil.eventmpro.util.L;
 
 public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnResponseReceived {
 
@@ -54,7 +50,7 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
 
         dao = new DiasDao(this);
         gson = new Gson();
-        //region Otra forma anteriro
+        //region Otra forma anterior
         List<Fragment> data = new ArrayList<>();
 
 
@@ -577,5 +573,4 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
         Intent inten = new Intent(Programacion.this, Notification.class);
         startActivity(inten);
     }
-
 }

@@ -40,7 +40,6 @@ public class ProgramacionAdapter extends RecyclerView.Adapter<ProgramacionAdapte
     @Override
     public ProgramacionHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = inflater.inflate(R.layout.template_programacion, parent, false);
-
         return new ProgramacionHolder(v);
     }
 

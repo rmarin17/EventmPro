@@ -1,20 +1,22 @@
 package unicauca.movil.eventmpro;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.graphics.Palette;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewTreeObserver;
+import android.widget.Toast;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 import unicauca.movil.eventmpro.databinding.ActivityDetailPonenteBinding;
 import unicauca.movil.eventmpro.models.Ponente;
@@ -35,7 +37,6 @@ public class DetailPonente extends AppCompatActivity implements Callback {
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         int pos =  getIntent().getExtras().getInt(EXTRA_POS);
         Ponente pon = L.data.get(pos);
 
@@ -43,9 +44,18 @@ public class DetailPonente extends AppCompatActivity implements Callback {
         binding.setHandler(this);
 
 
-        Picasso.with(this)
-                .load(Uri.parse(pon.getImagen()))
-                .into(binding.img, this);
+        if (!verificaConexion(this)) {
+            Toast.makeText(this,
+                    R.string.conection_internet_imagenes, Toast.LENGTH_SHORT)
+                    .show();
+            binding.img.setImageResource(R.drawable.ic_businessman);
+        }
+
+        else{
+            Picasso.with(this)
+                    .load(Uri.parse(pon.getImagen()))
+                    .into(binding.img, this);
+        }
 
     }
 
@@ -79,6 +89,22 @@ public class DetailPonente extends AppCompatActivity implements Callback {
     @Override
     public void onError() {
 
+    }
+
+    public static boolean verificaConexion(Context ctx) {
+        boolean bConectado = false;
+        ConnectivityManager connec = (ConnectivityManager) ctx
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        // No sólo wifi, también GPRS
+        NetworkInfo[] redes = connec.getAllNetworkInfo();
+        // este bucle debería no ser tan ñapa
+        for (int i = 0; i < 2; i++) {
+            // ¿Tenemos conexión? ponemos a true
+            if (redes[i].getState() == NetworkInfo.State.CONNECTED) {
+                bConectado = true;
+            }
+        }
+        return bConectado;
     }
 
 

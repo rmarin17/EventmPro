@@ -4,19 +4,25 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.estimote.coresdk.common.requirements.SystemRequirementsChecker;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
@@ -38,6 +44,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     ActivityMapsBinding binding;
     private GoogleMap mMap;
+    private UiSettings mUiSettings;
 
     int beacon;
 
@@ -46,7 +53,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     UbicacionDao udao;
     BeaconsDao bdao;
 
-    Double blat,blng;
+    Double blat, blng;
     String titulo;
 
     Intent intent;
@@ -85,6 +92,66 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mUiSettings = mMap.getUiSettings();
+
+        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+
+
+
+
+        /*GoogleMapOptions options = new GoogleMapOptions();
+
+
+        options.mapType(GoogleMap.MAP_TYPE_SATELLITE)
+                .compassEnabled(true)
+                .rotateGesturesEnabled(true)
+                .tiltGesturesEnabled(true)
+                ;*/
+
+
+
+
+        /*boolean success = googleMap.setMapStyle(new MapStyleOptions(getResources()
+                .getString(R.string.style_json)));
+
+        if (!success) {
+
+        }
+        // Position the map's camera near Sydney, Australia.
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(-34, 151)));*/
+
+
+
+
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+
+        mUiSettings.setZoomControlsEnabled(true);
+        mUiSettings.setCompassEnabled(true);
+        mUiSettings.setMyLocationButtonEnabled(true);
+        mMap.setMyLocationEnabled(true);
+        mUiSettings.setScrollGesturesEnabled(true);
+        mUiSettings.setZoomGesturesEnabled(true);
+        mUiSettings.setTiltGesturesEnabled(true);
+        mUiSettings.setRotateGesturesEnabled(true);
+        mUiSettings.setAllGesturesEnabled(true);
+        mUiSettings.isCompassEnabled();
+        mUiSettings.isRotateGesturesEnabled();
+        mUiSettings.isScrollGesturesEnabled();
+
+
+
 
         List<Ubicacion> list = udao.getAll();
 

@@ -44,6 +44,7 @@
     <string name="alert_beacon">Pabellon Cercano</string>
     <string name="alert_beacon2">Pabellon 2 Cercano</string>
     <string name="alert_msg_beacon">¿Desea ver su ubicacion en el mapa?</string>
+    <string name="conection_internet_imagenes">Por favor conectate a internet para tener los datos mas actualizados</string>
 
 
 </resources>
