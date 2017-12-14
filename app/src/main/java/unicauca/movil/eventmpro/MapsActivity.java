@@ -46,7 +46,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private UiSettings mUiSettings;
 
-    int beacon;
 
     Ubicacion u;
     Beacons b;
