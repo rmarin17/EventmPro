@@ -71,12 +71,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         udao = new UbicacionDao(this);
         bdao = new BeaconsDao(this);
 
+
+
         start();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
     }
 
     /**
@@ -93,39 +96,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         mUiSettings = mMap.getUiSettings();
 
-        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-
-
-
-
-        /*GoogleMapOptions options = new GoogleMapOptions();
-
-
-        options.mapType(GoogleMap.MAP_TYPE_SATELLITE)
-                .compassEnabled(true)
-                .rotateGesturesEnabled(true)
-                .tiltGesturesEnabled(true)
-                ;*/
-
-
-
-
-        /*boolean success = googleMap.setMapStyle(new MapStyleOptions(getResources()
-                .getString(R.string.style_json)));
-
-        if (!success) {
-
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(true);
+        } else {
+            //something here
         }
-        // Position the map's camera near Sydney, Australia.
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(-34, 151)));*/
 
-
-
-
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+        //region Bad permission
+        /*if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
                         != PackageManager.PERMISSION_GRANTED) {
+
+            mUiSettings.setZoomControlsEnabled(true);
+            mUiSettings.setCompassEnabled(true);
+            mUiSettings.setMyLocationButtonEnabled(true);
+            mUiSettings.setScrollGesturesEnabled(true);
+            mUiSettings.setZoomGesturesEnabled(true);
+            mUiSettings.setTiltGesturesEnabled(true);
+            mUiSettings.setRotateGesturesEnabled(true);
+            mUiSettings.setAllGesturesEnabled(true);
+            mUiSettings.isCompassEnabled();
+            mUiSettings.isRotateGesturesEnabled();
+            mUiSettings.isScrollGesturesEnabled();
+
 
             List<Ubicacion> list = udao.getAll();
 
@@ -145,12 +140,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
             return;
-        }
-
+        }*/
+        //endregion
         mUiSettings.setZoomControlsEnabled(true);
         mUiSettings.setCompassEnabled(true);
         mUiSettings.setMyLocationButtonEnabled(true);
-        mMap.setMyLocationEnabled(true);
         mUiSettings.setScrollGesturesEnabled(true);
         mUiSettings.setZoomGesturesEnabled(true);
         mUiSettings.setTiltGesturesEnabled(true);
@@ -159,9 +153,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mUiSettings.isCompassEnabled();
         mUiSettings.isRotateGesturesEnabled();
         mUiSettings.isScrollGesturesEnabled();
-
-
-
 
         List<Ubicacion> list = udao.getAll();
 
@@ -173,26 +164,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
 
-       /* // Add a marker in Sydney and move the camera
-        LatLng teatro = new LatLng(2.443176, -76.606018);
-        mMap.addMarker(new MarkerOptions().position(teatro).title("Teatro Guillermo Leon Valencia"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(teatro,16));
-
-        //chivas
-        LatLng chivas = new LatLng(2.444333, -76.605218);
-        mMap.addMarker(new MarkerOptions().position(chivas).title("Punto de Encuentro Paseo Turistico en Chivas"));
-
-        //salud
-        LatLng salud = new LatLng(2.451072, -76.598935);
-        mMap.addMarker(new MarkerOptions().position(salud).title("Facultad de Ciencias de la Salud"));
-
-        //club leones
-        LatLng club = new LatLng(2.442702, -76.607193);
-        mMap.addMarker(new MarkerOptions().position(club).title("Club de Leones (Fiesta de Clausura)"));
-
-        //casa mosquera
-        LatLng mosquera = new LatLng(2.442974, -76.605119);
-        mMap.addMarker(new MarkerOptions().position(mosquera).title("Casa Mosquera (Coctel de Bienvenida)"));*/
+        //binding.layers.setImageResource(getResources().getDrawable(R.drawable.ic_layers));
     }
 
 
@@ -276,6 +248,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 */
+
+    public void normal(){
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+    }
+    public void hibrido(){
+        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+    }
+
     public void goToPrincipal(){
         Intent intent = new Intent(MapsActivity.this, DetailEvent.class);
         startActivity(intent);

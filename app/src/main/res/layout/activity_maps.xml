@@ -1,7 +1,9 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
     >
 
     <data>
@@ -19,7 +21,7 @@
         android:stretchColumns="*"
         >
 
-        <TableLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="vertical"
@@ -29,9 +31,48 @@
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context="unicauca.movil.eventmpro.MapsActivity"
+
                 />
-        </TableLayout>
+
+            <com.github.clans.fab.FloatingActionMenu
+                android:id="@+id/layers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="16dp"
+                map:menu_colorNormal="@color/negro_semitransparente"
+                map:menu_icon="@drawable/ic_layers"
+                map:layout_constraintBottom_toBottomOf="parent"
+                map:layout_constraintStart_toStartOf="parent"
+                fab:menu_colorPressed="@color/button_press"
+                >
+
+                <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/accion_favorito"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{()->handler.hibrido()}"
+                    fab:fab_colorNormal="@color/negro_semitransparente"
+                    fab:fab_size="mini"
+                    map:fab_colorPressed="@color/button_press"
+                    android:src="@drawable/ic_satellite"
+                    />
+
+                <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/accion_buscar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{()->handler.normal()}"
+                    fab:fab_colorNormal="@color/negro_semitransparente"
+                    fab:fab_size="mini"
+                    map:fab_colorPressed="@color/button_press"
+                    android:src="@drawable/ic_terrain"
+                    />
+
+            </com.github.clans.fab.FloatingActionMenu>
+
+
+        </android.support.constraint.ConstraintLayout>
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
