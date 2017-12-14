@@ -126,6 +126,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
                         != PackageManager.PERMISSION_GRANTED) {
+
+            List<Ubicacion> list = udao.getAll();
+
+            if(list.size() > 0 ) {
+                for (Ubicacion u : list) {
+                    LatLng mark = new LatLng(u.getLat(), u.getLng());
+                    mMap.addMarker(new MarkerOptions().position(mark).title(u.getTitulo()));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mark,16));
+                }
+            }
+
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -189,7 +200,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             SystemRequirementsChecker.checkWithDefaultDialogs(this);
 
-            Toast.makeText(this, "Buscando Sugerencias", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Buscando Sugerencias", Toast.LENGTH_SHORT).show();
 
             //BEACONS
             intent = new Intent(this, BeaconLocationService.class);
