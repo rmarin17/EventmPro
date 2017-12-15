@@ -38,36 +38,37 @@
                 android:id="@+id/layers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="16dp"
-                map:menu_colorNormal="@color/negro_semitransparente"
-                map:menu_icon="@drawable/ic_layers"
+                android:layout_marginBottom="24dp"
+                android:layout_marginStart="8dp"
+                fab:menu_colorPressed="@color/button_press"
                 map:layout_constraintBottom_toBottomOf="parent"
                 map:layout_constraintStart_toStartOf="parent"
-                fab:menu_colorPressed="@color/button_press"
-                >
+                map:menu_colorNormal="@color/negro_semitransparente"
+                map:menu_icon="@drawable/ic_layers">
 
                 <com.github.clans.fab.FloatingActionButton
                     android:id="@+id/accion_favorito"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{()->handler.hibrido()}"
+                    android:src="@drawable/ic_satellite"
+                    map:srcCompat="@drawable/ic_satellite"
+                    tools:ignore="VectorDrawableCompat"
                     fab:fab_colorNormal="@color/negro_semitransparente"
                     fab:fab_size="mini"
-                    map:fab_colorPressed="@color/button_press"
-                    android:src="@drawable/ic_satellite"
-                    />
+                    map:fab_colorPressed="@color/button_press" />
 
                 <com.github.clans.fab.FloatingActionButton
                     android:id="@+id/accion_buscar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{()->handler.normal()}"
+                    android:src="@drawable/ic_terrain"
+                    map:srcCompat="@drawable/ic_terrain"
+                    tools:ignore="VectorDrawableCompat"
                     fab:fab_colorNormal="@color/negro_semitransparente"
                     fab:fab_size="mini"
-                    map:fab_colorPressed="@color/button_press"
-                    android:src="@drawable/ic_terrain"
-                    />
+                    map:fab_colorPressed="@color/button_press" />
 
             </com.github.clans.fab.FloatingActionMenu>
 
@@ -95,7 +96,9 @@
                     <ImageView
                         android:layout_width="@dimen/icon_btn"
                         android:layout_height="@dimen/icon_btn"
-                        android:src="@drawable/ic_principal" />
+                        android:src="@drawable/ic_principal"
+                        map:srcCompat="@drawable/ic_principal"
+                        tools:ignore="VectorDrawableCompat"/>
 
                     <TextView
                         style="@style/Base.TextAppearance.AppCompat.Body2"
@@ -126,7 +129,9 @@
                     <ImageView
                         android:layout_width="@dimen/icon_btn"
                         android:layout_height="@dimen/icon_btn"
-                        android:src="@drawable/ic_ponentes" />
+                        android:src="@drawable/ic_ponentes"
+                        map:srcCompat="@drawable/ic_ponentes"
+                        tools:ignore="VectorDrawableCompat"/>
 
                     <TextView
                         style="@style/Base.TextAppearance.AppCompat.Body2"
@@ -154,7 +159,9 @@
                     <ImageView
                         android:layout_width="@dimen/icon_btn"
                         android:layout_height="@dimen/icon_btn"
-                        android:src="@drawable/ic_clock" />
+                        android:src="@drawable/ic_clock"
+                        map:srcCompat="@drawable/ic_clock"
+                        tools:ignore="VectorDrawableCompat"/>
 
                     <TextView
                         style="@style/Base.TextAppearance.AppCompat.Body2"
@@ -182,7 +189,9 @@
                     <ImageView
                         android:layout_width="@dimen/icon_btn"
                         android:layout_height="@dimen/icon_btn"
-                        android:src="@drawable/ic_notification" />
+                        android:src="@drawable/ic_notification"
+                        map:srcCompat="@drawable/ic_notification"
+                        tools:ignore="VectorDrawableCompat"/>
 
                     <TextView
                         style="@style/Base.TextAppearance.AppCompat.Body2"

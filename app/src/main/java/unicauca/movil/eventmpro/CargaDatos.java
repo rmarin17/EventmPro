@@ -262,6 +262,12 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
                             e.setNombre(en);
                             break;
 
+                        case "numerodias":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String nd = readText(parser);
+                            e.setNumerodias(Integer.parseInt(nd));
+                            break;
+
                         case "objetivo":
                             parser.require(XmlPullParser.START_TAG, null, condi);
                             String obj = readText(parser);

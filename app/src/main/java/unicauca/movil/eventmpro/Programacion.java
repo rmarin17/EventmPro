@@ -22,9 +22,11 @@ import unicauca.movil.eventmpro.adapters.PagerAdapter;
 import unicauca.movil.eventmpro.databinding.ActivityProgramacionBinding;
 import unicauca.movil.eventmpro.db.ConectionsDao;
 import unicauca.movil.eventmpro.db.DiasDao;
+import unicauca.movil.eventmpro.db.EventoDao;
 import unicauca.movil.eventmpro.fragments.ProgramacionFragment;
 import unicauca.movil.eventmpro.models.Conections;
 import unicauca.movil.eventmpro.models.Dias;
+import unicauca.movil.eventmpro.models.Evento;
 import unicauca.movil.eventmpro.net.HttpAsyncTask;
 
 public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnResponseReceived {
@@ -36,6 +38,7 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
 
     Conections c;
     ConectionsDao cdao;
+    EventoDao edao;
 
     String comando1, comando2, comando3;
 
@@ -47,6 +50,7 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
 
         c = new Conections();
         cdao = new ConectionsDao(this);
+        edao = new EventoDao(this);
 
         dao = new DiasDao(this);
         gson = new Gson();
@@ -54,13 +58,26 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
         List<Fragment> data = new ArrayList<>();
 
 
-            ProgramacionFragment dia1 = ProgramacionFragment.newInstance(1);//, "http://www.unicauca.edu.co/moocmaker/pagapp/consultandroid.php?idd=1");
+            /*ProgramacionFragment dia1 = ProgramacionFragment.newInstance(1);//, "http://www.unicauca.edu.co/moocmaker/pagapp/consultandroid.php?idd=1");
             ProgramacionFragment dia2 = ProgramacionFragment.newInstance(2);//, "http://www.unicauca.edu.co/moocmaker/pagapp/consultandroid.php?idd=2");
             ProgramacionFragment dia3 = ProgramacionFragment.newInstance(3);//, "http://www.unicauca.edu.co/moocmaker/pagapp/consultandroid.php?idd=3");
 
             data.add(dia1);
             data.add(dia2);
-            data.add(dia3);
+            data.add(dia3);*/
+
+        List<Evento> elist = edao.getAll();
+        int dias;
+        dias = elist.get(0).getNumerodias();
+
+        if(dias > 0 ) {
+
+            for (int i = 1; i < dias+1; i++) {
+                ProgramacionFragment dia = ProgramacionFragment.newInstance(i);
+                data.add(dia);
+            }
+        }
+
 
 
         //endregion

@@ -7,6 +7,7 @@ package unicauca.movil.eventmpro.models;
 public class Evento {
     long id;
     String nombre, objetivo, lugar, descripcion, fecha;
+    int numerodias;
 
     public long getId() {
         return id;
@@ -22,6 +23,14 @@ public class Evento {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public int getNumerodias() {
+        return numerodias;
+    }
+
+    public void setNumerodias(int numerodias) {
+        this.numerodias = numerodias;
     }
 
     public String getObjetivo() {
