@@ -235,6 +235,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+
+
     /*public void beaconAlert2() {
 
         AlertDialog alert = new AlertDialog.Builder(this)
