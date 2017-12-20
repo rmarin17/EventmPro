@@ -38,7 +38,6 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
     ConectionsDao cdao;
 
 
-    int pos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
