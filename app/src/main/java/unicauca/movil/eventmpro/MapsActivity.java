@@ -159,7 +159,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(list.size() > 0 ) {
             for (Ubicacion u : list) {
                 LatLng mark = new LatLng(u.getLat(), u.getLng());
-                mMap.addMarker(new MarkerOptions().position(mark).title(u.getTitulo()));
+                mMap.addMarker(new MarkerOptions().position(mark).title(u.getTituloubicacion()));
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mark,16));
             }
         }

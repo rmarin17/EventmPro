@@ -44,7 +44,7 @@ public class DiasDao {
         cV.put(C_EVENTO, dias.getEvento());
         cV.put(C_TITULO, dias.getTitulo());
         cV.put(C_CONFERENCISTA, dias.getConferencista());
-        cV.put(C_EMPRESA, dias.getEmpresa());
+        cV.put(C_EMPRESA, dias.getEmpresadias());
         cV.put(C_LUGAR, dias.getLugar());
         db.insert(TABLE,null,cV);
     }
@@ -58,7 +58,7 @@ public class DiasDao {
         cV.put(C_EVENTO, dias.getEvento());
         cV.put(C_TITULO, dias.getTitulo());
         cV.put(C_CONFERENCISTA, dias.getConferencista());
-        cV.put(C_EMPRESA, dias.getEmpresa());
+        cV.put(C_EMPRESA, dias.getEmpresadias());
         cV.put(C_LUGAR, dias.getLugar());
         long idh = db.update(TABLE,cV,"_id = ?",new String[]{dias.getIdh()+" "});
     }
@@ -104,7 +104,7 @@ public class DiasDao {
             dias.setEvento(c.getString(4));
             dias.setTitulo(c.getString(5));
             dias.setConferencista(c.getString(6));
-            dias.setEmpresa(c.getString(7));
+            dias.setEmpresadias(c.getString(7));
             dias.setLugar(c.getString(8));
         }
         return dias;

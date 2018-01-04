@@ -40,7 +40,7 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
     ConectionsDao cdao;
     EventoDao edao;
 
-    String comando1, comando2, comando3;
+    String comando1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

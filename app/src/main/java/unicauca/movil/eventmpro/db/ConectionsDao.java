@@ -22,6 +22,7 @@ public class ConectionsDao {
     static final String C_SPEAKERS = "ponentes";
     static final String C_LOCATION = "ubicacion";
     static final String C_BEACONS = "beacons";
+    static final String C_EVENT = "evento";
 
     SQLiteDatabase db;
 
@@ -37,6 +38,7 @@ public class ConectionsDao {
         cV.put(C_SPEAKERS, con.getPonentes());
         cV.put(C_LOCATION, con.getUbicacion());
         cV.put(C_BEACONS, con.getBeacons());
+        cV.put(C_EVENT, con.getEvento());
         db.insert(TABLE,null,cV);
     }
 
@@ -47,6 +49,7 @@ public class ConectionsDao {
         cV.put(C_SPEAKERS, con.getPonentes());
         cV.put(C_LOCATION, con.getUbicacion());
         cV.put(C_BEACONS, con.getBeacons());
+        cV.put(C_EVENT, con.getEvento());
         long id = db.update(TABLE,cV,"_id = ?",new String[]{con.getIdc()+" "});
     }
 
@@ -89,6 +92,7 @@ public class ConectionsDao {
             con.setPonentes(c.getString(2));
             con.setUbicacion(c.getString(3));
             con.setBeacons(c.getString(4));
+            con.setEvento(c.getString(5));
         }
         return con;
     }

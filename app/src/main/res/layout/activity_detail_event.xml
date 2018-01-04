@@ -57,13 +57,13 @@
                 android:layout_height="190dp"
                 app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed"
                 app:contentScrim="@color/colorPrimary"
-                app:title="@{event.nombre}"
+                app:title="@{event.eventonombre}"
                 >
                 <ImageView
                     android:id="@+id/img"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:imgUrlEvent="@{event.imagen}"
+                    app:imgUrlEvent="@{event.eventoimg}"
                     android:scaleType="centerCrop"
                     app:layout_collapseMode="parallax"
                     />

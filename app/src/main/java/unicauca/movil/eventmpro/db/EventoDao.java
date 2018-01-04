@@ -36,11 +36,11 @@ public class EventoDao {
     public void insert (Evento evento){
         ContentValues cV = new ContentValues();
         cV.put(C_ID, evento.getIde());
-        cV.put(C_NAME, evento.getNombre());
-        cV.put(C_IMG, evento.getImagen());
+        cV.put(C_NAME, evento.getEventonombre());
+        cV.put(C_IMG, evento.getEventoimg());
         cV.put(C_DAYS, evento.getNumerodias());
         cV.put(C_GOAL, evento.getObjetivo());
-        cV.put(C_PLACE, evento.getLugar());
+        cV.put(C_PLACE, evento.getLugarevento());
         cV.put(C_DES, evento.getDescripcion());
         cV.put(C_DATE, evento.getFecha());
         db.insert(TABLE,null,cV);
@@ -49,11 +49,11 @@ public class EventoDao {
     public void update (Evento evento){
 
         ContentValues cV = new ContentValues();
-        cV.put(C_NAME, evento.getNombre());
-        cV.put(C_IMG, evento.getImagen());
+        cV.put(C_NAME, evento.getEventonombre());
+        cV.put(C_IMG, evento.getEventoimg());
         cV.put(C_DAYS, evento.getNumerodias());
         cV.put(C_GOAL, evento.getObjetivo());
-        cV.put(C_PLACE, evento.getLugar());
+        cV.put(C_PLACE, evento.getLugarevento());
         cV.put(C_DES, evento.getDescripcion());
         cV.put(C_DATE, evento.getFecha());
         long id = db.update(TABLE,cV,"_id = ?",new String[]{evento.getIde()+" "});
@@ -87,11 +87,11 @@ public class EventoDao {
         if (c.moveToNext()){
             evento = new Evento();
             evento.setIde(c.getLong(0));
-            evento.setNombre(c.getString(1));
-            evento.setImagen(c.getString(2));
+            evento.setEventonombre(c.getString(1));
+            evento.setEventoimg(c.getString(2));
             evento.setNumerodias(c.getInt(3));
             evento.setObjetivo(c.getString(4));
-            evento.setLugar(c.getString(5));
+            evento.setLugarevento(c.getString(5));
             evento.setDescripcion(c.getString(6));
             evento.setFecha(c.getString(7));
         }

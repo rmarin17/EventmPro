@@ -6,7 +6,7 @@ package unicauca.movil.eventmpro.models;
 
 public class Evento {
     long ide;
-    String nombre, imagen, objetivo, lugar, descripcion, fecha;
+    String eventonombre, eventoimg, objetivo, lugarevento, descripcion, fecha;
     int numerodias;
 
     public long getIde() {
@@ -17,28 +17,20 @@ public class Evento {
         this.ide = ide;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getEventonombre() {
+        return eventonombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setEventonombre(String eventonombre) {
+        this.eventonombre = eventonombre;
     }
 
-    public String getImagen() {
-        return imagen;
+    public String getEventoimg() {
+        return eventoimg;
     }
 
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
-
-    public int getNumerodias() {
-        return numerodias;
-    }
-
-    public void setNumerodias(int numerodias) {
-        this.numerodias = numerodias;
+    public void setEventoimg(String eventoimg) {
+        this.eventoimg = eventoimg;
     }
 
     public String getObjetivo() {
@@ -49,12 +41,12 @@ public class Evento {
         this.objetivo = objetivo;
     }
 
-    public String getLugar() {
-        return lugar;
+    public String getLugarevento() {
+        return lugarevento;
     }
 
-    public void setLugar(String lugar) {
-        this.lugar = lugar;
+    public void setLugarevento(String lugarevento) {
+        this.lugarevento = lugarevento;
     }
 
     public String getDescripcion() {
@@ -71,5 +63,13 @@ public class Evento {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public int getNumerodias() {
+        return numerodias;
+    }
+
+    public void setNumerodias(int numerodias) {
+        this.numerodias = numerodias;
     }
 }

@@ -6,7 +6,7 @@ package unicauca.movil.eventmpro.models;
 
 public class Dias {
 
-    String hora, evento, titulo, conferencista, empresa, lugar;
+    String hora, evento, titulo, conferencista, empresadias, lugar;
     long idh;
     int idd,ido;
 
@@ -42,12 +42,12 @@ public class Dias {
         this.conferencista = conferencista;
     }
 
-    public String getEmpresa() {
-        return empresa;
+    public String getEmpresadias() {
+        return empresadias;
     }
 
-    public void setEmpresa(String empresa) {
-        this.empresa = empresa;
+    public void setEmpresadias(String empresadias) {
+        this.empresadias = empresadias;
     }
 
     public String getLugar() {

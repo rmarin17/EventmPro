@@ -6,7 +6,7 @@ package unicauca.movil.eventmpro.models;
 
 public class Conections {
     long idc;
-    String dias, ponentes, ubicacion, beacons;
+    String dias, ponentes, ubicacion, beacons, evento;
 
     public long getIdc() {
         return idc;
@@ -46,5 +46,13 @@ public class Conections {
 
     public void setBeacons(String beacons) {
         this.beacons = beacons;
+    }
+
+    public String getEvento() {
+        return evento;
+    }
+
+    public void setEvento(String evento) {
+        this.evento = evento;
     }
 }

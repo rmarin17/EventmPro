@@ -68,6 +68,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 +", ponentes VARCHAR"
                 +", ubicacion VARCHAR"
                 +", beacons VARCHAR"
+                +", evento VARCHAR"
                 +")"
         );
 

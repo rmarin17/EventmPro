@@ -236,7 +236,7 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
                         case "empresadias":
                             parser.require(XmlPullParser.START_TAG, null, condi);
                             String empd = readText(parser);
-                            d.setEmpresa(empd);
+                            d.setEmpresadias(empd);
                             //p.setImagen(img);
                             break;
 
@@ -259,13 +259,13 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
                         case "eventonombre":
                             parser.require(XmlPullParser.START_TAG, null, condi);
                             String en = readText(parser);
-                            e.setNombre(en);
+                            e.setEventonombre(en);
                             break;
 
                         case "eventoimg":
                             parser.require(XmlPullParser.START_TAG, null, condi);
                             String img = readText(parser);
-                            e.setImagen(img);
+                            e.setEventoimg(img);
                             break;
 
                         case "numerodias":
@@ -283,7 +283,7 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
                         case "lugarevento":
                             parser.require(XmlPullParser.START_TAG, null, condi);
                             String el = readText(parser);
-                            e.setLugar(el);
+                            e.setLugarevento(el);
                             break;
 
                         case "descripcion":
@@ -310,7 +310,7 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
                         case "tituloubicacion":
                             parser.require(XmlPullParser.START_TAG, null, condi);
                             String titu = readText(parser);
-                            u.setTitulo(titu);
+                            u.setTituloubicacion(titu);
                             break;
 
                         case "lat":
@@ -395,6 +395,12 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
                             parser.require(XmlPullParser.START_TAG, null, condi);
                             String cb = readText(parser);
                             c.setBeacons(cb);
+                            break;
+
+                        case "cevento":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String ce = readText(parser);
+                            c.setEvento(ce);
                             cdao.insert(c);
                             break;
                         //endregion

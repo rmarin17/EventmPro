@@ -1,9 +1,12 @@
 package unicauca.movil.eventmpro;
 
-import android.app.Activity;
+
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +14,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,10 +29,12 @@ import unicauca.movil.eventmpro.db.EventoDao;
 import unicauca.movil.eventmpro.db.NotificationDao;
 import unicauca.movil.eventmpro.db.PonenteDao;
 import unicauca.movil.eventmpro.db.UbicacionDao;
+import unicauca.movil.eventmpro.models.Conections;
 import unicauca.movil.eventmpro.models.Evento;
+import unicauca.movil.eventmpro.net.HttpAsyncTask;
 import unicauca.movil.eventmpro.util.L;
 
-public class DetailEvent extends AppCompatActivity implements DialogInterface.OnClickListener{
+public class DetailEvent extends AppCompatActivity implements DialogInterface.OnClickListener, HttpAsyncTask.OnResponseReceived{
 
 
     ActivityDetailEventBinding binding;
@@ -35,8 +44,12 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
     PonenteDao pdao;
     BeaconsDao bdao;
     UbicacionDao udao;
+    Conections c;
     ConectionsDao cdao;
 
+    Gson gson;
+
+    String comando;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +61,7 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
 
         L.data3 = new ArrayList<>();
 
+        c = new Conections();
         edao = new EventoDao(this);
         ddao = new DiasDao(this);
         ndao = new NotificationDao(this);
@@ -55,6 +69,25 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
         bdao = new BeaconsDao(this);
         udao = new UbicacionDao(this);
         cdao = new ConectionsDao(this);
+
+        gson = new Gson();
+
+
+        List<Evento> elist = edao.getAll();
+
+        long ide = elist.get(0).getIde();
+
+        List<Conections> list = cdao.getAll();
+
+        if(list.size() > 0 ) {
+
+            for (Conections c : list) {
+                comando = c.getEvento()+""+ide;
+            }
+        }
+
+
+
 
         loadData();
 
@@ -65,17 +98,37 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
 
         List<Evento> list = edao.getAll();
 
+        if (!verificaConexion(this)) {
+            Toast.makeText(this,
+                    R.string.conection_internet, Toast.LENGTH_SHORT)
+                    .show();
 
-        if(list.size() > 0 ) {
-            for (Evento e : list) {
-                L.data3.add(e);
-                binding.setEvent(e);
+            //Carga el evento de la base de datos local
+            if(list.size() > 0 ) {
+                for (Evento e : list) {
+                    L.data3.add(e);
+                    binding.setEvent(e);
+                }
+
+            }
+            else {
+                Toast.makeText(this, R.string.empy, Toast.LENGTH_LONG).show();
             }
 
         }
-        else {
-            Toast.makeText(this, R.string.empy, Toast.LENGTH_LONG).show();
+
+        else
+        {
+            HttpAsyncTask task = new HttpAsyncTask(this);
+            task.execute(comando);
         }
+
+
+
+
+
+
+
 
     }
 
@@ -150,6 +203,41 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
 
         if( i == DialogInterface.BUTTON_NEGATIVE) {
 
+        }
+
+    }
+
+    public static boolean verificaConexion(Context ctx) {
+        boolean bConectado = false;
+        ConnectivityManager connec = (ConnectivityManager) ctx
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        // No sólo wifi, también GPRS
+        NetworkInfo[] redes = connec.getAllNetworkInfo();
+        // este bucle debería no ser tan ñapa
+        for (int i = 0; i < 2; i++) {
+            // ¿Tenemos conexión? ponemos a true
+            if (redes[i].getState() == NetworkInfo.State.CONNECTED) {
+                bConectado = true;
+            }
+        }
+        return bConectado;
+    }
+
+
+
+    @Override
+    public void onResponse(boolean success, String json) {
+
+        Type lista = new TypeToken<List<Evento>>() {
+        }.getType();
+        List<Evento> res = gson.fromJson(json, lista);
+
+        for (Evento e : res) {
+            edao.update(e);
+            edao.insert(e);
+
+            L.data3.add(e);
+            binding.setEvent(e);
         }
 
     }
