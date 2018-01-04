@@ -5,16 +5,16 @@ package unicauca.movil.eventmpro.models;
  */
 
 public class Evento {
-    long id;
-    String nombre, objetivo, lugar, descripcion, fecha;
+    long ide;
+    String nombre, imagen, objetivo, lugar, descripcion, fecha;
     int numerodias;
 
-    public long getId() {
-        return id;
+    public long getIde() {
+        return ide;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIde(long ide) {
+        this.ide = ide;
     }
 
     public String getNombre() {
@@ -23,6 +23,14 @@ public class Evento {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public int getNumerodias() {

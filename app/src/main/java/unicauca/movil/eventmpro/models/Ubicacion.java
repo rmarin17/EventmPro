@@ -5,16 +5,16 @@ package unicauca.movil.eventmpro.models;
  */
 
 public class Ubicacion {
-    long id;
+    long idu;
     String titulo;
     Double lat, lng;
 
-    public long getId() {
-        return id;
+    public long getIdu() {
+        return idu;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIdu(long idu) {
+        this.idu = idu;
     }
 
     public String getTitulo() {

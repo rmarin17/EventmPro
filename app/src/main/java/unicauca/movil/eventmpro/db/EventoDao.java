@@ -19,6 +19,7 @@ public class EventoDao {
     static final String TABLE = "evento";
     static final String C_ID = "_id";
     static final String C_NAME = "nombre";
+    static final String C_IMG = "imagen";
     static final String C_DAYS = "numerodias";
     static final String C_GOAL = "objetivo";
     static final String C_PLACE = "lugar";
@@ -34,8 +35,9 @@ public class EventoDao {
 
     public void insert (Evento evento){
         ContentValues cV = new ContentValues();
-        cV.put(C_ID, evento.getId());
+        cV.put(C_ID, evento.getIde());
         cV.put(C_NAME, evento.getNombre());
+        cV.put(C_IMG, evento.getImagen());
         cV.put(C_DAYS, evento.getNumerodias());
         cV.put(C_GOAL, evento.getObjetivo());
         cV.put(C_PLACE, evento.getLugar());
@@ -48,12 +50,13 @@ public class EventoDao {
 
         ContentValues cV = new ContentValues();
         cV.put(C_NAME, evento.getNombre());
+        cV.put(C_IMG, evento.getImagen());
         cV.put(C_DAYS, evento.getNumerodias());
         cV.put(C_GOAL, evento.getObjetivo());
         cV.put(C_PLACE, evento.getLugar());
         cV.put(C_DES, evento.getDescripcion());
         cV.put(C_DATE, evento.getFecha());
-        long id = db.update(TABLE,cV,"_id = ?",new String[]{evento.getId()+" "});
+        long id = db.update(TABLE,cV,"_id = ?",new String[]{evento.getIde()+" "});
     }
 
     public void delete (long id){
@@ -83,14 +86,14 @@ public class EventoDao {
 
         if (c.moveToNext()){
             evento = new Evento();
-            evento.setId(c.getLong(0));
+            evento.setIde(c.getLong(0));
             evento.setNombre(c.getString(1));
-            evento.setNumerodias(c.getInt(2));
-            evento.setObjetivo(c.getString(3));
-            evento.setLugar(c.getString(4));
-            evento.setDescripcion(c.getString(5));
-            evento.setFecha(c.getString(6));
-
+            evento.setImagen(c.getString(2));
+            evento.setNumerodias(c.getInt(3));
+            evento.setObjetivo(c.getString(4));
+            evento.setLugar(c.getString(5));
+            evento.setDescripcion(c.getString(6));
+            evento.setFecha(c.getString(7));
         }
         return evento;
     }

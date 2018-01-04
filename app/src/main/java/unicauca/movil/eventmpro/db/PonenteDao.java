@@ -18,6 +18,7 @@ import unicauca.movil.eventmpro.models.Ponente;
 public class PonenteDao {
 
     static final String TABLE = "ponente";
+    static final String C_ID = "_id";
     static final String C_NAME = "nombre";
     static final String C_LASTNAME = "apellidos";
     static final String C_EMPRESA = "empresa";
@@ -37,6 +38,7 @@ public class PonenteDao {
 
     public void insert (Ponente ponente){
         ContentValues cV = new ContentValues();
+        cV.put(C_ID, ponente.getIdp());
         cV.put(C_NAME, ponente.getNombre());
         cV.put(C_LASTNAME, ponente.getApellidos());
         cV.put(C_EMPRESA, ponente.getEmpresa());
@@ -46,8 +48,7 @@ public class PonenteDao {
         cV.put(C_INTERNACIONAL, ponente.getFormacioninternacional());
         cV.put(C_HABILIDAD, ponente.getHabilidad());
         cV.put(C_TYPE, ponente.getTipo());
-        long id = db.insert(TABLE,null,cV);
-        ponente.setId(id);
+        db.insert(TABLE,null,cV);
 
     }
 
@@ -63,7 +64,7 @@ public class PonenteDao {
         cV.put(C_INTERNACIONAL, ponente.getFormacioninternacional());
         cV.put(C_HABILIDAD, ponente.getHabilidad());
         cV.put(C_TYPE, ponente.getTipo());
-        long id = db.update(TABLE,cV,"_id = ?",new String[]{ponente.getId()+" "});
+        long id = db.update(TABLE,cV,"_id = ?",new String[]{ponente.getIdp()+" "});
     }
 
     public void delete (long id){
@@ -98,7 +99,7 @@ public class PonenteDao {
         Ponente ponente= null;
         if (c.moveToNext()){
             ponente = new Ponente();
-            ponente.setId(c.getLong(0));
+            ponente.setIdp(c.getLong(0));
             ponente.setNombre(c.getString(1));
             ponente.setApellidos(c.getString(2));
             ponente.setEmpresa(c.getString(3));

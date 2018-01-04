@@ -7,7 +7,7 @@ package unicauca.movil.eventmpro.models;
 public class Dias {
 
     String hora, evento, titulo, conferencista, empresa, lugar;
-    long id;
+    long idh;
     int idd,ido;
 
     public String getHora() {
@@ -58,12 +58,12 @@ public class Dias {
         this.lugar = lugar;
     }
 
-    public long getId() {
-        return id;
+    public long getIdh() {
+        return idh;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIdh(long idh) {
+        this.idh = idh;
     }
 
     public int getIdd() {

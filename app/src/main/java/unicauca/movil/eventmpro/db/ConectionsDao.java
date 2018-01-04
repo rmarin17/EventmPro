@@ -32,7 +32,7 @@ public class ConectionsDao {
 
     public void insert (Conections con){
         ContentValues cV = new ContentValues();
-        cV.put(C_ID, con.getId());
+        cV.put(C_ID, con.getIdc());
         cV.put(C_DAYS, con.getDias());
         cV.put(C_SPEAKERS, con.getPonentes());
         cV.put(C_LOCATION, con.getUbicacion());
@@ -47,7 +47,7 @@ public class ConectionsDao {
         cV.put(C_SPEAKERS, con.getPonentes());
         cV.put(C_LOCATION, con.getUbicacion());
         cV.put(C_BEACONS, con.getBeacons());
-        long id = db.update(TABLE,cV,"_id = ?",new String[]{con.getId()+" "});
+        long id = db.update(TABLE,cV,"_id = ?",new String[]{con.getIdc()+" "});
     }
 
     public void delete (long id){
@@ -84,7 +84,7 @@ public class ConectionsDao {
 
         if (c.moveToNext()){
             con = new Conections();
-            con.setId(c.getLong(0));
+            con.setIdc(c.getLong(0));
             con.setDias(c.getString(1));
             con.setPonentes(c.getString(2));
             con.setUbicacion(c.getString(3));

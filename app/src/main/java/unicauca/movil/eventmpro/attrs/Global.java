@@ -35,6 +35,25 @@ public class Global {
 
     }
 
+    @BindingAdapter("app:imgUrlEvent")
+    public static void setImageUrlEvent(ImageView imageView, String url){
+        Context context =  imageView.getContext();
+        Uri uri = Uri.parse(url);
+        if (!verificaConexion(context)) {
+            Toast.makeText(context,
+                    R.string.conection_internet_imagenes, Toast.LENGTH_SHORT)
+                    .show();
+            imageView.setImageResource(R.drawable.event);
+        }
+
+        else{
+            Picasso.with(context).load(uri).into(imageView);
+        }
+
+    }
+
+
+
     public static boolean verificaConexion(Context ctx) {
         boolean bConectado = false;
         ConnectivityManager connec = (ConnectivityManager) ctx

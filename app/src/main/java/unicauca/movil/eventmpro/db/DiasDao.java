@@ -37,7 +37,7 @@ public class DiasDao {
 
     public void insert (Dias dias){
         ContentValues cV = new ContentValues();
-        cV.put(C_ID, dias.getId());
+        cV.put(C_ID, dias.getIdh());
         cV.put(C_IDD, dias.getIdd());
         cV.put(C_IDO, dias.getIdo());
         cV.put(C_HORA, dias.getHora());
@@ -60,7 +60,7 @@ public class DiasDao {
         cV.put(C_CONFERENCISTA, dias.getConferencista());
         cV.put(C_EMPRESA, dias.getEmpresa());
         cV.put(C_LUGAR, dias.getLugar());
-        long id = db.update(TABLE,cV,"_id = ?",new String[]{dias.getId()+" "});
+        long idh = db.update(TABLE,cV,"_id = ?",new String[]{dias.getIdh()+" "});
     }
 
     public void delete (long id){
@@ -80,7 +80,7 @@ public class DiasDao {
 
     public List<Dias> getAllByDay (int day){
 
-        Cursor c = db.rawQuery("SELECT * FROM dias WHERE idd = "+day,null);
+        Cursor c = db.rawQuery("SELECT * FROM dias WHERE idd = '"+day+"' ORDER BY ido ASC",null);
         return cursorToList(c);
 
     }
@@ -97,7 +97,7 @@ public class DiasDao {
 
         if (c.moveToNext()){
             dias = new Dias();
-            dias.setId(c.getLong(0));
+            dias.setIdh(c.getLong(0));
             dias.setIdd(c.getInt(1));
             dias.setIdo(c.getInt(2));
             dias.setHora(c.getString(3));

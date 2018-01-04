@@ -5,17 +5,17 @@ package unicauca.movil.eventmpro.models;
  */
 
 public class Beacons {
-    long id;
+    long idb;
     String btitulo;
     int major, minor;
     Double blat,blng;
 
-    public long getId() {
-        return id;
+    public long getIdb() {
+        return idb;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIdb(long idb) {
+        this.idb = idb;
     }
 
     public String getBtitulo() {
@@ -50,11 +50,11 @@ public class Beacons {
         this.blat = blat;
     }
 
-    public Double getBlong() {
+    public Double getBlng() {
         return blng;
     }
 
-    public void setBlong(Double blng) {
+    public void setBlng(Double blng) {
         this.blng = blng;
     }
 }

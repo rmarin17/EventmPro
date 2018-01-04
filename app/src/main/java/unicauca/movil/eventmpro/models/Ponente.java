@@ -7,7 +7,7 @@ package unicauca.movil.eventmpro.models;
 public class Ponente {
 
     String nombre, apellidos, empresa, estudios, imagen, experiencia, formacioninternacional, habilidad, tipo;
-    long id;
+    long idp;
 
     public String getNombre() {
         return nombre;
@@ -81,11 +81,11 @@ public class Ponente {
         this.tipo = tipo;
     }
 
-    public long getId() {
-        return id;
+    public long getIdp() {
+        return idp;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIdp(long idp) {
+        this.idp = idp;
     }
 }

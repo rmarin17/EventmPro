@@ -68,7 +68,10 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
 
         List<Evento> elist = edao.getAll();
         int dias;
+        long  ide;
+
         dias = elist.get(0).getNumerodias();
+        ide = elist.get(0).getIde();
 
         if(dias > 0 ) {
 
@@ -87,9 +90,10 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
         if(list.size() > 0 ) {
 
             for (Conections c : list) {
-                comando1 = c.getDias();
+                comando1 = c.getDias()+""+ide;
+/*
                 comando2 = c.getPonentes();
-                comando3 = c.getUbicacion();
+                comando3 = c.getUbicacion();*/
             }
         }
 
@@ -534,10 +538,10 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
         {
             HttpAsyncTask task = new HttpAsyncTask(this);
             task.execute(comando1);
-            HttpAsyncTask task2 = new HttpAsyncTask(this);
+           /* HttpAsyncTask task2 = new HttpAsyncTask(this);
             task2.execute(comando2);
             HttpAsyncTask task3 = new HttpAsyncTask(this);
-            task3.execute(comando3);
+            task3.execute(comando3);*/
         }
 
     }

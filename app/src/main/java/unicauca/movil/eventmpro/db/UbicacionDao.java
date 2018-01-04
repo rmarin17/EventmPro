@@ -32,7 +32,7 @@ public class UbicacionDao {
 
     public void insert (Ubicacion ubi){
         ContentValues cV = new ContentValues();
-        cV.put(C_ID, ubi.getId());
+        cV.put(C_ID, ubi.getIdu());
         cV.put(C_TITLE, ubi.getTitulo());
         cV.put(C_LAT, ubi.getLat());
         cV.put(C_LNG, ubi.getLng());
@@ -45,7 +45,7 @@ public class UbicacionDao {
         cV.put(C_TITLE, ubi.getTitulo());
         cV.put(C_LAT, ubi.getLat());
         cV.put(C_LNG, ubi.getLng());
-        long id = db.update(TABLE,cV,"_id = ?",new String[]{ubi.getId()+" "});
+        long id = db.update(TABLE,cV,"_id = ?",new String[]{ubi.getIdu()+" "});
     }
 
     public void delete (long id){
@@ -82,7 +82,7 @@ public class UbicacionDao {
 
         if (c.moveToNext()){
             ubi = new Ubicacion();
-            ubi.setId(c.getLong(0));
+            ubi.setIdu(c.getLong(0));
             ubi.setTitulo(c.getString(1));
             ubi.setLat(c.getDouble(2));
             ubi.setLng(c.getDouble(3));

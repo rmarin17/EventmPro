@@ -122,7 +122,7 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
                         case "idp":
                             parser.require(XmlPullParser.START_TAG, null, condi);
                             String idp = readText(parser);
-                            p.setId(Integer.parseInt(idp));
+                            p.setIdp(Integer.parseInt(idp));
                             break;
 
                         case "nombre":
@@ -185,7 +185,7 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
                         case "idh":
                             parser.require(XmlPullParser.START_TAG, null, condi);
                             String idh = readText(parser);
-                            d.setId(Integer.parseInt(idh));
+                            d.setIdh(Integer.parseInt(idh));
                             //p.setImagen(img);
                             break;
 
@@ -253,13 +253,19 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
                         case "ide":
                             parser.require(XmlPullParser.START_TAG, null, condi);
                             String ide = readText(parser);
-                            e.setId(Integer.parseInt(ide));
+                            e.setIde(Integer.parseInt(ide));
                             break;
 
                         case "eventonombre":
                             parser.require(XmlPullParser.START_TAG, null, condi);
                             String en = readText(parser);
                             e.setNombre(en);
+                            break;
+
+                        case "eventoimg":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String img = readText(parser);
+                            e.setImagen(img);
                             break;
 
                         case "numerodias":
@@ -298,7 +304,7 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
                         case "idu":
                             parser.require(XmlPullParser.START_TAG, null, condi);
                             String idu = readText(parser);
-                            u.setId(Integer.parseInt(idu));
+                            u.setIdu(Integer.parseInt(idu));
                             break;
 
                         case "tituloubicacion":
@@ -325,7 +331,7 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
                         case "idb":
                             parser.require(XmlPullParser.START_TAG, null, condi);
                             String idb = readText(parser);
-                            b.setId(Integer.parseInt(idb));
+                            b.setIdb(Integer.parseInt(idb));
                             break;
 
                         case "btitulo":
@@ -355,7 +361,7 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
                         case "blng":
                             parser.require(XmlPullParser.START_TAG, null, condi);
                             String blng = readText(parser);
-                            b.setBlong(Double.parseDouble(blng));
+                            b.setBlng(Double.parseDouble(blng));
                             bdao.insert(b);
                             break;
                         //endregion
@@ -364,7 +370,7 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
                         case "idc":
                             parser.require(XmlPullParser.START_TAG, null, condi);
                             String idc = readText(parser);
-                            c.setId(Integer.parseInt(idc));
+                            c.setIdc(Integer.parseInt(idc));
                             break;
 
                         case "cdias":

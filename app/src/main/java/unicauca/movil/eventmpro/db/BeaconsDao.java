@@ -33,12 +33,12 @@ public class BeaconsDao {
 
     public void insert (Beacons beacon){
         ContentValues cV = new ContentValues();
-        cV.put(C_ID, beacon.getId());
+        cV.put(C_ID, beacon.getIdb());
         cV.put(C_TITLE, beacon.getBtitulo());
         cV.put(C_MAJOR, beacon.getMajor());
         cV.put(C_MINOR, beacon.getMinor());
         cV.put(C_BLAT, beacon.getBlat());
-        cV.put(C_BLONG, beacon.getBlong());
+        cV.put(C_BLONG, beacon.getBlng());
         db.insert(TABLE,null,cV);
     }
 
@@ -49,8 +49,8 @@ public class BeaconsDao {
         cV.put(C_MAJOR, beacon.getMajor());
         cV.put(C_MINOR, beacon.getMinor());
         cV.put(C_BLAT, beacon.getBlat());
-        cV.put(C_BLONG, beacon.getBlong());
-        long id = db.update(TABLE,cV,"_id = ?",new String[]{beacon.getId()+" "});
+        cV.put(C_BLONG, beacon.getBlng());
+        long id = db.update(TABLE,cV,"_id = ?",new String[]{beacon.getIdb()+" "});
     }
 
     public void delete (long id){
@@ -87,12 +87,12 @@ public class BeaconsDao {
 
         if (c.moveToNext()){
             beacons = new Beacons();
-            beacons.setId(c.getLong(0));
+            beacons.setIdb(c.getLong(0));
             beacons.setBtitulo(c.getString(1));
             beacons.setMajor(c.getInt(2));
             beacons.setMinor(c.getInt(3));
             beacons.setBlat(c.getDouble(4));
-            beacons.setBlong(c.getDouble(5));
+            beacons.setBlng(c.getDouble(5));
         }
         return beacons;
     }

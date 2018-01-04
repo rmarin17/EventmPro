@@ -202,7 +202,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     if (major1 == b.getMajor()) {
                                         titulo = b.getBtitulo();
                                         blat = b.getBlat();
-                                        blng = b.getBlong();
+                                        blng = b.getBlng();
                                         beaconAlert(titulo);
                                     }
                                 }
