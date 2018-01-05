@@ -90,6 +90,7 @@ public class ProgramacionFragment extends Fragment implements ProgramacionAdapte
 
     public void loadData() {
 
+        L.data1.clear();
         List<Dias> list = dao.getAllByDay(dia);
 
         for (Dias d : list){

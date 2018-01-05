@@ -58,7 +58,6 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail_event);
         binding.setHandler(this);
 
-
         L.data3 = new ArrayList<>();
 
         c = new Conections();
@@ -69,67 +68,53 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
         bdao = new BeaconsDao(this);
         udao = new UbicacionDao(this);
         cdao = new ConectionsDao(this);
-
         gson = new Gson();
 
-
         List<Evento> elist = edao.getAll();
-
         long ide = elist.get(0).getIde();
-
         List<Conections> list = cdao.getAll();
-
         if(list.size() > 0 ) {
 
             for (Conections c : list) {
                 comando = c.getEvento()+""+ide;
             }
         }
-
-
-
-
         loadData();
-
     }
 
 
     public void loadData() {
-
         List<Evento> list = edao.getAll();
-
         if (!verificaConexion(this)) {
             Toast.makeText(this,
                     R.string.conection_internet, Toast.LENGTH_SHORT)
                     .show();
-
             //Carga el evento de la base de datos local
             if(list.size() > 0 ) {
                 for (Evento e : list) {
                     L.data3.add(e);
                     binding.setEvent(e);
                 }
-
             }
             else {
                 Toast.makeText(this, R.string.empy, Toast.LENGTH_LONG).show();
             }
-
         }
-
         else
         {
             HttpAsyncTask task = new HttpAsyncTask(this);
             task.execute(comando);
+            //Carga el evento de la base de datos local
+            if(list.size() > 0 ) {
+                for (Evento e : list) {
+                    L.data3.add(e);
+                    binding.setEvent(e);
+                }
+            }
+            else {
+                Toast.makeText(this, R.string.empy, Toast.LENGTH_LONG).show();
+            }
         }
-
-
-
-
-
-
-
-
     }
 
     public void goToPonente(){
@@ -159,18 +144,13 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.salir:
-
                 generateAlert();
-
                 break;
         }
-
-
         return super.onOptionsItemSelected(item);
     }
 
     public void generateAlert(){
-
         AlertDialog alert = new AlertDialog.Builder(this)
                 .setTitle(R.string.alert_title_event)
                 .setIcon(R.drawable.ic_warning)
@@ -183,9 +163,7 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
 
     @Override
     public void onClick(DialogInterface dialogInterface, int i) {
-
         if( i == DialogInterface.BUTTON_POSITIVE) {
-
             edao.deleteAll();
             ddao.deleteAll();
             ndao.deleteAll();
@@ -198,15 +176,10 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
             inten.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(inten);
             //finish();
-
         }
-
         if( i == DialogInterface.BUTTON_NEGATIVE) {
-
         }
-
     }
-
     public static boolean verificaConexion(Context ctx) {
         boolean bConectado = false;
         ConnectivityManager connec = (ConnectivityManager) ctx
@@ -223,22 +196,15 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
         return bConectado;
     }
 
-
-
     @Override
     public void onResponse(boolean success, String json) {
-
         Type lista = new TypeToken<List<Evento>>() {
         }.getType();
         List<Evento> res = gson.fromJson(json, lista);
-
+        edao.deleteAll();
         for (Evento e : res) {
             edao.update(e);
             edao.insert(e);
-
-            L.data3.add(e);
-            binding.setEvent(e);
         }
-
     }
 }

@@ -1,11 +1,14 @@
 package unicauca.movil.eventmpro;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -15,6 +18,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.estimote.coresdk.common.requirements.SystemRequirementsChecker;
+import com.estimote.coresdk.recognition.packets.Beacon;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMapOptions;
@@ -24,7 +28,10 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 import io.reactivex.disposables.Disposable;
@@ -34,30 +41,38 @@ import unicauca.movil.eventmpro.beacons.BeaconLocationService;
 import unicauca.movil.eventmpro.beacons.BeaconReceiver;
 import unicauca.movil.eventmpro.databinding.ActivityMapsBinding;
 import unicauca.movil.eventmpro.db.BeaconsDao;
+import unicauca.movil.eventmpro.db.ConectionsDao;
+import unicauca.movil.eventmpro.db.EventoDao;
 import unicauca.movil.eventmpro.db.UbicacionDao;
 import unicauca.movil.eventmpro.models.Beacons;
+import unicauca.movil.eventmpro.models.Conections;
+import unicauca.movil.eventmpro.models.Evento;
 import unicauca.movil.eventmpro.models.Ponente;
 import unicauca.movil.eventmpro.models.Ubicacion;
+import unicauca.movil.eventmpro.net.HttpAsyncTask;
 import unicauca.movil.eventmpro.util.L;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, DialogInterface.OnClickListener {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, DialogInterface.OnClickListener, HttpAsyncTask.OnResponseReceived {
 
     ActivityMapsBinding binding;
     private GoogleMap mMap;
     private UiSettings mUiSettings;
 
+    HttpAsyncTask task;
 
     Ubicacion u;
     Beacons b;
+    Conections c;
+    ConectionsDao cdao;
+    EventoDao edao;
     UbicacionDao udao;
     BeaconsDao bdao;
-
+    Gson gson;
     Double blat, blng;
-    String titulo;
-
+    String titulo, comando1, comando2;
+    int ban1=0, ban2=0, tamañoU=0, tamañoB=0;
     Intent intent;
     BeaconReceiver receiver;
-
     Disposable disposable;
 
     @Override
@@ -66,15 +81,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding = DataBindingUtil.setContentView(this, R.layout.activity_maps);
         binding.setHandler(this);
 
+        task = new HttpAsyncTask(this);
+        c = new Conections();
         u = new Ubicacion();
         b = new Beacons();
         udao = new UbicacionDao(this);
         bdao = new BeaconsDao(this);
+        cdao = new ConectionsDao(this);
+        edao = new EventoDao(this);
+        gson = new Gson();
 
-
+        List<Evento> elist = edao.getAll();
+        long ide = elist.get(0).getIde();
+        List<Conections> list = cdao.getAll();
+        if(list.size() > 0 ) {
+            for (Conections c : list) {
+                comando1 = c.getUbicacion()+""+ide;
+                comando2 = c.getBeacons()+""+ide;
+            }
+        }
 
         start();
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -103,45 +130,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             //something here
         }
 
-        //region Bad permission
-        /*if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED) {
-
-            mUiSettings.setZoomControlsEnabled(true);
-            mUiSettings.setCompassEnabled(true);
-            mUiSettings.setMyLocationButtonEnabled(true);
-            mUiSettings.setScrollGesturesEnabled(true);
-            mUiSettings.setZoomGesturesEnabled(true);
-            mUiSettings.setTiltGesturesEnabled(true);
-            mUiSettings.setRotateGesturesEnabled(true);
-            mUiSettings.setAllGesturesEnabled(true);
-            mUiSettings.isCompassEnabled();
-            mUiSettings.isRotateGesturesEnabled();
-            mUiSettings.isScrollGesturesEnabled();
-
-
-            List<Ubicacion> list = udao.getAll();
-
-            if(list.size() > 0 ) {
-                for (Ubicacion u : list) {
-                    LatLng mark = new LatLng(u.getLat(), u.getLng());
-                    mMap.addMarker(new MarkerOptions().position(mark).title(u.getTitulo()));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mark,16));
-                }
-            }
-
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }*/
-        //endregion
         mUiSettings.setZoomControlsEnabled(true);
         mUiSettings.setCompassEnabled(true);
         mUiSettings.setMyLocationButtonEnabled(true);
@@ -155,25 +143,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mUiSettings.isScrollGesturesEnabled();
 
         List<Ubicacion> list = udao.getAll();
-
-        if(list.size() > 0 ) {
-            for (Ubicacion u : list) {
-                LatLng mark = new LatLng(u.getLat(), u.getLng());
-                mMap.addMarker(new MarkerOptions().position(mark).title(u.getTituloubicacion()));
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mark,16));
+        tamañoU=list.size();
+        if (!verificaConexion(this)) {
+            Toast.makeText(this,
+                    R.string.conection_internet, Toast.LENGTH_SHORT)
+                    .show();
+            if(list.size() > 0 ) {
+                for (Ubicacion u : list) {
+                    LatLng mark = new LatLng(u.getLat(), u.getLng());
+                    mMap.addMarker(new MarkerOptions().position(mark).title(u.getTituloubicacion()));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mark,16));
+                }
             }
         }
-
-        //binding.layers.setImageResource(getResources().getDrawable(R.drawable.ic_layers));
+        else
+        {
+            ban1 = 1;
+            task.execute(comando1);
+            if(list.size() > 0 ) {
+                for (Ubicacion u : list) {
+                    LatLng mark = new LatLng(u.getLat(), u.getLng());
+                    mMap.addMarker(new MarkerOptions().position(mark).title(u.getTituloubicacion()));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mark,16));
+                }
+            }
+        }
     }
 
 
     public void start() {
 
             SystemRequirementsChecker.checkWithDefaultDialogs(this);
-
             //Toast.makeText(this, "Buscando Sugerencias", Toast.LENGTH_SHORT).show();
-
             //BEACONS
             intent = new Intent(this, BeaconLocationService.class);
             startService(intent);
@@ -190,32 +191,50 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .subscribe(new Consumer<Integer[]>() {
                         @Override
                         public void accept(Integer[] integers) throws Exception {
-
                             // integer = MAJOR del beacon.
                             Integer major1 = integers[0];
-
                             List<Beacons> list = bdao.getAll();
-
-                            if(list.size() > 0 ) {
-
-                                for (Beacons b : list) {
-                                    if (major1 == b.getMajor()) {
-                                        titulo = b.getBtitulo();
-                                        blat = b.getBlat();
-                                        blng = b.getBlng();
-                                        beaconAlert(titulo);
+                            tamañoB=list.size();
+                            if (!verificaConexion(getApplicationContext())) {
+                                Toast.makeText(getApplicationContext(),
+                                        R.string.conection_internet, Toast.LENGTH_SHORT)
+                                        .show();
+                                if(list.size() > 0 ) {
+                                    for (Beacons b : list) {
+                                        if (major1 == b.getMajor()) {
+                                            titulo = b.getBtitulo();
+                                            blat = b.getBlat();
+                                            blng = b.getBlng();
+                                            beaconAlert(titulo);
+                                        }
                                     }
+                                }
+                            }
+                            else
+                            {
+                                ban2 = 1;
+                                task.execute(comando2);
+                                if(list.size() > 0 ) {
+                                    for (Beacons b : list) {
+                                        if (major1 == b.getMajor()) {
+                                            titulo = b.getBtitulo();
+                                            blat = b.getBlat();
+                                            blng = b.getBlng();
+                                            beaconAlert(titulo);
+                                        }
+                                    }
+                                }
+                                else {
+                                    Toast.makeText(getApplicationContext(), R.string.empy, Toast.LENGTH_LONG).show();
                                 }
                             }
                             //Toast.makeText(MapsActivity.this, "" + integers[0] + " " + integers[1], Toast.LENGTH_SHORT).show();
                             //Log.i("BEACONINFO", "MARJOR1: " + integers[0] + " MAJOR2:" + integers[1]);
                         }
                     });
-
     }
 
     public void stop(){
-
         Toast.makeText(this, "Detener Servicio", Toast.LENGTH_SHORT).show();
         stopService(intent);
         disposable.dispose();
@@ -223,7 +242,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void beaconAlert(String titulo) {
-
         AlertDialog alert = new AlertDialog.Builder(this)
                 .setTitle(titulo)
                 .setIcon(R.drawable.ic_warning)
@@ -232,24 +250,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .setNegativeButton(R.string.cancel, this)
                 .create();
         alert.show();
-
     }
-
-
-
-    /*public void beaconAlert2() {
-
-        AlertDialog alert = new AlertDialog.Builder(this)
-                .setTitle(R.string.alert_beacon2)
-                .setIcon(R.drawable.ic_warning)
-                .setMessage(R.string.alert_msg_beacon)
-                .setPositiveButton(R.string.ok,this)
-                .setNegativeButton(R.string.cancel, this)
-                .create();
-        alert.show();
-
-    }
-*/
 
     public void normal(){
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -277,12 +278,56 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onClick(DialogInterface dialogInterface, int i) {
-
         if( i == DialogInterface.BUTTON_POSITIVE) {
                 LatLng encuentro = new LatLng(blat, blng);
                 mMap.addMarker(new MarkerOptions().position(encuentro).title(titulo));
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(encuentro, 30));
         }
+    }
 
+    public static boolean verificaConexion(Context ctx) {
+        boolean bConectado = false;
+        ConnectivityManager connec = (ConnectivityManager) ctx
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        // No sólo wifi, también GPRS
+        NetworkInfo[] redes = connec.getAllNetworkInfo();
+        // este bucle debería no ser tan ñapa
+        for (int i = 0; i < 2; i++) {
+            // ¿Tenemos conexión? ponemos a true
+            if (redes[i].getState() == NetworkInfo.State.CONNECTED) {
+                bConectado = true;
+            }
+        }
+        return bConectado;
+    }
+
+    @Override
+    public void onResponse(boolean success, String json) {
+
+        if (ban1 == 1) {
+            Type lista = new TypeToken<List<Ubicacion>>() {
+            }.getType();
+            List<Ubicacion> res = gson.fromJson(json, lista);
+
+            udao.deleteAll();
+            for (Ubicacion u : res) {
+                udao.update(u);
+                udao.insert(u);
+            }
+            ban1 = 0;
+        }
+
+        if (ban2 == 1) {
+            Type lista = new TypeToken<List<Beacons>>() {
+            }.getType();
+            List<Beacons> res = gson.fromJson(json, lista);
+
+            bdao.deleteAll();
+            for (Beacons b : res) {
+                bdao.update(b);
+                bdao.insert(b);
+            }
+            ban2 = 0;
+        }
     }
 }
