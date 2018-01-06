@@ -519,7 +519,6 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
             List<Evento> liste = edao.getAll();
             List<Ubicacion> listu = udao.getAll();
             if (listp.size() > 0 && listb.size() > 0 && listc.size() > 0 && listd.size() > 0 && liste.size() > 0 && listu.size() > 0  ){
-
                 Intent intent = new Intent(this, DetailEvent.class);
                 startActivity(intent);
                 finish();

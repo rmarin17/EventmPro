@@ -74,7 +74,6 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
         long ide = elist.get(0).getIde();
         List<Conections> list = cdao.getAll();
         if(list.size() > 0 ) {
-
             for (Conections c : list) {
                 comando = c.getEvento()+""+ide;
             }

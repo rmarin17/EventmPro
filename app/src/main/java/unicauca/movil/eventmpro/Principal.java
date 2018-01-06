@@ -112,7 +112,6 @@ public class Principal extends AppCompatActivity {
 
         //region Tomar datos de la notificacion de firebase
         if(getIntent().getExtras()!=null){
-
             for (String Key : getIntent().getExtras().keySet()){
                 if (Key.equals("mensaje")){
                     String men = getIntent().getExtras().getString(Key);
