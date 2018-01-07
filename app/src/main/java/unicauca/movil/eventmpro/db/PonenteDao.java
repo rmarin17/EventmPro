@@ -28,6 +28,7 @@ public class PonenteDao {
     static final String C_IMAGEN = "img";
     static final String C_INTERNACIONAL = "formacioninternacional";
     static final String C_TYPE = "tipo";
+    static final String C_LINK = "link";
 
     SQLiteDatabase db;
 
@@ -48,6 +49,7 @@ public class PonenteDao {
         cV.put(C_INTERNACIONAL, ponente.getFormacioninternacional());
         cV.put(C_HABILIDAD, ponente.getHabilidad());
         cV.put(C_TYPE, ponente.getTipo());
+        cV.put(C_LINK, ponente.getLink());
         db.insert(TABLE,null,cV);
 
     }
@@ -64,6 +66,7 @@ public class PonenteDao {
         cV.put(C_INTERNACIONAL, ponente.getFormacioninternacional());
         cV.put(C_HABILIDAD, ponente.getHabilidad());
         cV.put(C_TYPE, ponente.getTipo());
+        cV.put(C_LINK, ponente.getLink());
         long id = db.update(TABLE,cV,"_id = ?",new String[]{ponente.getIdp()+" "});
     }
 
@@ -109,6 +112,7 @@ public class PonenteDao {
             ponente.setFormacioninternacional(c.getString(7));
             ponente.setHabilidad(c.getString(8));
             ponente.setTipo(c.getString(9));
+            ponente.setLink(c.getString(10));
         }
         return ponente;
     }

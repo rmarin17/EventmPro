@@ -30,6 +30,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 +", formacioninternacional VARCHAR"
                 +", habilidades VARCHAR"
                 +", tipo VARCHAR"
+                +", link VARCHAR"
                 +")"
             );
 

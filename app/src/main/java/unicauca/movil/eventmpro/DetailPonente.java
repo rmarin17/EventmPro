@@ -29,6 +29,8 @@ public class DetailPonente extends AppCompatActivity implements Callback {
     ActivityDetailPonenteBinding binding;
     ContentDetailPonenteBinding binding2;
 
+    String link=null;
+
     public static final String EXTRA_POS = "pos";
     public static final int DARKEN = 20;
 
@@ -45,6 +47,7 @@ public class DetailPonente extends AppCompatActivity implements Callback {
 
         binding.setPonen(pon);
         binding.setHandler(this);
+        link = pon.getLink();
 
 
         if (!verificaConexion(this)) {
@@ -95,9 +98,16 @@ public class DetailPonente extends AppCompatActivity implements Callback {
     }
 
     public void onLink() {
-        Uri uri = Uri.parse("http://www.andreaardions.com/");
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
+        if (link.isEmpty()) {
+            Toast.makeText(this,
+                    R.string.conection_internet_linkedin, Toast.LENGTH_SHORT)
+                    .show();
+        }
+        else{
+            Uri uri = Uri.parse(link);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+        }
     }
 
     public static boolean verificaConexion(Context ctx) {

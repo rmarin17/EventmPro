@@ -177,6 +177,12 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
                             parser.require(XmlPullParser.START_TAG, null, condi);
                             String habilidad = readText(parser);
                             p.setHabilidad(habilidad);
+                            break;
+
+                        case "plink":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String plink = readText(parser);
+                            p.setLink(plink);
                             pdao.insert(p);
                             break;
                         //endregion
