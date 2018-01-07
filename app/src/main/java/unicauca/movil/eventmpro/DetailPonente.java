@@ -1,6 +1,7 @@
 package unicauca.movil.eventmpro;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
@@ -19,12 +20,14 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import unicauca.movil.eventmpro.databinding.ActivityDetailPonenteBinding;
+import unicauca.movil.eventmpro.databinding.ContentDetailPonenteBinding;
 import unicauca.movil.eventmpro.models.Ponente;
 import unicauca.movil.eventmpro.util.L;
 
 public class DetailPonente extends AppCompatActivity implements Callback {
 
     ActivityDetailPonenteBinding binding;
+    ContentDetailPonenteBinding binding2;
 
     public static final String EXTRA_POS = "pos";
     public static final int DARKEN = 20;
@@ -89,6 +92,12 @@ public class DetailPonente extends AppCompatActivity implements Callback {
     @Override
     public void onError() {
 
+    }
+
+    public void onLink() {
+        Uri uri = Uri.parse("http://www.andreaardions.com/");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
     }
 
     public static boolean verificaConexion(Context ctx) {
