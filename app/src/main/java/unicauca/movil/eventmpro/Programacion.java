@@ -34,14 +34,11 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
     ActivityProgramacionBinding binding;
     DiasDao ddao;
     Gson gson;
-
-
     Conections c;
     ConectionsDao cdao;
     EventoDao edao;
 
     String comando1;
-
     int tamaño = 0;
 
     @Override
@@ -60,15 +57,18 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
 
         List<Evento> elist = edao.getAll();
         List<Dias> dlist = ddao.getAll();
-        tamaño= dlist.size();
+        tamaño = dlist.size();
         int dias;
         long  ide;
         dias = elist.get(0).getNumerodias();
         ide = elist.get(0).getIde();
+
+
+        List<Fragment> pages =  new ArrayList<>();
+
         if(dias > 0 ) {
             for (int i = 1; i < dias+1; i++) {
-                ProgramacionFragment dia = ProgramacionFragment.newInstance(i);
-                data.add(dia);
+                pages.add(ProgramacionFragment.newInstance(i));
             }
         }
 
@@ -81,7 +81,7 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
         }
         loadData();
 
-        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), data);
+        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), pages);
         binding.pager.setAdapter(adapter);
 
         setSupportActionBar(binding.toolbar);
@@ -110,19 +110,18 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
         }.getType();
         List<Dias> res = gson.fromJson(json, lista);
 
-       // if ( tamaño!=res.size())
-      //  {
+        if (tamaño!=res.size())
+        {
             ddao.deleteAll();
             for (Dias d : res) {
                 ddao.insert(d);
             }
-       /* }
+        }
         else {
             for (Dias d : res) {
                 ddao.update(d);
-                ddao.insert(d);
             }
-        }*/
+        }
 
     }
 

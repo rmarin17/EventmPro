@@ -150,10 +150,18 @@ public class Ponentes extends AppCompatActivity implements PonenteAdapter.OnPone
         Type lista = new TypeToken<List<Ponente>>() {
         }.getType();
         List<Ponente> res = gson.fromJson(json, lista);
-            pdao.deleteAll();
+
+        if (tamaño!=res.size())
+        {
+        pdao.deleteAll();
+        for (Ponente p : res) {
+            pdao.insert(p);
+        }
+        }
+        else {
             for (Ponente p : res) {
                 pdao.update(p);
-                pdao.insert(p);
             }
+        }
     }
 }

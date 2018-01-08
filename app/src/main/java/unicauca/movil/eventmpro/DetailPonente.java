@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.graphics.Palette;
 import android.view.MenuItem;
+import android.webkit.URLUtil;
 import android.widget.Toast;
 
 import com.squareup.picasso.Callback;
@@ -25,10 +26,7 @@ import unicauca.movil.eventmpro.models.Ponente;
 import unicauca.movil.eventmpro.util.L;
 
 public class DetailPonente extends AppCompatActivity implements Callback {
-
     ActivityDetailPonenteBinding binding;
-    ContentDetailPonenteBinding binding2;
-
     String link=null;
 
     public static final String EXTRA_POS = "pos";
@@ -98,15 +96,16 @@ public class DetailPonente extends AppCompatActivity implements Callback {
     }
 
     public void onLink() {
-        if (link.isEmpty()) {
-            Toast.makeText(this,
-                    R.string.conection_internet_linkedin, Toast.LENGTH_SHORT)
-                    .show();
-        }
-        else{
+
+        if(URLUtil.isValidUrl(link)){
             Uri uri = Uri.parse(link);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
+        }
+        else {
+            Toast.makeText(this,
+                    R.string.conection_internet_linkedin, Toast.LENGTH_SHORT)
+                    .show();
         }
     }
 

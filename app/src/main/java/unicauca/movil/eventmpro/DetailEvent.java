@@ -30,6 +30,7 @@ import unicauca.movil.eventmpro.db.NotificationDao;
 import unicauca.movil.eventmpro.db.PonenteDao;
 import unicauca.movil.eventmpro.db.UbicacionDao;
 import unicauca.movil.eventmpro.models.Conections;
+import unicauca.movil.eventmpro.models.Dias;
 import unicauca.movil.eventmpro.models.Evento;
 import unicauca.movil.eventmpro.net.HttpAsyncTask;
 import unicauca.movil.eventmpro.util.L;
@@ -200,7 +201,6 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
         Type lista = new TypeToken<List<Evento>>() {
         }.getType();
         List<Evento> res = gson.fromJson(json, lista);
-        edao.deleteAll();
         for (Evento e : res) {
             edao.update(e);
             edao.insert(e);

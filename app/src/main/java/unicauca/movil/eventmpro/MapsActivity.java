@@ -46,6 +46,7 @@ import unicauca.movil.eventmpro.db.EventoDao;
 import unicauca.movil.eventmpro.db.UbicacionDao;
 import unicauca.movil.eventmpro.models.Beacons;
 import unicauca.movil.eventmpro.models.Conections;
+import unicauca.movil.eventmpro.models.Dias;
 import unicauca.movil.eventmpro.models.Evento;
 import unicauca.movil.eventmpro.models.Ponente;
 import unicauca.movil.eventmpro.models.Ubicacion;
@@ -309,12 +310,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }.getType();
             List<Ubicacion> res = gson.fromJson(json, lista);
 
-            udao.deleteAll();
-            for (Ubicacion u : res) {
-                udao.update(u);
-                udao.insert(u);
+            if (tamañoU!=res.size())
+            {
+                udao.deleteAll();
+                for (Ubicacion u : res) {
+                    udao.insert(u);
+                }
+                ban1 = 0;
             }
-            ban1 = 0;
+            else {
+                for (Ubicacion u : res) {
+                    udao.update(u);
+                }
+                ban1 = 0;
+            }
         }
 
         if (ban2 == 1) {
@@ -322,12 +331,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }.getType();
             List<Beacons> res = gson.fromJson(json, lista);
 
-            bdao.deleteAll();
-            for (Beacons b : res) {
-                bdao.update(b);
+            if (tamañoB!=res.size())
+            {
+                bdao.deleteAll();
+                for (Beacons b : res) {
                 bdao.insert(b);
+                }
+                ban2 = 0;
             }
-            ban2 = 0;
+            else{
+                for (Beacons b : res) {
+                    bdao.update(b);
+                }
+                ban2 = 0;
+            }
         }
     }
 }

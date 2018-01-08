@@ -85,9 +85,9 @@ public class DiasDao {
 
     }
 
-    public List<Dias> getAByName (String name){
+    public List<Dias> getByDayHour (int day, int hour){
 
-        Cursor c = db.rawQuery("SELECT * FROM dias WHERE nombre LIKE '%"+name+"%'",null);
+        Cursor c = db.rawQuery("SELECT * FROM dias WHERE idd='"+day+"' AND ido= '"+hour+"'",null);
         return cursorToList(c);
     }
 

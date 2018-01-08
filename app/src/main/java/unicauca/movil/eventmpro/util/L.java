@@ -17,7 +17,8 @@ import unicauca.movil.eventmpro.models.Ponente;
 public class L {
 
     public static List<Ponente> data = new ArrayList<Ponente>();
-    public static List<Dias> data1;
+    public static List<Dias> data1 = new ArrayList<Dias>();
+    public static List<Dias> datad = new ArrayList<Dias>();
     public static List<Mensaje> data2 = new ArrayList<Mensaje>();
     public static List<Evento> data3 = new ArrayList<Evento>();
 }
