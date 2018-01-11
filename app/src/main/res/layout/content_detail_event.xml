@@ -70,11 +70,11 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:text="@{event.objetivo}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView13"
                     app:layout_constraintTop_toBottomOf="@+id/textView"
-                    android:text="@{event.objetivo}"
                     tools:text="Objetivo del evento" />
 
                 <ImageView
@@ -110,11 +110,11 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:text="@{event.fecha}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView14"
                     app:layout_constraintTop_toBottomOf="@+id/textView10"
-                    android:text="@{event.fecha}"
                     tools:text="Fecha del evento" />
 
                 <ImageView

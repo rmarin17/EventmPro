@@ -32,6 +32,7 @@ import unicauca.movil.eventmpro.db.UbicacionDao;
 import unicauca.movil.eventmpro.models.Conections;
 import unicauca.movil.eventmpro.models.Dias;
 import unicauca.movil.eventmpro.models.Evento;
+import unicauca.movil.eventmpro.models.Ponente;
 import unicauca.movil.eventmpro.net.HttpAsyncTask;
 import unicauca.movil.eventmpro.util.L;
 
@@ -104,7 +105,7 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
         {
             HttpAsyncTask task = new HttpAsyncTask(this);
             task.execute(comando);
-            //Carga el evento de la base de datos local
+
             if(list.size() > 0 ) {
                 for (Evento e : list) {
                     L.data3.add(e);
@@ -201,8 +202,8 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
         Type lista = new TypeToken<List<Evento>>() {
         }.getType();
         List<Evento> res = gson.fromJson(json, lista);
+        edao.deleteAll();
         for (Evento e : res) {
-            edao.update(e);
             edao.insert(e);
         }
     }
