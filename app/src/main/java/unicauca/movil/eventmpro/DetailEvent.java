@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Callback;
@@ -179,6 +180,9 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
     @Override
     public void onClick(DialogInterface dialogInterface, int i) {
         if( i == DialogInterface.BUTTON_POSITIVE) {
+            List<Evento> elist = edao.getAll();
+            long ide = elist.get(0).getIde();
+            FirebaseMessaging.getInstance().unsubscribeFromTopic(""+ide);
             edao.deleteAll();
             ddao.deleteAll();
             ndao.deleteAll();
