@@ -19,13 +19,13 @@
 
         <android.support.v7.widget.CardView
             android:id="@+id/card"
-            android:onClick="@{(view)->handler.onItemClick((int)view.tag)}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:onClick="@{(view)->handler.onItemClick((int)view.tag)}"
             app:cardElevation="@dimen/cardelevation"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +34,7 @@
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:id="@+id/clock"
@@ -68,12 +68,12 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:text="Evento:"
+                    android:text="@string/hor_evento"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/hora"
-                    tools:text="Evento" />
+                    tools:text="@string/hor_evento" />
 
                 <TextView
                     android:id="@+id/evento"
@@ -90,46 +90,18 @@
                     tools:text="Conferencia" />
 
                 <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Titulo:"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/evento"
-                    tools:text="Titulo" />
-
-                <TextView
-                    android:id="@+id/titulo"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@{prog.titulo}"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView5"
-                    tools:text="Titulo" />
-
-                <TextView
                     android:id="@+id/textView8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:text="Conferencistas:"
+                    android:text="@string/hor_encargado"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/titulo"
-                    tools:text="Conferencista:" />
+                    app:layout_constraintTop_toBottomOf="@+id/evento"
+                    tools:text="@string/hor_encargado" />
 
                 <TextView
                     android:id="@+id/conferencista"
@@ -145,43 +117,16 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView8"
                     tools:text="Conferencista" />
 
-                <TextView
-                    android:id="@+id/textView12"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Empresa:"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/conferencista"
-                    tools:text="Empresa:" />
-
-                <TextView
-                    android:id="@+id/empresa"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="16dp"
-                    android:text="@{prog.empresadias}"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView12"
-                    tools:text="Empresa" />
-
                 <ImageView
                     android:id="@+id/imageView8"
                     android:layout_width="@dimen/icon"
                     android:layout_height="@dimen/icon"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/empresa"
+                    app:layout_constraintTop_toBottomOf="@+id/conferencista"
                     app:srcCompat="@drawable/ic_place" />
 
                 <TextView
@@ -196,7 +141,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/imageView8"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView8"
-                    app:layout_constraintTop_toBottomOf="@+id/empresa"
+                    app:layout_constraintTop_toBottomOf="@+id/conferencista"
                     tools:text="Lugar" />
             </android.support.constraint.ConstraintLayout>
         </android.support.v7.widget.CardView>

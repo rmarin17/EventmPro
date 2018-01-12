@@ -47,6 +47,8 @@
     <string name="conection_internet_imagenes">Por favor conectate a internet para tener los datos mas actualizados</string>
     <string name="btn_text_linkedin">Linkedin</string>
     <string name="conection_internet_linkedin">El ponente no tiene registrado un perfil</string>
+    <string name="hor_encargado">Encargado:</string>
+    <string name="hor_evento">Evento:</string>
 
 
 </resources>
