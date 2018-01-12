@@ -71,10 +71,24 @@ public class Principal extends AppCompatActivity {
         List<Ubicacion> listu = udao.getAll();
         if (listp.size() > 0 && listb.size() > 0 && listc.size() > 0 && listd.size() > 0 && liste.size() > 0 && listu.size() > 0  ){
             long ide = liste.get(0).getIde();
-            FirebaseMessaging.getInstance().subscribeToTopic("Evento"+ide);
+            FirebaseMessaging.getInstance().subscribeToTopic(""+ide);
             Intent intent = new Intent(this, DetailEvent.class);
             startActivity(intent);
             finish();
+        }
+
+        if(getIntent().getExtras()!=null){
+
+            for (String Key : getIntent().getExtras().keySet()){
+                if (Key.equals("mensaje")){
+                    String men = getIntent().getExtras().getString(Key);
+                    Mensaje m = new Mensaje();
+                    m.setMensaje(men);
+                    m.setFecha(fecha_sistema);
+                    m.setHora(hora_sistema);
+                    ndao.insert(m);
+                }
+            }
         }
 
         //region Tomar datos de la notificacion de firebase
@@ -88,7 +102,6 @@ public class Principal extends AppCompatActivity {
                     men = getIntent().getExtras().getString(Key);
                 }
             }
-
             if ( Long.parseLong(ide) == liste.get(0).getIde()){
                 Mensaje m = new Mensaje();
                 m.setMensaje(men);
@@ -96,7 +109,6 @@ public class Principal extends AppCompatActivity {
                 m.setHora(hora_sistema);
                 ndao.insert(m);
             }
-
         }*/
         //endregion
     }

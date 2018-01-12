@@ -59,7 +59,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private UiSettings mUiSettings;
 
-    HttpAsyncTask task;
+    HttpAsyncTask tasku;
+    HttpAsyncTask taskb;
 
     Ubicacion u;
     Beacons b;
@@ -82,7 +83,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding = DataBindingUtil.setContentView(this, R.layout.activity_maps);
         binding.setHandler(this);
 
-        task = new HttpAsyncTask(this);
+        tasku = new HttpAsyncTask(this);
+        taskb = new HttpAsyncTask(this);
         c = new Conections();
         u = new Ubicacion();
         b = new Beacons();
@@ -160,7 +162,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         else
         {
             ban1 = 1;
-            task.execute(comando1);
+            tasku.execute(comando1);
             if(list.size() > 0 ) {
                 for (Ubicacion u : list) {
                     LatLng mark = new LatLng(u.getLat(), u.getLng());
@@ -170,7 +172,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
     }
-
 
     public void start() {
 
@@ -214,7 +215,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             else
                             {
                                 ban2 = 1;
-                                task.execute(comando2);
+                                taskb.execute(comando2);
                                 if(list.size() > 0 ) {
                                     for (Beacons b : list) {
                                         if (major1 == b.getMajor()) {

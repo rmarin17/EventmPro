@@ -5,17 +5,23 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.graphics.Palette;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -36,7 +42,7 @@ import unicauca.movil.eventmpro.models.Ponente;
 import unicauca.movil.eventmpro.net.HttpAsyncTask;
 import unicauca.movil.eventmpro.util.L;
 
-public class DetailEvent extends AppCompatActivity implements DialogInterface.OnClickListener, HttpAsyncTask.OnResponseReceived{
+public class DetailEvent extends AppCompatActivity implements DialogInterface.OnClickListener, HttpAsyncTask.OnResponseReceived, Callback {
 
 
     ActivityDetailEventBinding binding;
@@ -95,6 +101,9 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
                 for (Evento e : list) {
                     L.data3.add(e);
                     binding.setEvent(e);
+                    Picasso.with(this)
+                            .load(Uri.parse(e.getEventoimg()))
+                            .into(binding.img, this);
                 }
             }
             else {
@@ -110,7 +119,12 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
                 for (Evento e : list) {
                     L.data3.add(e);
                     binding.setEvent(e);
+                    Picasso.with(this)
+                            .load(Uri.parse(e.getEventoimg()))
+                            .into(binding.img, this);
                 }
+
+
             }
             else {
                 Toast.makeText(this, R.string.empy, Toast.LENGTH_LONG).show();
@@ -206,5 +220,22 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
         for (Evento e : res) {
             edao.insert(e);
         }
+    }
+
+    @Override
+    public void onSuccess() {
+        BitmapDrawable drawable = (BitmapDrawable) binding.img.getDrawable();
+        Palette palette =  new Palette
+                .Builder(drawable.getBitmap())
+                .generate();
+
+        int colorDefault = ContextCompat.getColor(this, R.color.colorPrimary);
+        int color = palette.getVibrantColor(colorDefault);
+        binding.collapsingToolbar.setContentScrimColor(color);
+    }
+
+    @Override
+    public void onError() {
+
     }
 }

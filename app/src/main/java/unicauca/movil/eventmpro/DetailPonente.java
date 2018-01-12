@@ -26,6 +26,7 @@ import unicauca.movil.eventmpro.models.Ponente;
 import unicauca.movil.eventmpro.util.L;
 
 public class DetailPonente extends AppCompatActivity implements Callback {
+
     ActivityDetailPonenteBinding binding;
     String link=null;
 
