@@ -11,6 +11,7 @@
     <dimen name="icon">25dp</dimen>
     <dimen name="img_ponen">100dp</dimen>
     <dimen name="cardelevation">8dp</dimen>
+    <dimen name="img_50">50dp</dimen>
 
 
 </resources>

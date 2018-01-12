@@ -78,7 +78,7 @@ public class Principal extends AppCompatActivity {
         }
 
         //region Tomar datos de la notificacion de firebase
-        if(getIntent().getExtras()!=null){
+       /* if(getIntent().getExtras()!=null){
             String ide = "", men = "";
             for (String Key : getIntent().getExtras().keySet()){
                 if (Key.equals("ide")) {
@@ -88,6 +88,7 @@ public class Principal extends AppCompatActivity {
                     men = getIntent().getExtras().getString(Key);
                 }
             }
+
             if ( Long.parseLong(ide) == liste.get(0).getIde()){
                 Mensaje m = new Mensaje();
                 m.setMensaje(men);
@@ -96,7 +97,7 @@ public class Principal extends AppCompatActivity {
                 ndao.insert(m);
             }
 
-        }
+        }*/
         //endregion
     }
 
