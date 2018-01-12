@@ -59,9 +59,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private UiSettings mUiSettings;
 
-    HttpAsyncTask tasku;
-    HttpAsyncTask taskb;
-
     Ubicacion u;
     Beacons b;
     Conections c;
@@ -83,8 +80,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding = DataBindingUtil.setContentView(this, R.layout.activity_maps);
         binding.setHandler(this);
 
-        tasku = new HttpAsyncTask(this);
-        taskb = new HttpAsyncTask(this);
         c = new Conections();
         u = new Ubicacion();
         b = new Beacons();
@@ -96,9 +91,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         List<Evento> elist = edao.getAll();
         long ide = elist.get(0).getIde();
-        List<Conections> list = cdao.getAll();
-        if(list.size() > 0 ) {
-            for (Conections c : list) {
+        List<Conections> listc = cdao.getAll();
+        if(listc.size() > 0 ) {
+            for (Conections c : listc) {
                 comando1 = c.getUbicacion()+""+ide;
                 comando2 = c.getBeacons()+""+ide;
             }
@@ -146,31 +141,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mUiSettings.isScrollGesturesEnabled();
 
         List<Ubicacion> list = udao.getAll();
-        tamañoU=list.size();
-        if (!verificaConexion(this)) {
-            Toast.makeText(this,
-                    R.string.conection_internet, Toast.LENGTH_SHORT)
-                    .show();
-            if(list.size() > 0 ) {
-                for (Ubicacion u : list) {
-                    LatLng mark = new LatLng(u.getLat(), u.getLng());
-                    mMap.addMarker(new MarkerOptions().position(mark).title(u.getTituloubicacion()));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mark,16));
-                }
-            }
+        cargaOnlineUbicacion();
+        for (Ubicacion u : list) {
+            LatLng mark = new LatLng(u.getLat(), u.getLng());
+            mMap.addMarker(new MarkerOptions().position(mark).title(u.getTituloubicacion()));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mark,16));
         }
-        else
-        {
-            ban1 = 1;
-            tasku.execute(comando1);
-            if(list.size() > 0 ) {
-                for (Ubicacion u : list) {
-                    LatLng mark = new LatLng(u.getLat(), u.getLng());
-                    mMap.addMarker(new MarkerOptions().position(mark).title(u.getTituloubicacion()));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mark,16));
-                }
-            }
-        }
+
     }
 
     public void start() {
@@ -196,11 +173,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             // integer = MAJOR del beacon.
                             Integer major1 = integers[0];
                             List<Beacons> list = bdao.getAll();
-                            tamañoB=list.size();
-                            if (!verificaConexion(getApplicationContext())) {
-                                Toast.makeText(getApplicationContext(),
-                                        R.string.conection_internet, Toast.LENGTH_SHORT)
-                                        .show();
+                            cargaOnlineBeacons();
                                 if(list.size() > 0 ) {
                                     for (Beacons b : list) {
                                         if (major1 == b.getMajor()) {
@@ -210,29 +183,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                             beaconAlert(titulo);
                                         }
                                     }
-                                }
-                            }
-                            else
-                            {
-                                ban2 = 1;
-                                taskb.execute(comando2);
-                                if(list.size() > 0 ) {
-                                    for (Beacons b : list) {
-                                        if (major1 == b.getMajor()) {
-                                            titulo = b.getBtitulo();
-                                            blat = b.getBlat();
-                                            blng = b.getBlng();
-                                            beaconAlert(titulo);
-                                        }
-                                    }
-                                }
-                                else {
-                                    Toast.makeText(getApplicationContext(), R.string.empy, Toast.LENGTH_LONG).show();
                                 }
                             }
                             //Toast.makeText(MapsActivity.this, "" + integers[0] + " " + integers[1], Toast.LENGTH_SHORT).show();
                             //Log.i("BEACONINFO", "MARJOR1: " + integers[0] + " MAJOR2:" + integers[1]);
-                        }
                     });
     }
 
@@ -284,6 +238,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 LatLng encuentro = new LatLng(blat, blng);
                 mMap.addMarker(new MarkerOptions().position(encuentro).title(titulo));
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(encuentro, 30));
+        }
+    }
+    public void cargaOnlineUbicacion() {
+        if (!verificaConexion(this)) {
+            Toast.makeText(this,
+                    R.string.conection_internet, Toast.LENGTH_SHORT)
+                    .show();
+        }
+        else
+        {
+            HttpAsyncTask tasku = new HttpAsyncTask(this);
+            List<Ubicacion> listu = udao.getAll();
+            tamañoU=listu.size();
+            ban1 = 1;
+            tasku.execute(comando1);
+        }
+    }
+
+    public void cargaOnlineBeacons() {
+        if (!verificaConexion(this)) {
+            Toast.makeText(this,
+                    R.string.conection_internet, Toast.LENGTH_SHORT)
+                    .show();
+        }
+        else
+        {
+            HttpAsyncTask taskb = new HttpAsyncTask(this);
+            List<Beacons> listb = bdao.getAll();
+            tamañoB=listb.size();
+            ban2 = 1;
+            taskb.execute(comando2);
         }
     }
 
