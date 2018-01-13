@@ -49,6 +49,9 @@
     <string name="conection_internet_linkedin">El ponente no tiene registrado un perfil</string>
     <string name="hor_encargado">Encargado:</string>
     <string name="hor_evento">Evento:</string>
+    <string name="alert_msg_noti">¿Esta seguro de elminar la notificación?</string>
+    <string name="alert_title_noti">Eliminar</string>
+
 
 
 </resources>
