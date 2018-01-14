@@ -90,7 +90,6 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
         loadData();
     }
 
-
     public void loadData() {
         List<Evento> list = edao.getAll();
         if (!verificaConexion(this)) {
@@ -115,7 +114,6 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
         {
             HttpAsyncTask task = new HttpAsyncTask(this);
             task.execute(comando);
-
             if(list.size() > 0 ) {
                 for (Evento e : list) {
                     L.data3.add(e);
@@ -124,8 +122,6 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
                             .load(Uri.parse(e.getEventoimg()))
                             .into(binding.img, this);
                 }
-
-
             }
             else {
                 Toast.makeText(this, R.string.empy, Toast.LENGTH_LONG).show();
@@ -150,21 +146,6 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
         startActivity(inten);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_prin, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.salir:
-                generateAlert();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     public void generateAlert(){
         AlertDialog alert = new AlertDialog.Builder(this)
