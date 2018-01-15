@@ -79,27 +79,22 @@ public class PonenteDao {
     }
 
     public  Ponente getByid (long id){
-
         Cursor c = db.rawQuery("SELECT * FROM ponente WHERE _id="+id,null);
         return cursorToPonente(c);
-
     }
 
     public List<Ponente> getAll (){
-
         Cursor c = db.rawQuery("SELECT * FROM ponente ORDER BY nombre",null);
         return cursorToList(c);
-
     }
 
     public List<Ponente> getAByName (String name){
-
         Cursor c = db.rawQuery("SELECT * FROM ponente WHERE nombre LIKE '%"+name+"%'",null);
         return cursorToList(c);
     }
 
     private Ponente cursorToPonente (Cursor c){
-        Ponente ponente= null;
+        Ponente ponente = null;
         if (c.moveToNext()){
             ponente = new Ponente();
             ponente.setIdp(c.getLong(0));
@@ -118,14 +113,11 @@ public class PonenteDao {
     }
 
     private List<Ponente> cursorToList (Cursor c){
-
         List<Ponente> data = new ArrayList<>();
-
         for (int i= 0; i< c.getCount();i++){
             Ponente p = cursorToPonente(c);
             data.add(p);
         }
-
         return data;
     }
 

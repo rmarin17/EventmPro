@@ -48,11 +48,8 @@ public class DiaFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         Bundle args = getArguments();
         dia = args.getInt(EXTRA_DAY);
-
-
     }
 
     @Override
@@ -71,6 +68,7 @@ public class DiaFragment extends Fragment {
     }
 
     public void loaddata() {
+            data.clear();
             List<Dias> list = dao.getAllByDay(dia);
             for (Dias d : list){
                 data.add(d);

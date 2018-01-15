@@ -2,10 +2,9 @@ package unicauca.movil.eventmpro.fragments;
 
 
 
-import android.content.Intent;
+
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -14,11 +13,8 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import unicauca.movil.eventmpro.DetailPonente;
-import unicauca.movil.eventmpro.DetailProgramacion;
 import unicauca.movil.eventmpro.R;
 import unicauca.movil.eventmpro.adapters.ProgramacionAdapter;
 import unicauca.movil.eventmpro.databinding.FragmentProgramacionBinding;
@@ -43,7 +39,6 @@ public class ProgramacionFragment extends Fragment implements ProgramacionAdapte
     int dia;
     ProgramacionAdapter adapter;
     DiasDao dao;
-    Gson gson;
 
      @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,8 +55,6 @@ public class ProgramacionFragment extends Fragment implements ProgramacionAdapte
         binding.recycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
         dao = new DiasDao(getContext());
-
-        gson = new Gson();
         loadData();
 
         return binding.getRoot();

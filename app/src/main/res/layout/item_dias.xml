@@ -94,13 +94,13 @@
 
                 <TextView
                     android:id="@+id/lugar"
-                    style="@style/Base.TextAppearance.AppCompat.Title"
+                    style="@style/Base.TextAppearance.AppCompat.Body1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/id_lugar"
                     android:layout_toEndOf="@+id/id_lugar"
                     android:layout_toRightOf="@+id/id_lugar"
-                    android:paddingBottom="8dp"
+                    android:paddingBottom="10dp"
                     android:textColor="@color/textTitle"
                     tools:text="Lugar" />
 

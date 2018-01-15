@@ -91,6 +91,7 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
     }
 
     public void loadData() {
+        L.data3.clear();
         List<Evento> list = edao.getAll();
         if (!verificaConexion(this)) {
             Toast.makeText(this,
@@ -171,6 +172,12 @@ public class DetailEvent extends AppCompatActivity implements DialogInterface.On
             cdao.deleteAll();
             udao.deleteAll();
             bdao.deleteAll();
+
+            L.data.clear();
+            L.data1.clear();
+            L.data2.clear();
+            L.data3.clear();
+            L.datad.clear();
 
             Intent inten = new Intent(this, Principal.class);
             inten.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

@@ -72,6 +72,7 @@ public class Ponentes extends AppCompatActivity implements PonenteAdapter.OnPone
 
 
     public void loadData() {
+        L.data.clear();
         List<Ponente> list = pdao.getAll();
         tamaño=list.size();
         if (!verificaConexion(this)) {

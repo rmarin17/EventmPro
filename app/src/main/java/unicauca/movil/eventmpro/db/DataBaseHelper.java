@@ -94,6 +94,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             db.execSQL("DROP TABLE ponente");
             db.execSQL("DROP TABLE dias");
+            db.execSQL("DROP TABLE evento");
             db.execSQL("DROP TABLE notification");
             db.execSQL("DROP TABLE conections");
             db.execSQL("DROP TABLE ubicacion");
