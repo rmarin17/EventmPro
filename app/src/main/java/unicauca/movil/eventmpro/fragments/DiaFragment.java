@@ -1,9 +1,6 @@
 package unicauca.movil.eventmpro.fragments;
 
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,9 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +17,6 @@ import unicauca.movil.eventmpro.R;
 import unicauca.movil.eventmpro.adapters.DiasAdapter;
 import unicauca.movil.eventmpro.db.DiasDao;
 import unicauca.movil.eventmpro.models.Dias;
-import unicauca.movil.eventmpro.net.HttpAsyncTask;
 
 /**
  * A simple {@link Fragment} subclass.

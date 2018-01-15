@@ -68,6 +68,7 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
 
         if(dias > 0 ) {
             for (int i = 1; i < dias+1; i++) {
+                //pages.add(DiaFragment.newInstance(i)); //Forma con data binding que se confunde
                 pages.add(DiaFragment.newInstance(i));
             }
         }
