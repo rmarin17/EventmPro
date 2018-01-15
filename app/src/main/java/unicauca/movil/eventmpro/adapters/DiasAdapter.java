@@ -52,15 +52,11 @@ public class DiasAdapter extends BaseAdapter {
         TextView hora = (TextView) v.findViewById(R.id.hora);
         TextView evento = (TextView) v.findViewById(R.id.evento);
         TextView titulo = (TextView) v.findViewById(R.id.titulo);
-        TextView conferencista = (TextView) v.findViewById(R.id.conferencista);
-        TextView empresa = (TextView) v.findViewById(R.id.empresa);
         TextView lugar = (TextView) v.findViewById(R.id.lugar);
 
         hora.setText(d.getHora());
         evento.setText(d.getEvento());
-        titulo.setText(d.getTitulo());
-        conferencista.setText(d.getConferencista());
-        empresa.setText(d.getEmpresadias());
+        titulo.setText(d.getConferencista());
         lugar.setText(d.getLugar());
 
         return v;

@@ -319,6 +319,12 @@ public class CargaDatos extends AppCompatActivity implements DialogInterface.OnC
                             u.setTituloubicacion(titu);
                             break;
 
+                        case "direccion":
+                            parser.require(XmlPullParser.START_TAG, null, condi);
+                            String dir = readText(parser);
+                            u.setDireccion(dir);
+                            break;
+
                         case "lat":
                             parser.require(XmlPullParser.START_TAG, null, condi);
                             String lat = readText(parser);

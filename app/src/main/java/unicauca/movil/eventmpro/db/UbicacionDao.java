@@ -19,6 +19,7 @@ public class UbicacionDao {
     static final String TABLE = "ubicacion";
     static final String C_ID = "_id";
     static final String C_TITLE = "titulo";
+    static final String C_DIR = "direccion";
     static final String C_LAT = "lat";
     static final String C_LNG = "lng";
 
@@ -34,6 +35,7 @@ public class UbicacionDao {
         ContentValues cV = new ContentValues();
         cV.put(C_ID, ubi.getIdu());
         cV.put(C_TITLE, ubi.getTituloubicacion());
+        cV.put(C_DIR, ubi.getDireccion());
         cV.put(C_LAT, ubi.getLat());
         cV.put(C_LNG, ubi.getLng());
         db.insert(TABLE,null,cV);
@@ -43,6 +45,7 @@ public class UbicacionDao {
 
         ContentValues cV = new ContentValues();
         cV.put(C_TITLE, ubi.getTituloubicacion());
+        cV.put(C_DIR, ubi.getDireccion());
         cV.put(C_LAT, ubi.getLat());
         cV.put(C_LNG, ubi.getLng());
         long id = db.update(TABLE,cV,"_id = ?",new String[]{ubi.getIdu()+" "});
@@ -84,8 +87,9 @@ public class UbicacionDao {
             ubi = new Ubicacion();
             ubi.setIdu(c.getLong(0));
             ubi.setTituloubicacion(c.getString(1));
-            ubi.setLat(c.getDouble(2));
-            ubi.setLng(c.getDouble(3));
+            ubi.setDireccion(c.getString(2));
+            ubi.setLat(c.getDouble(3));
+            ubi.setLng(c.getDouble(4));
         }
         return ubi;
     }

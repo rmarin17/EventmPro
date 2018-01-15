@@ -75,6 +75,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         db.execSQL(" CREATE TABLE ubicacion (_id INTEGER PRIMARY KEY"
                 +", titulo VARCHAR"
+                +", direccion VARCHAR"
                 +", lat DOUBLE"
                 +", lng DOUBLE"
                 +")"

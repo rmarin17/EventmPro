@@ -144,7 +144,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         cargaOnlineUbicacion();
         for (Ubicacion u : list) {
             LatLng mark = new LatLng(u.getLat(), u.getLng());
-            mMap.addMarker(new MarkerOptions().position(mark).title(u.getTituloubicacion()));
+            mMap.addMarker(new MarkerOptions().position(mark).title(u.getTituloubicacion()).snippet(u.getDireccion()));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mark,16));
         }
 
@@ -295,7 +295,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Type lista = new TypeToken<List<Ubicacion>>() {
             }.getType();
             List<Ubicacion> res = gson.fromJson(json, lista);
-
             if (tamañoU!=res.size())
             {
                 udao.deleteAll();

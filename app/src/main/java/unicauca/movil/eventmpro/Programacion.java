@@ -23,6 +23,7 @@ import unicauca.movil.eventmpro.databinding.ActivityProgramacionBinding;
 import unicauca.movil.eventmpro.db.ConectionsDao;
 import unicauca.movil.eventmpro.db.DiasDao;
 import unicauca.movil.eventmpro.db.EventoDao;
+import unicauca.movil.eventmpro.fragments.DiaFragment;
 import unicauca.movil.eventmpro.fragments.ProgramacionFragment;
 import unicauca.movil.eventmpro.models.Conections;
 import unicauca.movil.eventmpro.models.Dias;
@@ -53,7 +54,6 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
         ddao = new DiasDao(this);
         gson = new Gson();
         //region Otra forma anterior
-        List<Fragment> data = new ArrayList<>();
 
         List<Evento> elist = edao.getAll();
         List<Dias> dlist = ddao.getAll();
@@ -68,7 +68,7 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
 
         if(dias > 0 ) {
             for (int i = 1; i < dias+1; i++) {
-                pages.add(ProgramacionFragment.newInstance(i));
+                pages.add(DiaFragment.newInstance(i));
             }
         }
 

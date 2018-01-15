@@ -83,6 +83,7 @@ public class Notification extends AppCompatActivity implements MensajeAdapter.On
         }
         else {
             Toast.makeText(this, R.string.empy, Toast.LENGTH_LONG).show();
+            finish();
         }
     }
 
