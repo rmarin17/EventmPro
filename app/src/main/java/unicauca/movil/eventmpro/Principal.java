@@ -63,13 +63,13 @@ public class Principal extends AppCompatActivity {
         udao = new UbicacionDao(this);
         ndao = new NotificationDao(this);
 
-        List<Ponente> listp = pdao.getAll();
-        List<Beacons> listb = bdao.getAll();
+        //List<Ponente> listp = pdao.getAll();
+        //List<Beacons> listb = bdao.getAll();
         List<Conections> listc = cdao.getAll();
         List<Dias> listd = ddao.getAll();
         List<Evento> liste = edao.getAll();
-        List<Ubicacion> listu = udao.getAll();
-        if (listp.size() > 0 && listb.size() > 0 && listc.size() > 0 && listd.size() > 0 && liste.size() > 0 && listu.size() > 0  ){
+        //List<Ubicacion> listu = udao.getAll();
+        if (listc.size()>0 && listd.size()>0 && liste.size()>0){
             long ide = liste.get(0).getIde();
             FirebaseMessaging.getInstance().subscribeToTopic(""+ide);
             Intent intent = new Intent(this, DetailEvent.class);

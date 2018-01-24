@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import java.util.ArrayList;
@@ -70,9 +71,13 @@ public class DiaFragment extends Fragment {
     public void loaddata() {
             data.clear();
             List<Dias> list = dao.getAllByDay(dia);
-            for (Dias d : list){
-                data.add(d);
+            if (list.size() > 0) {
+                for (Dias d : list) {
+                    data.add(d);
+                }
+                adapter.notifyDataSetChanged();
+            }else{
+                Toast.makeText(getContext(), R.string.empy, Toast.LENGTH_LONG).show();
             }
-            adapter.notifyDataSetChanged();
     }
 }

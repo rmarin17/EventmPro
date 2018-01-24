@@ -51,7 +51,7 @@
     <string name="hor_evento">Evento:</string>
     <string name="alert_msg_noti">¿Esta seguro de elminar la notificación?</string>
     <string name="alert_title_noti">Eliminar</string>
-
+    <string name="empy_map">No se encuentran datos registrados, igual puedes navegar por el mapa</string>
 
 
 </resources>

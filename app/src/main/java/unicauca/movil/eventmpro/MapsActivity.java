@@ -143,11 +143,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         List<Ubicacion> list = udao.getAll();
         cargaOnlineUbicacion();
-        for (Ubicacion u : list) {
-            LatLng mark = new LatLng(u.getLat(), u.getLng());
-            mMap.addMarker(new MarkerOptions().position(mark).title(u.getTituloubicacion()).snippet(u.getDireccion()));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mark,16));
+        if(list.size() > 0 ) {
+            for (Ubicacion u : list) {
+                LatLng mark = new LatLng(u.getLat(), u.getLng());
+                mMap.addMarker(new MarkerOptions().position(mark).title(u.getTituloubicacion()).snippet(u.getDireccion()));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mark,16));
+            }
         }
+        else {
+            Toast.makeText(this, R.string.empy_map, Toast.LENGTH_LONG).show();
+        }
+
 
     }
 
@@ -297,7 +303,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }.getType();
             List<Ubicacion> res = gson.fromJson(json, lista);
             if (res!=null) {
-                if (tamañoU != res.size()) {
+                if (tamañoU!=res.size()) {
                     udao.deleteAll();
                     for (Ubicacion u : res) {
                         udao.insert(u);
@@ -309,6 +315,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                     ban1 = 0;
                 }
+            }else{
+                udao.deleteAll();
             }
         }
 
@@ -316,9 +324,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Type lista = new TypeToken<List<Beacons>>() {
             }.getType();
             List<Beacons> res = gson.fromJson(json, lista);
-
             if (res!=null) {
-                if (tamañoB != res.size()) {
+                if (tamañoB!= res.size()) {
                     bdao.deleteAll();
                     for (Beacons b : res) {
                         bdao.insert(b);
@@ -332,6 +339,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
             }
-
     }
 }

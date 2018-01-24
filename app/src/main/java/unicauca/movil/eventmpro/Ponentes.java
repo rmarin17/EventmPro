@@ -87,6 +87,7 @@ public class Ponentes extends AppCompatActivity implements PonenteAdapter.OnPone
             }
             else {
                 Toast.makeText(this, R.string.empy, Toast.LENGTH_LONG).show();
+                finish();
             }
         }
         else
@@ -101,6 +102,7 @@ public class Ponentes extends AppCompatActivity implements PonenteAdapter.OnPone
             }
             else {
                 Toast.makeText(this, R.string.empy, Toast.LENGTH_LONG).show();
+                finish();
             }
         }
     }
@@ -152,17 +154,19 @@ public class Ponentes extends AppCompatActivity implements PonenteAdapter.OnPone
         }.getType();
         List<Ponente> res = gson.fromJson(json, lista);
 
-        if (tamaño!=res.size())
-        {
-        pdao.deleteAll();
-        for (Ponente p : res) {
-            pdao.insert(p);
-        }
-        }
-        else {
-            for (Ponente p : res) {
-                pdao.update(p);
+        if (res!=null) {
+            if (tamaño!= res.size()) {
+                pdao.deleteAll();
+                for (Ponente p : res) {
+                    pdao.insert(p);
+                }
+            } else {
+                for (Ponente p : res) {
+                    pdao.update(p);
+                }
             }
+        }else {
+            pdao.deleteAll();
         }
     }
 }

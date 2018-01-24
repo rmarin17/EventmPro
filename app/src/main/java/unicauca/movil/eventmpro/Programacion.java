@@ -110,20 +110,20 @@ public class Programacion extends AppCompatActivity implements HttpAsyncTask.OnR
         Type lista = new TypeToken<List<Dias>>() {
         }.getType();
         List<Dias> res = gson.fromJson(json, lista);
-
-        if (tamaño!=res.size())
-        {
+        if (res!=null) {
+            if (tamaño != res.size()) {
+                ddao.deleteAll();
+                for (Dias d : res) {
+                    ddao.insert(d);
+                }
+            } else {
+                for (Dias d : res) {
+                    ddao.update(d);
+                }
+            }
+        }else{
             ddao.deleteAll();
-            for (Dias d : res) {
-                ddao.insert(d);
-            }
         }
-        else {
-            for (Dias d : res) {
-                ddao.update(d);
-            }
-        }
-
     }
 
     public static boolean verificaConexion(Context ctx) {
