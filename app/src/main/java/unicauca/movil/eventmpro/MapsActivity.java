@@ -89,6 +89,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         edao = new EventoDao(this);
         gson = new Gson();
 
+
+
         List<Evento> elist = edao.getAll();
         long ide = elist.get(0).getIde();
         List<Conections> listc = cdao.getAll();
@@ -98,7 +100,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 comando2 = c.getBeacons()+""+ide;
             }
         }
-
         start();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -250,9 +251,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         {
             HttpAsyncTask tasku = new HttpAsyncTask(this);
             List<Ubicacion> listu = udao.getAll();
-            tamañoU=listu.size();
-            ban1 = 1;
-            tasku.execute(comando1);
+                tamañoU = listu.size();
+                ban1 = 1;
+                tasku.execute(comando1);
         }
     }
 
@@ -295,19 +296,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Type lista = new TypeToken<List<Ubicacion>>() {
             }.getType();
             List<Ubicacion> res = gson.fromJson(json, lista);
-            if (tamañoU!=res.size())
-            {
-                udao.deleteAll();
-                for (Ubicacion u : res) {
-                    udao.insert(u);
+            if (res!=null) {
+                if (tamañoU != res.size()) {
+                    udao.deleteAll();
+                    for (Ubicacion u : res) {
+                        udao.insert(u);
+                    }
+                    ban1 = 0;
+                } else {
+                    for (Ubicacion u : res) {
+                        udao.update(u);
+                    }
+                    ban1 = 0;
                 }
-                ban1 = 0;
-            }
-            else {
-                for (Ubicacion u : res) {
-                    udao.update(u);
-                }
-                ban1 = 0;
             }
         }
 
@@ -316,20 +317,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }.getType();
             List<Beacons> res = gson.fromJson(json, lista);
 
-            if (tamañoB!=res.size())
-            {
-                bdao.deleteAll();
-                for (Beacons b : res) {
-                bdao.insert(b);
+            if (res!=null) {
+                if (tamañoB != res.size()) {
+                    bdao.deleteAll();
+                    for (Beacons b : res) {
+                        bdao.insert(b);
+                    }
+                    ban2 = 0;
+                } else {
+                    for (Beacons b : res) {
+                        bdao.update(b);
+                    }
+                    ban2 = 0;
                 }
-                ban2 = 0;
             }
-            else{
-                for (Beacons b : res) {
-                    bdao.update(b);
-                }
-                ban2 = 0;
             }
-        }
+
     }
 }
