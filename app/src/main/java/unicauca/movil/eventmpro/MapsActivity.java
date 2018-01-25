@@ -337,6 +337,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                     ban2 = 0;
                 }
+            }else{
+                bdao.deleteAll();
             }
             }
     }
